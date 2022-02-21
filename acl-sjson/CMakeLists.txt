@@ -26,4 +26,4 @@ setup_default_compiler_flags(${PROJECT_NAME})
 add_definitions(-DACL_ON_ASSERT_ABORT)
 add_definitions(-DRTM_ON_ASSERT_ABORT)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
