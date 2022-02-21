@@ -42,3 +42,16 @@ jobs:
         run: ./tools/setup_osx_compiler.sh ${{ matrix.compiler }}
       - name: Building (release-x64)
         run: python3 make.py -ci -compiler osx -config Release -cpu x64 -build
+
+  windows:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        compiler: [vs2019]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Building (release-x64)
+        run: python3 make.py -ci -compiler ${{ matrix.compiler }} -config Release -cpu x64 -build
