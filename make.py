@@ -92,7 +92,6 @@ def get_architecture(compiler, cpu):
 
 def set_compiler_env(compiler, args):
 	if platform.system() == 'Linux':
-		os.environ['MAKEFLAGS'] = '-j{}'.format(args.num_threads)
 		if compiler == 'clang9':
 			os.environ['CC'] = 'clang-9'
 			os.environ['CXX'] = 'clang++-9'
@@ -176,6 +175,9 @@ if __name__ == "__main__":
 	print('Using {} threads'.format(args.num_threads))
 
 	do_generate_solution(build_dir, cmake_script_dir, args)
+	# Make sure 'make' runs with all available cores
+	os.environ['MAKEFLAGS'] = '-j{}'.format(args.num_threads)
+
 
 	if args.build:
 		do_build(args)
