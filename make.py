@@ -103,7 +103,7 @@ def set_compiler_env(compiler, args):
 			print('See help with: python make.py -help')
 			sys.exit(1)
 
-def do_generate_solution(build_dir, cmake_script_dir, args):
+def do_generate_solution(install_dir, cmake_script_dir, args):
 	compiler = args.compiler
 	cpu = args.cpu
 	config = args.config
@@ -131,7 +131,7 @@ def do_generate_solution(build_dir, cmake_script_dir, args):
 		print('Using architecture: {}'.format(cmake_arch))
 		extra_switches.append(' -A {}'.format(cmake_arch))
 
-	cmake_cmd = 'cmake .. -DCMAKE_INSTALL_PREFIX="{}" {}'.format(build_dir, ' '.join(extra_switches))
+	cmake_cmd = 'cmake .. -DCMAKE_INSTALL_PREFIX="{}" {}'.format(install_dir, ' '.join(extra_switches))
 
 	result = subprocess.call(cmake_cmd, shell=True)
 	if result != 0:
@@ -156,15 +156,22 @@ def do_build(args):
 if __name__ == "__main__":
 	args = parse_argv()
 
-	build_dir = os.path.join(os.getcwd(), 'build')
-	cmake_script_dir = os.path.join(os.getcwd(), 'cmake')
+	root_dir = os.getcwd()
+	build_dir = os.path.join(root_dir, 'build')
+	install_dir = os.path.join(root_dir, 'bin')
+	cmake_script_dir = os.path.join(root_dir, 'cmake')
 
-	if args.clean and os.path.exists(build_dir):
+	if args.clean:
 		print('Cleaning previous build ...')
-		shutil.rmtree(build_dir)
+		if os.path.exists(build_dir):
+			shutil.rmtree(build_dir)
+		if os.path.exists(install_dir):
+			shutil.rmtree(install_dir)
 
 	if not os.path.exists(build_dir):
 		os.makedirs(build_dir)
+	if not os.path.exists(install_dir):
+		os.makedirs(install_dir)
 
 	os.chdir(build_dir)
 
@@ -174,10 +181,10 @@ if __name__ == "__main__":
 		print('Using compiler: {}'.format(args.compiler))
 	print('Using {} threads'.format(args.num_threads))
 
-	do_generate_solution(build_dir, cmake_script_dir, args)
 	# Make sure 'make' runs with all available cores
 	os.environ['MAKEFLAGS'] = '-j{}'.format(args.num_threads)
 
+	do_generate_solution(install_dir, cmake_script_dir, args)
 
 	if args.build:
 		do_build(args)
