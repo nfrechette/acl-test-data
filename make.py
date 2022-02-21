@@ -16,10 +16,11 @@ def parse_argv():
 	target = parser.add_argument_group(title='Target')
 	target.add_argument('-compiler', choices=['vs2019', 'clang9', 'gcc9', 'osx'], help='Defaults to the host system\'s default compiler')
 	target.add_argument('-config', choices=['Debug', 'Release'], type=str.capitalize)
-	target.add_argument('-cpu', choices=['x86', 'x64', 'arm64'], help='Only supported for Windows, OS X, and Linux; defaults to the host system\'s architecture')
+	target.add_argument('-cpu', choices=['x64', 'arm64'], help='Defaults to the host system\'s architecture')
 
 	misc = parser.add_argument_group(title='Miscellaneous')
 	misc.add_argument('-num_threads', help='No. to use while compiling and regressing')
+	misc.add_argument('-ci', action='store_true', help='Whether or not this is a Continuous Integration build')
 	misc.add_argument('-help', action='help', help='Display this usage information')
 
 	num_threads = multiprocessing.cpu_count()
@@ -28,19 +29,35 @@ def parse_argv():
 	if not num_threads or num_threads == 0:
 		num_threads = 4
 
-	parser.set_defaults(build=False, clean=False, compiler=None, config='Release', cpu='x64', use_avx=False, use_simd=True, num_threads=num_threads)
+	parser.set_defaults(build=False, clean=False, compiler=None, config='Release', cpu=None, num_threads=num_threads)
 
 	args = parser.parse_args()
 
+	is_arm64_cpu = False
+	if platform.machine() == 'arm64' or platform.machine() == 'aarch64':
+		is_arm64_cpu = True
+
 	# Sanitize and validate our options
+	if not args.cpu:
+		if is_arm64_cpu:
+			args.cpu = 'arm64'
+		else:
+			args.cpu = 'x64'
+
+	if args.cpu == 'arm64':
+		is_arm_supported = False
+
+		# Native compilation
+		if platform.system() == 'Darwin' and is_arm64_cpu:
+			is_arm_supported = True
+		elif platform.system() == 'Linux' and is_arm64_cpu:
+			is_arm_supported = True
+
+		if not is_arm_supported:
+			print('arm64 is only supported with OS X (M1 processors), and Linux')
+			sys.exit(1)
 
 	return args
-
-def get_cmake_exes():
-	if platform.system() == 'Windows':
-		return ('cmake.exe', 'ctest.exe')
-	else:
-		return ('cmake', 'ctest')
 
 def get_generator(compiler, cpu):
 	if not compiler:
@@ -87,7 +104,7 @@ def set_compiler_env(compiler, args):
 			print('See help with: python make.py -help')
 			sys.exit(1)
 
-def do_generate_solution(cmake_exe, build_dir, cmake_script_dir, args):
+def do_generate_solution(build_dir, cmake_script_dir, args):
 	compiler = args.compiler
 	cpu = args.cpu
 	config = args.config
@@ -103,28 +120,29 @@ def do_generate_solution(cmake_exe, build_dir, cmake_script_dir, args):
 
 	# Generate IDE solution
 	print('Generating build files ...')
-	cmake_cmd = '"{}" .. -DCMAKE_INSTALL_PREFIX="{}" {}'.format(cmake_exe, build_dir, ' '.join(extra_switches))
 	cmake_generator = get_generator(compiler, cpu)
 	if not cmake_generator:
 		print('Using default generator')
 	else:
 		print('Using generator: {}'.format(cmake_generator))
-		cmake_cmd += ' -G "{}"'.format(cmake_generator)
+		extra_switches.append(' -G "{}"'.format(cmake_generator))
 
 	cmake_arch = get_architecture(compiler, cpu)
 	if cmake_arch:
 		print('Using architecture: {}'.format(cmake_arch))
-		cmake_cmd += ' -A {}'.format(cmake_arch)
+		extra_switches.append(' -A {}'.format(cmake_arch))
+
+	cmake_cmd = 'cmake .. -DCMAKE_INSTALL_PREFIX="{}" {}'.format(build_dir, ' '.join(extra_switches))
 
 	result = subprocess.call(cmake_cmd, shell=True)
 	if result != 0:
 		sys.exit(result)
 
-def do_build(cmake_exe, args):
+def do_build(args):
 	config = args.config
 
 	print('Building ...')
-	cmake_cmd = '"{}" --build .'.format(cmake_exe)
+	cmake_cmd = 'cmake --build .'
 	if platform.system() == 'Windows':
 		cmake_cmd += ' --config {} --target INSTALL'.format(config)
 	elif platform.system() == 'Darwin':
@@ -139,11 +157,6 @@ def do_build(cmake_exe, args):
 if __name__ == "__main__":
 	args = parse_argv()
 
-	cmake_exe, ctest_exe = get_cmake_exes()
-	compiler = args.compiler
-	cpu = args.cpu
-	config = args.config
-
 	build_dir = os.path.join(os.getcwd(), 'build')
 	cmake_script_dir = os.path.join(os.getcwd(), 'cmake')
 
@@ -156,15 +169,15 @@ if __name__ == "__main__":
 
 	os.chdir(build_dir)
 
-	print('Using config: {}'.format(config))
-	print('Using cpu: {}'.format(cpu))
-	if compiler:
-		print('Using compiler: {}'.format(compiler))
+	print('Using config: {}'.format(args.config))
+	print('Using cpu: {}'.format(args.cpu))
+	if args.compiler:
+		print('Using compiler: {}'.format(args.compiler))
 	print('Using {} threads'.format(args.num_threads))
 
-	do_generate_solution(cmake_exe, build_dir, cmake_script_dir, args)
+	do_generate_solution(build_dir, cmake_script_dir, args)
 
 	if args.build:
-		do_build(cmake_exe, args)
+		do_build(args)
 
 	sys.exit(0)
