@@ -1,0 +1,44 @@
+name: build
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  linux:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        compiler: [gcc9, clang9]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Setup ${{ matrix.compiler }} compiler
+        run: ./tools/setup_linux_compiler.sh ${{ matrix.compiler }}
+      - name: Building (release-x64)
+        run: python3 make.py -ci -compiler ${{ matrix.compiler }} -config Release -cpu x64 -build
+
+  osx-11:
+    runs-on: macos-11
+    strategy:
+      matrix:
+        compiler: [xcode13]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Setup ${{ matrix.compiler }} compiler
+        run: ./tools/setup_osx_compiler.sh ${{ matrix.compiler }}
+      - name: Building (release-x64)
+        run: python3 make.py -ci -compiler osx -config Release -cpu x64 -build
