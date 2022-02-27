@@ -22,6 +22,7 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "convert.h"
 #include "command_line_options.h"
 
 #include <acl/core/error.h>
@@ -46,17 +47,9 @@ int main(int argc, char* argv[])
 		ACL_ASSERT(false, "Unknown state");
 		exit_code = 1;
 		break;
-#if 0
-	case command_line_action::compress:
-		exit_code = compress_gltf(options) ? 0 : 1;
+	case command_line_action::convert:
+		exit_code = convert(options) ? 0 : 1;
 		break;
-	case command_line_action::decompress:
-		exit_code = decompress_gltf(options) ? 0 : 1;
-		break;
-	case command_line_action::diff:
-		exit_code = diff_gltf(options) ? 0 : 1;
-		break;
-#endif
 	}
 
 	return exit_code;

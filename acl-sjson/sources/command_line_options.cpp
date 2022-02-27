@@ -28,16 +28,13 @@
 
 command_line_options::command_line_options()
 	: action(command_line_action::none)
-	//, input_filename0()
-	//, input_filename1()
-	//, output_filename()
+	, input_filename()
+	, output_filename()
 {}
 
 static void print_usage()
 {
-	//printf("Usage: acl-gltf --compress <input_file> [<output_file>]\n");
-	//printf("Usage: acl-gltf --decompress <input_file> [<output_file>]\n");
-	//printf("Usage: acl-gltf --diff <input_file1> <input_file2>\n");
+	printf("Usage: acl-sjson --convert <input_file> <output_file>\n");
 }
 
 static bool is_str_equal(const char* argument0, const char* argument1)
@@ -54,10 +51,7 @@ bool parse_command_line_arguments(int argc, char* argv[], command_line_options& 
 	{
 		const char* argument = argv[arg_index];
 
-		(void)argument;
-		is_str_equal("", "");
-#if 0
-		if (is_str_equal(argument, "--compress"))
+		if (is_str_equal(argument, "--convert"))
 		{
 			if (options.action != command_line_action::none)
 			{
@@ -66,78 +60,20 @@ bool parse_command_line_arguments(int argc, char* argv[], command_line_options& 
 				return false;
 			}
 
-			if (arg_index + 1 == argc)
+			if (arg_index + 2 >= argc)
 			{
-				printf("--compress requires an input glTF/glB file\n");
+				printf("--convert requires input and output files\n");
 				print_usage();
 				return false;
 			}
 
-			arg_index++;
+			options.action = command_line_action::convert;
+			options.input_filename = argv[arg_index + 1];
+			options.output_filename = argv[arg_index + 2];
 
-			options.action = command_line_action::compress;
-			options.input_filename0 = argv[arg_index];
-
-			// If we have no output file, we'll just end up printing the stats which is fine
-			if (arg_index + 1 < argc)
-			{
-				arg_index++;
-				options.output_filename = argv[arg_index];
-			}
+			arg_index += 2;
 		}
-		else if (is_str_equal(argument, "--decompress"))
-		{
-			if (options.action != command_line_action::none)
-			{
-				printf("Only one action can be provided\n");
-				print_usage();
-				return false;
-			}
 
-			if (arg_index + 1 == argc)
-			{
-				printf("--decompress requires an input glTF/glB file\n");
-				print_usage();
-				return false;
-			}
-
-			arg_index++;
-
-			options.action = command_line_action::decompress;
-			options.input_filename0 = argv[arg_index];
-
-			// If we have no output file, we'll just end up printing the stats which is fine
-			if (arg_index + 1 < argc)
-			{
-				arg_index++;
-				options.output_filename = argv[arg_index];
-			}
-		}
-		else if (is_str_equal(argument, "--diff"))
-		{
-			if (options.action != command_line_action::none)
-			{
-				printf("Only one action can be provided\n");
-				print_usage();
-				return false;
-			}
-
-			if (arg_index + 3 != argc)
-			{
-				printf("--diff requires two input glTF/glB files\n");
-				print_usage();
-				return false;
-			}
-
-			arg_index++;
-
-			options.action = command_line_action::diff;
-			options.input_filename0 = argv[arg_index];
-
-			arg_index++;
-			options.input_filename1 = argv[arg_index];
-		}
-#endif
 		// Unknown arguments are ignored silently
 	}
 
