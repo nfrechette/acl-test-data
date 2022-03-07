@@ -25,11 +25,15 @@
 #include "command_line_options.h"
 
 #include <sjson/parser.h>
+#include <sjson/writer.h>
 
+#include <acl/compression/convert.h>
 #include <acl/core/ansi_allocator.h>
 #include <acl/core/compressed_tracks.h>
 #include <acl/io/clip_reader.h>
+#include <acl/io/clip_writer.h>
 
+#include <fstream>
 #include <cstdio>
 
 static bool read_file(acl::iallocator& allocator, const char* input_filename, char*& out_buffer, size_t& out_file_size)
@@ -165,7 +169,7 @@ static bool is_acl_bin_file(const char* filename)
 	return filename_len >= 4 && strncmp(filename + filename_len - 4, ".acl", 4) == 0;
 }
 
-bool convert(const command_line_options& options)
+static bool read_input_tracks(const command_line_options& options, acl::iallocator& allocator, acl::track_array& input_tracks)
 {
     if (options.input_filename == options.output_filename)
 	{
@@ -173,14 +177,25 @@ bool convert(const command_line_options& options)
 		return false;
 	}
 
-    acl::ansi_allocator allocator;
-
     if (is_acl_bin_file(options.input_filename.c_str()))
     {
         acl::compressed_tracks* tracks = nullptr;
 
+        // Read the compressed data file
         if (!read_acl_bin_file(allocator, options.input_filename.c_str(), tracks))
             return false;
+        
+        // Convert the compressed data into a raw track array
+        const acl::error_result result = acl::convert_track_list(allocator, *tracks, input_tracks);
+        if (result.any())
+        {
+            printf("Failed to convert input binary track list: %s\n", result.c_str());
+            deallocate_type_array(allocator, tracks, tracks->get_size());
+            return false;
+        }
+
+        // Release the compressed data, no longer needed
+		deallocate_type_array(allocator, tracks, tracks->get_size());
     }
     else
     {
@@ -190,7 +205,113 @@ bool convert(const command_line_options& options)
 
         if (!read_acl_sjson_file(allocator, options.input_filename.c_str(), sjson_type, sjson_clip, sjson_track_list))
             return false;
+        
+        switch (sjson_type)
+        {
+        case acl::sjson_file_type::raw_clip:
+            if (!sjson_clip.additive_base_track_list.is_empty())
+            {
+                printf("Additive base not supported yet\n");
+                return false;
+            }
+            else if (sjson_clip.has_settings)
+            {
+                printf("Settings not supported yet\n");
+                return false;
+            }
+
+            input_tracks = std::move(sjson_clip.track_list);
+            break;
+        case acl::sjson_file_type::raw_track_list:
+            if (sjson_track_list.has_settings)
+            {
+                printf("Settings not supported yet\n");
+                return false;
+            }
+
+            input_tracks = std::move(sjson_track_list.track_list);
+            break;
+        default:
+            printf("Unsupported SJSON type: %d\n", sjson_type);
+            return false;
+        }
     }
 
+    return true;
+}
+
+static bool write_output_tracks(const command_line_options& options, acl::iallocator& allocator, const acl::track_array& input_tracks)
+{
+    if (is_acl_bin_file(options.output_filename.c_str()))
+    {
+        // Convert our input tracks into a compressed_tracks instance
+        acl::compressed_tracks* output_tracks = nullptr;
+        const acl::error_result result = acl::convert_track_list(allocator, input_tracks, output_tracks);
+        if (result.any())
+        {
+            printf("Failed to convert tracks: %s\n", result.c_str());
+            return false;
+        }
+
+#ifdef _WIN32
+		char output_filename[64 * 1024] = { 0 };
+		snprintf(output_filename, acl::get_array_size(output_filename), "\\\\?\\%s", options.output_filename.c_str());
+#else
+		const char* output_filename = options.output_filename.c_str();
+#endif
+
+        std::ofstream output_file_stream(output_filename, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+        if (!output_file_stream.is_open() || !output_file_stream.good())
+        {
+            printf("Failed to open output file for writing: %s\n", options.output_filename.c_str());
+            deallocate_type_array(allocator, output_tracks, output_tracks->get_size());
+            return false;
+        }
+
+        output_file_stream.write(reinterpret_cast<const char*>(output_tracks), output_tracks->get_size());
+
+        // Release the compressed data, no longer needed
+		deallocate_type_array(allocator, output_tracks, output_tracks->get_size());
+
+        if (!output_file_stream.good())
+        {
+            printf("Failed to write output file: %s\n", options.output_filename.c_str());
+            return false;
+        }
+
+        output_file_stream.close();
+        if (!output_file_stream.good())
+        {
+            printf("Failed to close output file: %s\n", options.output_filename.c_str());
+            return false;
+        }
+    }
+    else
+    {
+        const acl::error_result result = acl::write_track_list(input_tracks, options.output_filename.c_str());
+        if (result.any())
+        {
+            printf("Failed to write output file: %s\n", result.c_str());
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool convert(const command_line_options& options)
+{
+    acl::ansi_allocator allocator;
+
+    // Read the input file into a tracks array
+	acl::track_array input_tracks;
+    if (!read_input_tracks(options, allocator, input_tracks))
+        return false;
+    
+    // Write the tracks array out into our desired format
+    if (!write_output_tracks(options, allocator, input_tracks))
+        return false;
+
+    // Done!
     return true;
 }
