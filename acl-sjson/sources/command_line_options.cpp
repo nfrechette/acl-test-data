@@ -35,6 +35,9 @@ command_line_options::command_line_options()
 static void print_usage()
 {
 	printf("Usage: acl-sjson --convert <input_file> <output_file>\n");
+	printf("This utility convers between two ACL file formats.\n");
+	printf("Human readable files end with the *.acl.sjson extension.\n");
+	printf("Binary files end with the *.acl extension.\n");
 }
 
 static bool is_str_equal(const char* argument0, const char* argument1)
