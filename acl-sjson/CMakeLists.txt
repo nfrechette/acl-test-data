@@ -3,9 +3,9 @@ project(acl-sjson CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories("${PROJECT_SOURCE_DIR}/../external/acl/includes")
-include_directories("${PROJECT_SOURCE_DIR}/../external/acl/external/rtm/includes")
-include_directories("${PROJECT_SOURCE_DIR}/../external/acl/external/sjson-cpp/includes")
+include_directories("${PROJECT_SOURCE_DIR}/../external/acl_v21/includes")
+include_directories("${PROJECT_SOURCE_DIR}/../external/acl_v21/external/rtm/includes")
+include_directories("${PROJECT_SOURCE_DIR}/../external/acl_v21/external/sjson-cpp/includes")
 
 # Grab all of our source files
 file(GLOB_RECURSE ALL_MAIN_SOURCE_FILES LIST_DIRECTORIES false
