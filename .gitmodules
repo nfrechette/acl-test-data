@@ -5,3 +5,7 @@
 	path = external/acl_v21
 	url = https://github.com/nfrechette/acl.git
 	branch = develop
+[submodule "external/acl_v20"]
+	path = external/acl_v20
+	url = https://github.com/nfrechette/acl.git
+	branch = release/2.0
