@@ -43,7 +43,7 @@ namespace acl_sjson
 
 #ifdef _WIN32
         char path[64 * 1024] = { 0 };
-        snprintf(path, acl::get_array_size(path), "\\\\?\\%s", input_filename);
+        snprintf(path, 64 * 1024, "\\\\?\\%s", input_filename);
         fopen_s(&file, path, "rb");
 #else
         file = fopen(input_filename, "rb");
