@@ -23,9 +23,9 @@ add_executable(${PROJECT_NAME} ${ALL_TEST_SOURCE_FILES} ${ALL_MAIN_SOURCE_FILES}
 setup_default_compiler_flags(${PROJECT_NAME})
 
 # Link dependencies
-target_link_libraries(${PROJECT_NAME} acl-sjson-core)
-target_link_libraries(${PROJECT_NAME} acl-v20-shim)
-target_link_libraries(${PROJECT_NAME} acl-v21-shim)
+target_link_libraries(${PROJECT_NAME} PRIVATE acl-sjson-core)
+target_link_libraries(${PROJECT_NAME} PRIVATE acl-v20-shim)
+target_link_libraries(${PROJECT_NAME} PRIVATE acl-v21-shim)
 
 # Abort on failure, easier to debug issues this way
 add_definitions(-DACL_ON_ASSERT_ABORT)
