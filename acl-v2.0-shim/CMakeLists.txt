@@ -21,6 +21,9 @@ add_library(${PROJECT_NAME} STATIC ${ALL_MAIN_SOURCE_FILES})
 
 setup_default_compiler_flags(${PROJECT_NAME})
 
+# Link dependencies
+target_link_libraries(${PROJECT_NAME} PRIVATE acl-sjson-core)
+
 # Abort on failure, easier to debug issues this way
 add_definitions(-DACL_ON_ASSERT_ABORT)
 add_definitions(-DRTM_ON_ASSERT_ABORT)
