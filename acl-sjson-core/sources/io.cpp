@@ -24,6 +24,7 @@
 
 #include "acl-sjson/io.h"
 
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
