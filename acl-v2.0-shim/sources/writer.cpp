@@ -127,7 +127,7 @@ namespace
 
             acl::track out_track = make_track(allocator, track_);
 
-            const uint32_t num_samples = track_.get_num_samples();
+            const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
             const uint32_t sample_size = get_sample_size(track_.get_type());
 
             for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
