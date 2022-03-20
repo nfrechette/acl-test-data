@@ -24,26 +24,14 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
-
-#include <string>
-
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    enum class acl_version
+    {
+        v02_00_00 = 0,
+        v02_01_00 = 1,
 
-struct command_line_options
-{
-	command_line_action		action;
-
-	std::string				input_filename;
-	std::string				output_filename;
-
-	acl_sjson::acl_version	output_version;
-
-	command_line_options();
-};
-
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+        latest = v02_01_00,
+        unknown = -1,
+    };
+}

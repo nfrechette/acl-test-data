@@ -1,5 +1,3 @@
-#pragma once
-
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -24,26 +22,54 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+#include "acl-sjson/sample.h"
+#include "acl-sjson/track.h"
 
-#include <string>
-
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    track::track(sample_type type, float sample_rate)
+        : m_type(type)
+        , m_sample_rate(sample_rate)
+    {
+    }
 
-struct command_line_options
-{
-	command_line_action		action;
+    sample_type track::get_type() const
+    {
+        return m_type;
+    }
 
-	std::string				input_filename;
-	std::string				output_filename;
+    size_t track::get_num_samples() const
+    {
+        return m_samples.size();
+    }
 
-	acl_sjson::acl_version	output_version;
+    float track::get_sample_rate() const
+    {
+        return m_sample_rate;
+    }
 
-	command_line_options();
-};
+    void track::emplace_back(sample&& item)
+    {
+        m_samples.emplace_back(std::move(item));
+    }
 
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+    track_description& track::get_description()
+    {
+        return m_desc;
+    }
+
+    const track_description& track::get_description() const
+    {
+        return m_desc;
+    }
+
+    sample& track::operator[](size_t index)
+    {
+        return m_samples[index];
+    }
+
+    const sample& track::operator[](size_t index) const
+    {
+        return m_samples[index];
+    }
+}

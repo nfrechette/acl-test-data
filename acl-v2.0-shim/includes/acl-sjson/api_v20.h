@@ -24,26 +24,13 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
-
-#include <string>
-
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    class track_array;
+}
 
-struct command_line_options
+namespace acl_sjson_v20
 {
-	command_line_action		action;
-
-	std::string				input_filename;
-	std::string				output_filename;
-
-	acl_sjson::acl_version	output_version;
-
-	command_line_options();
-};
-
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+    bool read_tracks(const char* filename, acl_sjson::track_array& out_tracks);
+    bool write_tracks(const char* filename, const acl_sjson::track_array& tracks);
+}

@@ -24,26 +24,35 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+#include "acl-sjson/acl_version.h"
+#include "acl-sjson/track.h"
 
-#include <string>
+#include <vector>
 
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    class track_array
+    {
+    public:
+        track_array(acl_version version);
 
-struct command_line_options
-{
-	command_line_action		action;
+        track_array(const track_array&) = delete;
+        track_array(track_array&&) = default;
+        track_array& operator=(const track_array&) = delete;
+        track_array& operator=(track_array&&) = default;
 
-	std::string				input_filename;
-	std::string				output_filename;
+        size_t get_num_tracks() const;
+        acl_version get_version() const;
 
-	acl_sjson::acl_version	output_version;
+        void emplace_back(track&& item);
 
-	command_line_options();
-};
+        void clear();
 
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+        track& operator[](size_t index);
+        const track& operator[](size_t index) const;
+
+    private:
+        std::vector<track>  m_tracks;
+        acl_version         m_version;
+    };
+}

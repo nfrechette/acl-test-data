@@ -1,5 +1,3 @@
-#pragma once
-
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -24,26 +22,43 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+#include "acl-sjson/track.h"
+#include "acl-sjson/track_array.h"
 
-#include <string>
-
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    track_array::track_array(acl_version version)
+        : m_version(version)
+    {
+    }
 
-struct command_line_options
-{
-	command_line_action		action;
+    size_t track_array::get_num_tracks() const
+    {
+        return m_tracks.size();
+    }
 
-	std::string				input_filename;
-	std::string				output_filename;
+    acl_version track_array::get_version() const
+    {
+        return m_version;
+    }
 
-	acl_sjson::acl_version	output_version;
+    void track_array::emplace_back(track&& item)
+    {
+        m_tracks.emplace_back(std::move(item));
+    }
 
-	command_line_options();
-};
+    void track_array::clear()
+    {
+        m_tracks.clear();
+    }
 
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+    track& track_array::operator[](size_t index)
+    {
+        return m_tracks[index];
+    }
+
+    const track& track_array::operator[](size_t index) const
+    {
+        return m_tracks[index];
+    }
+}

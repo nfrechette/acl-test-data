@@ -25,9 +25,6 @@
 #include "convert.h"
 #include "command_line_options.h"
 
-#include <acl/core/error.h>
-#include <acl/core/floating_point_exceptions.h>
-
 int main(int argc, char* argv[])
 {
 	command_line_options options;
@@ -35,16 +32,13 @@ int main(int argc, char* argv[])
 	if (!arguments_valid)
 		return 1;
 
-	// Disable floating point exceptions
-	acl::scope_disable_fp_exceptions fp_off;
-
 	int exit_code = 0;
 	switch (options.action)
 	{
 	case command_line_action::none:
 	default:
 		// Unknown state, should never happen
-		ACL_ASSERT(false, "Unknown state");
+		printf("Unknown command line action\n");
 		exit_code = 1;
 		break;
 	case command_line_action::convert:
