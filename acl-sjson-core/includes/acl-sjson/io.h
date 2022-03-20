@@ -24,26 +24,18 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+#include <cstddef>
 
-#include <string>
-
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    // Reads a file and returns its content and size
+    // Memory is allocated with malloc and is aligned to 64 bytes
+    // Use free_file_memory(..) to free the allocated memory
+    bool read_file(const char* input_filename, char*& out_buffer, std::size_t& out_file_size);
 
-struct command_line_options
-{
-	command_line_action		action;
+    // Frees memory allocated from read_file(..)
+    void free_file_memory(char* buffer);
 
-	std::string				input_filename;
-	std::string				output_filename;
-
-	acl_sjson::acl_version	output_version;
-
-	command_line_options();
-};
-
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+    // Returns whether or not the filename refers to a binary ACL file
+    bool is_acl_bin_file(const char* filename);
+}

@@ -18,3 +18,6 @@ enable_testing()
 
 # Add other projects
 add_subdirectory("${PROJECT_SOURCE_DIR}/acl-sjson")
+add_subdirectory("${PROJECT_SOURCE_DIR}/acl-sjson-core")
+add_subdirectory("${PROJECT_SOURCE_DIR}/acl-v2.0-shim")
+add_subdirectory("${PROJECT_SOURCE_DIR}/acl-v2.1-shim")

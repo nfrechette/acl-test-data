@@ -30,14 +30,16 @@ command_line_options::command_line_options()
 	: action(command_line_action::none)
 	, input_filename()
 	, output_filename()
+	, output_version(acl_sjson::acl_version::latest)
 {}
 
 static void print_usage()
 {
-	printf("Usage: acl-sjson --convert <input_file> <output_file>\n");
+	printf("Usage: acl-sjson --convert <input_file> <output_file> [--target <version>]\n");
 	printf("This utility convers between two ACL file formats.\n");
 	printf("Human readable files end with the *.acl.sjson extension.\n");
 	printf("Binary files end with the *.acl extension.\n");
+	printf("Optionally, a target version can be provided (e.g. --target 2.0). If none is provided, the latest ACL version is used.\n");
 }
 
 static bool is_str_equal(const char* argument0, const char* argument1)
@@ -75,6 +77,29 @@ bool parse_command_line_arguments(int argc, char* argv[], command_line_options& 
 			options.output_filename = argv[arg_index + 2];
 
 			arg_index += 2;
+		}
+		else if (is_str_equal(argument, "--target"))
+		{
+			if (arg_index + 1 >= argc)
+			{
+				printf("--target requires a version\n");
+				print_usage();
+				return false;
+			}
+
+			const char* target_version = argv[arg_index + 1];
+			if (is_str_equal(target_version, "2.0"))
+				options.output_version = acl_sjson::acl_version::v02_00_00;
+			else if (is_str_equal(target_version, "2.1"))
+				options.output_version = acl_sjson::acl_version::v02_01_00;
+			else
+			{
+				printf("--target requires a valid version\n");
+				print_usage();
+				return false;
+			}
+
+			arg_index += 1;
 		}
 
 		// Unknown arguments are ignored silently

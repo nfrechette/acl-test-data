@@ -24,26 +24,76 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
-
-#include <string>
-
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    struct quat
+    {
+        float x;
+        float y;
+        float z;
+        float w;
+    };
 
-struct command_line_options
-{
-	command_line_action		action;
+    struct float1
+    {
+        float x;
+    };
 
-	std::string				input_filename;
-	std::string				output_filename;
+    struct float2
+    {
+        float x;
+        float y;
+    };
 
-	acl_sjson::acl_version	output_version;
+    struct float3
+    {
+        float x;
+        float y;
+        float z;
+    };
 
-	command_line_options();
-};
+    struct float4
+    {
+        float x;
+        float y;
+        float z;
+        float w;
+    };
 
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+    struct vector4
+    {
+        float x;
+        float y;
+        float z;
+        float w;
+    };
+
+    struct qvv
+    {
+        quat rotation;
+        vector4 translation;
+        vector4 scale;
+    };
+
+    enum class sample_type
+    {
+        float1,
+        float2,
+        float3,
+        float4,
+        vector4,
+        quat,
+        qvv,
+    };
+
+    union sample
+    {
+        float1 f1;
+        float2 f2;
+        float3 f3;
+        float4 f4;
+        vector4 v4;
+        quat q;
+        qvv transform;
+    };
+}

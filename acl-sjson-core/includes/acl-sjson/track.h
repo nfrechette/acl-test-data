@@ -24,26 +24,39 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+#include "acl-sjson/sample.h"
+#include "acl-sjson/track_description.h"
 
-#include <string>
+#include <vector>
 
-enum class command_line_action
+namespace acl_sjson
 {
-	none,
-	convert,
-};
+    class track
+    {
+    public:
+        track(sample_type type, float sample_rate);
 
-struct command_line_options
-{
-	command_line_action		action;
+        track(const track&) = delete;
+        track(track&&) = default;
+        track& operator=(const track&) = delete;
+        track& operator=(track&&) = default;
 
-	std::string				input_filename;
-	std::string				output_filename;
+        sample_type get_type() const;
+        size_t get_num_samples() const;
+        float get_sample_rate() const;
 
-	acl_sjson::acl_version	output_version;
+        void emplace_back(sample&& item);
 
-	command_line_options();
-};
+        track_description& get_description();
+        const track_description& get_description() const;
 
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+        sample& operator[](size_t index);
+        const sample& operator[](size_t index) const;
+
+    private:
+        std::vector<sample> m_samples;
+        track_description   m_desc;
+        sample_type         m_type;
+        float               m_sample_rate;
+    };
+}
