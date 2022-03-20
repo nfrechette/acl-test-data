@@ -274,7 +274,7 @@ namespace acl_sjson_v20
                 input_tracks = std::move(sjson_track_list.track_list);
                 break;
             default:
-                printf("Unsupported SJSON type: %d\n", sjson_type);
+                printf("Unsupported SJSON type: %d\n", static_cast<int>(sjson_type));
                 return false;
             }
 
