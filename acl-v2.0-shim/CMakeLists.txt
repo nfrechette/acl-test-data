@@ -27,3 +27,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE acl-sjson-core)
 # Abort on failure, easier to debug issues this way
 add_definitions(-DACL_ON_ASSERT_ABORT)
 add_definitions(-DRTM_ON_ASSERT_ABORT)
+
+# Enable version namespaces
+add_definitions(-DACL_ENABLE_VERSION_NAMESPACE)
+add_definitions(-DRTM_ENABLE_VERSION_NAMESPACE)
+add_definitions(-DSJSON_CPP_ENABLE_VERSION_NAMESPACE)
