@@ -27,6 +27,7 @@
 #include "acl-sjson/sample.h"
 #include "acl-sjson/track_description.h"
 
+#include <cstddef>
 #include <vector>
 
 namespace acl_sjson

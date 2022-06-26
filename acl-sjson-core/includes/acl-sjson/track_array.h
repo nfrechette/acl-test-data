@@ -27,6 +27,7 @@
 #include "acl-sjson/acl_version.h"
 #include "acl-sjson/track.h"
 
+#include <cstddef>
 #include <vector>
 
 namespace acl_sjson
