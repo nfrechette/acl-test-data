@@ -14,19 +14,19 @@ on:
 
 jobs:
   linux:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        compiler: [gcc9, clang9]
+        compiler: [gcc11, clang14]
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
-      - name: Setup ${{ matrix.compiler }} compiler
-        run: ./tools/setup_linux_compiler.sh ${{ matrix.compiler }}
       - name: Building (release-x64)
-        run: python3 make.py -ci -compiler ${{ matrix.compiler }} -config Release -cpu x64 -build
+        uses: docker://ghcr.io/nfrechette/toolchain-amd64-focal:v1
+        with:
+          args: 'python3 make.py -ci -compiler ${{ matrix.compiler }} -config Release -cpu x64 -build'
 
   osx-11:
     runs-on: macos-11
