@@ -13,7 +13,7 @@ ACL has the following runtime dependencies:
 
 ## Animation Compression Library (ACL) 2.0
 
-[Animation Compression Library v2.0.4](https://github.com/nfrechette/acl/releases/tag/v2.0.4) (MIT License) is used to compress and decompress animations.
+[Animation Compression Library v2.0.5](https://github.com/nfrechette/acl/releases/tag/v2.0.5) (MIT License) is used to compress and decompress animations.
 
 ACL has the following runtime dependencies:
 
