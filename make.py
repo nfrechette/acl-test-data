@@ -14,7 +14,7 @@ def parse_argv():
 	actions.add_argument('-clean', action='store_true')
 
 	target = parser.add_argument_group(title='Target')
-	target.add_argument('-compiler', choices=['vs2019', 'clang9', 'gcc9', 'osx'], help='Defaults to the host system\'s default compiler')
+	target.add_argument('-compiler', choices=['vs2019', 'clang14', 'gcc11', 'osx'], help='Defaults to the host system\'s default compiler')
 	target.add_argument('-config', choices=['Debug', 'Release'], type=str.capitalize)
 	target.add_argument('-cpu', choices=['x64', 'arm64'], help='Defaults to the host system\'s architecture')
 
@@ -92,12 +92,12 @@ def get_architecture(compiler, cpu):
 
 def set_compiler_env(compiler, args):
 	if platform.system() == 'Linux':
-		if compiler == 'clang9':
-			os.environ['CC'] = 'clang-9'
-			os.environ['CXX'] = 'clang++-9'
-		elif compiler == 'gcc9':
-			os.environ['CC'] = 'gcc-9'
-			os.environ['CXX'] = 'g++-9'
+		if compiler == 'clang14':
+			os.environ['CC'] = 'clang-14'
+			os.environ['CXX'] = 'clang++-14'
+		elif compiler == 'gcc11':
+			os.environ['CC'] = 'gcc-11'
+			os.environ['CXX'] = 'g++-11'
 		else:
 			print('Unknown compiler: {}'.format(compiler))
 			print('See help with: python make.py -help')
