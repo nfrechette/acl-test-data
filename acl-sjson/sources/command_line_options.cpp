@@ -36,10 +36,10 @@ command_line_options::command_line_options()
 static void print_usage()
 {
 	printf("Usage: acl-sjson --convert <input_file> <output_file> [--target <version>]\n");
-	printf("This utility convers between two ACL file formats.\n");
+	printf("This utility converts between two ACL file formats.\n");
 	printf("Human readable files end with the *.acl.sjson extension.\n");
 	printf("Binary files end with the *.acl extension.\n");
-	printf("Optionally, a target version can be provided (e.g. --target 2.0). If none is provided, the latest ACL version is used.\n");
+	printf("Optionally, a target version can be provided (e.g. --target 2.0). Defaults to the latest ACL version.\n");
 }
 
 static bool is_str_equal(const char* argument0, const char* argument1)
