@@ -1,0 +1,18 @@
+version = 1
+
+clip =
+{
+	name = "93_01"
+	num_samples = 5
+	sample_rate = 24
+	error_threshold = 0.01
+}
+
+bones =
+[
+]
+
+tracks =
+[
+]
+
