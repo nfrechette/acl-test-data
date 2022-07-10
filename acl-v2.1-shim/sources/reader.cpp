@@ -242,7 +242,7 @@ namespace acl_sjson_v21
             // Release the compressed data, no longer needed
             acl_sjson::free_file_memory(reinterpret_cast<char*>(tracks));
         }
-        else
+        else if (acl_sjson::is_acl_sjson_file(filename))
         {
             acl::sjson_file_type sjson_type = acl::sjson_file_type::unknown;
             acl::sjson_raw_clip sjson_clip;
@@ -285,6 +285,11 @@ namespace acl_sjson_v21
         }
 
         out_tracks = convert_tracks(input_tracks, version);
+		else
+		{
+			printf("Unknown ACL file format\n");
+			return false;
+		}
 
         return true;
     }
