@@ -43,6 +43,7 @@ namespace acl_sjson
         track_array& operator=(track_array&&) = default;
 
         size_t get_num_tracks() const;
+		float get_sample_rate() const;
         acl_version get_version() const;
 
         void emplace_back(track&& item);

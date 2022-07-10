@@ -25,6 +25,8 @@
 #include "acl-sjson/track.h"
 #include "acl-sjson/track_array.h"
 
+#include <limits>
+
 namespace acl_sjson
 {
     track_array::track_array(acl_version version)
@@ -36,6 +38,14 @@ namespace acl_sjson
     {
         return m_tracks.size();
     }
+
+	float track_array::get_sample_rate() const
+	{
+		if (m_tracks.empty())
+			return std::numeric_limits<float>::signaling_NaN();
+
+		return m_tracks[0].get_sample_rate();
+	}
 
     acl_version track_array::get_version() const
     {
