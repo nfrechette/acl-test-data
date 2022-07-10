@@ -227,7 +227,7 @@ namespace acl_sjson_v21
             // Read the compressed data file
             if (!read_acl_bin_file(filename, tracks))
                 return false;
-            
+
             // Convert the compressed data into a raw track array
             const acl::error_result result = acl::convert_track_list(allocator, *tracks, input_tracks);
             if (result.any())
@@ -250,7 +250,7 @@ namespace acl_sjson_v21
 
             if (!read_acl_sjson_file(allocator, filename, sjson_type, sjson_clip, sjson_track_list))
                 return false;
-            
+
             switch (sjson_type)
             {
             case acl::sjson_file_type::raw_clip:
@@ -283,13 +283,13 @@ namespace acl_sjson_v21
 
             version = acl_sjson::acl_version::v02_01_00;
         }
-
-        out_tracks = convert_tracks(input_tracks, version);
 		else
 		{
 			printf("Unknown ACL file format\n");
 			return false;
 		}
+
+        out_tracks = convert_tracks(input_tracks, version);
 
         return true;
     }
