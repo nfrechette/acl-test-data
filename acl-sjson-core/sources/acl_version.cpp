@@ -1,5 +1,3 @@
-#pragma once
-
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -24,16 +22,17 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "acl-sjson/acl_version.h"
+
 namespace acl_sjson
 {
-    enum class acl_version
-    {
-        v02_00_00 = 0,
-        v02_01_00 = 1,
-
-        latest = v02_01_00,
-        unknown = -1,
-    };
-
-	const char* to_string(acl_version version);
+	const char* to_string(acl_version version)
+	{
+		switch (version)
+		{
+		case acl_version::v02_00_00:	return "2.0.0";
+		case acl_version::v02_01_00:	return "2.1.0";
+		default:						return "<unknown>";
+		}
+	}
 }
