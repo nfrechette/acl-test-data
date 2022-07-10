@@ -38,4 +38,7 @@ namespace acl_sjson
 
     // Returns whether or not the filename refers to a binary ACL file
     bool is_acl_bin_file(const char* filename);
+
+	// Returns whether or not the filename refers to a SJSON ACL file
+    bool is_acl_sjson_file(const char* filename);
 }

@@ -123,4 +123,10 @@ namespace acl_sjson
         const size_t filename_len = filename != nullptr ? std::strlen(filename) : 0;
         return filename_len >= 4 && strncmp(filename + filename_len - 4, ".acl", 4) == 0;
     }
+
+	bool is_acl_sjson_file(const char* filename)
+	{
+		const size_t filename_len = filename != nullptr ? std::strlen(filename) : 0;
+        return filename_len >= 10 && strncmp(filename + filename_len - 10, ".acl.sjson", 10) == 0;
+	}
 }
