@@ -101,6 +101,27 @@ bool parse_command_line_arguments(int argc, char* argv[], command_line_options& 
 
 			arg_index += 1;
 		}
+		else if (is_str_equal(argument, "--info"))
+		{
+			if (options.action != command_line_action::none)
+			{
+				printf("Only one action can be provided\n");
+				print_usage();
+				return false;
+			}
+
+			if (arg_index + 1 >= argc)
+			{
+				printf("--info requires an input file\n");
+				print_usage();
+				return false;
+			}
+
+			options.action = command_line_action::info;
+			options.input_filename = argv[arg_index + 1];
+
+			arg_index += 1;
+		}
 
 		// Unknown arguments are ignored silently
 	}

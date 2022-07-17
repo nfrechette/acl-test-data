@@ -24,32 +24,6 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+struct command_line_options;
 
-#include <string>
-
-enum class command_line_action
-{
-	// No action
-	none,
-
-	// Converts from one ACL format/version into another
-	convert,
-
-	// Dumps information about an input ACL clip to stdout
-	info,
-};
-
-struct command_line_options
-{
-	command_line_action		action;
-
-	std::string				input_filename;
-	std::string				output_filename;
-
-	acl_sjson::acl_version	output_version;
-
-	command_line_options();
-};
-
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+bool info(const command_line_options& options);
