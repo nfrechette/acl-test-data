@@ -1,5 +1,3 @@
-#pragma once
-
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -24,79 +22,23 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "acl-sjson/sample.h"
+
 namespace acl_sjson
 {
-    struct quat
-    {
-        float x;
-        float y;
-        float z;
-        float w;
-    };
-
-    struct float1
-    {
-        float x;
-    };
-
-    struct float2
-    {
-        float x;
-        float y;
-    };
-
-    struct float3
-    {
-        float x;
-        float y;
-        float z;
-    };
-
-    struct float4
-    {
-        float x;
-        float y;
-        float z;
-        float w;
-    };
-
-    struct vector4
-    {
-        float x;
-        float y;
-        float z;
-        float w;
-    };
-
-    struct qvv
-    {
-        quat rotation;
-        vector4 translation;
-        vector4 scale;
-    };
-
-    enum class sample_type
-    {
-		unknown,
-        float1,
-        float2,
-        float3,
-        float4,
-        vector4,
-        quat,
-        qvv,
-    };
-
-	const char* to_string(sample_type type);
-
-    union sample
-    {
-        float1 f1;
-        float2 f2;
-        float3 f3;
-        float4 f4;
-        vector4 v4;
-        quat q;
-        qvv transform;
-    };
+	const char* to_string(sample_type type)
+	{
+		switch (type)
+		{
+			default:
+			case sample_type::unknown:	return "unknown";
+			case sample_type::float1:	return "float1";
+			case sample_type::float2:	return "float2";
+			case sample_type::float3:	return "float3";
+			case sample_type::float4:	return "float4";
+			case sample_type::vector4:	return "vector4";
+			case sample_type::quat:		return "quat";
+			case sample_type::qvv:		return "qvv";
+		}
+	}
 }
