@@ -32,6 +32,14 @@ namespace acl_sjson
     {
     }
 
+	sample_type track_array::get_type() const
+	{
+		if (m_tracks.empty())
+			return sample_type::unknown;
+
+		return m_tracks[0].get_type();
+	}
+
     size_t track_array::get_num_tracks() const
     {
         return m_tracks.size();

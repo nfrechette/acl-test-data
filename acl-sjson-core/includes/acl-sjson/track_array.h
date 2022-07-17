@@ -25,6 +25,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "acl-sjson/acl_version.h"
+#include "acl-sjson/sample.h"
 #include "acl-sjson/track.h"
 
 #include <cstddef>
@@ -42,6 +43,7 @@ namespace acl_sjson
         track_array& operator=(const track_array&) = delete;
         track_array& operator=(track_array&&) = default;
 
+		sample_type get_type() const;
         size_t get_num_tracks() const;
 		size_t get_num_samples_per_track() const;
 		float get_sample_rate() const;
