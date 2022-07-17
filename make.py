@@ -12,6 +12,9 @@ def parse_argv():
 	actions = parser.add_argument_group(title='Actions', description='If no action is specified, on Windows, OS X, and Linux the solution/make files are generated.  Multiple actions can be used simultaneously.')
 	actions.add_argument('-build', action='store_true')
 	actions.add_argument('-clean', action='store_true')
+	actions.add_argument('-convert', action='store_true', help="Converts the '-input' directory/file into '-output' directory/file")
+	actions.add_argument('-input')
+	actions.add_argument('-output')
 
 	target = parser.add_argument_group(title='Target')
 	target.add_argument('-compiler', choices=['vs2019', 'clang14', 'gcc11', 'osx'], help='Defaults to the host system\'s default compiler')
@@ -153,6 +156,88 @@ def do_build(args):
 	if result != 0:
 		sys.exit(result)
 
+def do_convert(args, root_dir, build_dir):
+	os.chdir(root_dir)
+
+	if not os.path.exists(args.input):
+		print('Input conversion directory or file not found: {}'.format(args.input))
+		sys.exit(1)
+
+	if not args.output:
+		print('Output conversion directory or file not found: {}'.format(args.output))
+		sys.exit(1)
+
+	# Validate that our tool is present
+	if platform.system() == 'Windows':
+		tool_path = './bin/acl-sjson.exe'
+	else:
+		tool_path = './bin/acl-sjson'
+
+	tool_path = os.path.abspath(tool_path)
+	if not os.path.exists(tool_path):
+		print('acl-sjson executable not found: {}'.format(tool_path))
+		sys.exit(1)
+
+	# Grab all the clips to convert
+	conversion_clips = []
+	if os.path.isfile(args.input):
+		if not args.input.endswith('.acl.sjson') and not args.input.endswith('.acl'):
+			print('Expected an ACL file format as input: {}'.format(args.input))
+			sys.exit(1)
+
+		if not args.output.endswith('.acl.sjson') and not args.output.endswith('.acl'):
+			print('Expected an ACL file format as output: {}'.format(args.output))
+			sys.exit(1)
+
+		input_filename = os.path.abspath(args.input)
+		output_filename = os.path.abspath(args.output)
+
+		if not os.path.exists(output_filename):
+			os.makedirs(output_filename)
+
+		conversion_clips.append((input_filename, output_filename))
+	elif os.path.isdir(args.input):
+		for (dirpath, dirnames, filenames) in os.walk(args.input):
+			for filename in filenames:
+				if not filename.endswith('.acl.sjson') and not filename.endswith('.acl'):
+					continue
+
+				input_filename = os.path.join(dirpath, filename)
+				# Always convert to binary
+				output_filename = os.path.join(args.output, filename.replace('.acl.sjson', '.acl'))
+				conversion_clips.append((input_filename, output_filename))
+
+		if not os.path.exists(args.output):
+			os.makedirs(args.output)
+	else:
+		print('Unexpected input found: {}'.format(args.input))
+		sys.exit(1)
+
+	if len(conversion_clips) == 0:
+		print('No clips found to convert')
+		sys.exit(0)
+
+	print('Converting {} clips in ...'.format(len(conversion_clips)))
+	conversion_failed = False
+	for (input_filename, output_filename) in conversion_clips:
+		cmd = '"{}" --convert "{}" "{}"'.format(tool_path, input_filename, output_filename)
+
+		if platform.system() == 'Windows':
+			cmd = cmd.replace('/', '\\')
+
+		result = subprocess.call(cmd, shell=True)
+
+		if result != 0:
+			print('Failed to run conversion for clip: {}'.format(input_filename))
+			print(cmd)
+			conversion_failed = True
+
+	print('Done!')
+	os.chdir(build_dir)
+
+	if conversion_failed:
+		sys.exit(1)
+
 if __name__ == "__main__":
 	args = parse_argv()
 
@@ -188,5 +273,8 @@ if __name__ == "__main__":
 
 	if args.build:
 		do_build(args)
+
+	if args.convert:
+		do_convert(args, root_dir, build_dir)
 
 	sys.exit(0)
