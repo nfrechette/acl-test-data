@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -22,48 +24,9 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "command_line_options.h"
-#include "utils.h"
-
-#include <acl-sjson/api_v20.h>
-#include <acl-sjson/api_v21.h>
-#include <acl-sjson/track_array.h>
-
-#include <cstdio>
-
-bool convert(const command_line_options& options)
+namespace acl_sjson
 {
-    if (options.input_filename == options.output_filename)
-	{
-		printf("Input and output cannot be the same file\n");
-		return false;
-	}
-
-    acl_sjson::track_array tracks(acl_sjson::acl_version::unknown);
-    if (!read_tracks(options.input_filename.c_str(), tracks))
-        return false;
-
-    if (tracks.get_version() == acl_sjson::acl_version::unknown)
-    {
-        printf("Unknown ACL version used in input file\n");
-        return false;
-    }
-
-    switch (options.output_version)
-    {
-    case acl_sjson::acl_version::v02_00_00:
-        if (!acl_sjson_v20::write_tracks(options.output_filename.c_str(), tracks))
-            return false;
-        break;
-    case acl_sjson::acl_version::v02_01_00:
-        if (!acl_sjson_v21::write_tracks(options.output_filename.c_str(), tracks))
-            return false;
-        break;
-    default:
-        printf("Unsupported target version\n");
-        return false;
-    }
-
-    // Done!
-    return true;
+	class track_array;
 }
+
+bool read_tracks(const char* filename, acl_sjson::track_array& out_tracks);
