@@ -39,6 +39,14 @@ namespace acl_sjson
         return m_tracks.size();
     }
 
+	size_t track_array::get_num_samples_per_track() const
+	{
+		if (m_tracks.empty())
+			return 0;
+
+		return m_tracks[0].get_num_samples();
+	}
+
 	float track_array::get_sample_rate() const
 	{
 		if (m_tracks.empty())
