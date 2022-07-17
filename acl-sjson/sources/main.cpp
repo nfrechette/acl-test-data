@@ -24,6 +24,7 @@
 
 #include "convert.h"
 #include "command_line_options.h"
+#include "info.h"
 
 int main(int argc, char* argv[])
 {
@@ -43,6 +44,9 @@ int main(int argc, char* argv[])
 		break;
 	case command_line_action::convert:
 		exit_code = convert(options) ? 0 : 1;
+		break;
+	case command_line_action::info:
+		exit_code = info(options) ? 0 : 1;
 		break;
 	}
 

@@ -1,5 +1,3 @@
-#pragma once
-
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -24,32 +22,32 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <acl-sjson/acl_version.h>
+#include "command_line_options.h"
+#include "utils.h"
 
-#include <string>
+#include <acl-sjson/api_v20.h>
+#include <acl-sjson/api_v21.h>
+#include <acl-sjson/track_array.h>
 
-enum class command_line_action
+#include <cstdio>
+
+bool info(const command_line_options& options)
 {
-	// No action
-	none,
+	acl_sjson::track_array tracks(acl_sjson::acl_version::unknown);
+	if (!read_tracks(options.input_filename.c_str(), tracks))
+		return false;
 
-	// Converts from one ACL format/version into another
-	convert,
+	if (tracks.get_version() == acl_sjson::acl_version::unknown)
+	{
+		printf("Unknown ACL version used in input file\n");
+		return false;
+	}
 
-	// Dumps information about an input ACL clip to stdout
-	info,
-};
+	printf("Filename: %s\n", options.input_filename.c_str());
+	printf("Version: %s\n", acl_sjson::to_string(tracks.get_version()));
+	printf("Num tracks: %u\n", static_cast<uint32_t>(tracks.get_num_tracks()));
+	printf("Num samples per track: %u\n", static_cast<uint32_t>(tracks.get_num_samples_per_track()));
+	printf("Sample rate: %.2f\n", tracks.get_sample_rate());
 
-struct command_line_options
-{
-	command_line_action		action;
-
-	std::string				input_filename;
-	std::string				output_filename;
-
-	acl_sjson::acl_version	output_version;
-
-	command_line_options();
-};
-
-bool parse_command_line_arguments(int argc, char* argv[], command_line_options& out_options);
+	return true;
+}
