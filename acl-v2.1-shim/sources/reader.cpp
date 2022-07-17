@@ -106,8 +106,9 @@ namespace
     {
         switch (type)
         {
+		default:
+			return acl_sjson::sample_type::unknown;
         case acl::track_type8::float1f:
-        default:
             return acl_sjson::sample_type::float1;
 		case acl::track_type8::float2f:
             return acl_sjson::sample_type::float2;

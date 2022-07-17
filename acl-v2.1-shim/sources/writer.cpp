@@ -46,8 +46,9 @@ namespace
     {
         switch (type)
         {
+		default:
+			return 0;
         case acl_sjson::sample_type::float1:
-        default:
             return sizeof(float);
         case acl_sjson::sample_type::float2:
             return sizeof(rtm::float2f);
@@ -86,7 +87,7 @@ namespace
         out_desc.constant_rotation_threshold_angle = desc.constant_rotation_threshold_angle;
         out_desc.constant_translation_threshold = desc.constant_translation_threshold;
         out_desc.constant_scale_threshold = desc.constant_scale_threshold;
-        
+
         return out_desc;
     }
 
@@ -212,7 +213,7 @@ namespace acl_sjson_v21
                 return false;
             }
         }
-        
+
         return true;
     }
 }
