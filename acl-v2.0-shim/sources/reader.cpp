@@ -106,8 +106,9 @@ namespace
     {
         switch (type)
         {
+		default:
+			return acl_sjson::sample_type::unknown;
         case acl::track_type8::float1f:
-        default:
             return acl_sjson::sample_type::float1;
 		case acl::track_type8::float2f:
             return acl_sjson::sample_type::float2;
@@ -224,7 +225,7 @@ namespace acl_sjson_v20
             // Read the compressed data file
             if (!read_acl_bin_file(filename, tracks))
                 return false;
-            
+
             // Convert the compressed data into a raw track array
             const acl::error_result result = acl::convert_track_list(allocator, *tracks, input_tracks);
             if (result.any())
@@ -247,7 +248,7 @@ namespace acl_sjson_v20
 
             if (!read_acl_sjson_file(allocator, filename, sjson_type, sjson_clip, sjson_track_list))
                 return false;
-            
+
             switch (sjson_type)
             {
             case acl::sjson_file_type::raw_clip:

@@ -46,8 +46,9 @@ namespace
     {
         switch (type)
         {
+		default:
+			return 0;
         case acl_sjson::sample_type::float1:
-        default:
             return sizeof(float);
         case acl_sjson::sample_type::float2:
             return sizeof(rtm::float2f);
@@ -206,7 +207,7 @@ namespace acl_sjson_v20
                 return false;
             }
         }
-        
+
         return true;
     }
 }

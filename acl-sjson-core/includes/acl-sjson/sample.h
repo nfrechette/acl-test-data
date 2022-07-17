@@ -77,6 +77,7 @@ namespace acl_sjson
 
     enum class sample_type
     {
+		unknown,
         float1,
         float2,
         float3,
