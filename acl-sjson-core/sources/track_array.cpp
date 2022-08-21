@@ -31,8 +31,9 @@ namespace acl_sjson
     {
     }
 
-    track_array::track_array(const metadata_t& metadata)
-        : m_metadata(metadata)
+    track_array::track_array(const char* name, const metadata_t& metadata)
+        : m_name(name)
+		, m_metadata(metadata)
     {
     }
 
@@ -81,6 +82,11 @@ namespace acl_sjson
 	const metadata_t& track_array::get_metadata() const
 	{
 		return m_metadata;
+	}
+
+	const char* track_array::get_name() const
+	{
+		return m_name.c_str();
 	}
 
     void track_array::emplace_back(track&& item)

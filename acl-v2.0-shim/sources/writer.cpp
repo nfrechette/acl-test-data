@@ -121,6 +121,7 @@ namespace
         const uint32_t num_tracks = static_cast<uint32_t>(input_tracks.get_num_tracks());
 
         acl::track_array out_tracks(allocator, num_tracks);
+		out_tracks.set_name(acl::string(allocator, input_tracks.get_name()));
 
         for (uint32_t track_index = 0; track_index < num_tracks; ++track_index)
         {

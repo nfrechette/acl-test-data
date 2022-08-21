@@ -127,6 +127,7 @@ namespace
         const acl_sjson::acl_version version = input_tracks.get_version();
 
         acl::track_array out_tracks(allocator, num_tracks);
+		out_tracks.set_name(acl::string(allocator, input_tracks.get_name()));
 
         for (uint32_t track_index = 0; track_index < num_tracks; ++track_index)
         {
