@@ -122,8 +122,11 @@ bool parse_command_line_arguments(int argc, char* argv[], command_line_options& 
 
 			arg_index += 1;
 		}
-
-		// Unknown arguments are ignored silently
+		else
+		{
+			// Unknown arguments just warn, they are ignored
+			printf("Unknown argument: %s\n", argument);
+		}
 	}
 
 	if (options.action == command_line_action::none)
