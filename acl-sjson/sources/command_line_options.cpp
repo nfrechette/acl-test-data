@@ -30,7 +30,7 @@ command_line_options::command_line_options()
 	: action(command_line_action::none)
 	, input_filename()
 	, output_filename()
-	, output_version(acl_sjson::acl_version::latest)
+	, output_version(acl_sjson::acl_version::unknown)
 {}
 
 static void print_usage()
@@ -39,7 +39,7 @@ static void print_usage()
 	printf("This utility converts between two ACL file formats.\n");
 	printf("Human readable files end with the *.acl.sjson extension.\n");
 	printf("Binary files end with the *.acl extension.\n");
-	printf("Optionally, a target version can be provided (e.g. --target 2.0). Defaults to the latest ACL version.\n");
+	printf("Optionally, a target version can be provided (e.g. --target 2.0). Defaults to the source file version.\n");
 }
 
 static bool is_str_equal(const char* argument0, const char* argument1)

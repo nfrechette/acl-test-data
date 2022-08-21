@@ -60,8 +60,22 @@ bool convert(const command_line_options& options)
             return false;
         break;
     default:
-        printf("Unsupported target version\n");
-        return false;
+		// By default, if no target version is specified, we maintain the source version
+		switch (tracks.get_version())
+		{
+		case acl_sjson::acl_version::v02_00_00:
+			if (!acl_sjson_v20::write_tracks(options.output_filename.c_str(), tracks))
+				return false;
+			break;
+		case acl_sjson::acl_version::v02_01_00:
+			if (!acl_sjson_v21::write_tracks(options.output_filename.c_str(), tracks))
+				return false;
+			break;
+		default:
+			printf("Unsupported source version\n");
+			return false;
+		}
+		break;
     }
 
     // Done!
