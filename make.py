@@ -5,6 +5,7 @@ import platform
 import shutil
 import subprocess
 import sys
+import time
 
 def parse_argv():
 	parser = argparse.ArgumentParser(add_help=False)
@@ -157,7 +158,48 @@ def do_build(args):
 	if result != 0:
 		sys.exit(result)
 
-def do_convert(args, root_dir, build_dir):
+def format_elapsed_time(elapsed_time):
+	hours, rem = divmod(elapsed_time, 3600)
+	minutes, seconds = divmod(rem, 60)
+	if hours > 0:
+		return '{:0>2}h {:0>2}m {:05.2f}s'.format(int(hours), int(minutes), seconds)
+	elif minutes > 0:
+		return '{:0>2}m {:05.2f}s'.format(int(minutes), seconds)
+	else:
+		return '{:05.2f}s'.format(seconds)
+
+def print_progress(iteration, total, prefix='', suffix='', decimals = 1, bar_length = 40):
+	# Taken from https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
+	# With minor tweaks
+	"""
+	Call in a loop to create terminal progress bar
+	@params:
+		iteration   - Required  : current iteration (Int)
+		total       - Required  : total iterations (Int)
+		prefix      - Optional  : prefix string (Str)
+		suffix      - Optional  : suffix string (Str)
+		decimals    - Optional  : positive number of decimals in percent complete (Int)
+		bar_length  - Optional  : character length of bar (Int)
+	"""
+	str_format = "{0:." + str(decimals) + "f}"
+	percents = str_format.format(100 * (iteration / float(total)))
+	filled_length = int(round(bar_length * iteration / float(total)))
+	bar = '█' * filled_length + '-' * (bar_length - filled_length)
+
+	# We need to clear any previous line we might have to ensure we have no visual artifacts
+	# Note that if this function is called too quickly, the text might flicker
+	terminal_width = 80
+	sys.stdout.write('{}\r'.format(' ' * terminal_width))
+	sys.stdout.flush()
+
+	sys.stdout.write('%s |%s| %s%s %s\r' % (prefix, bar, percents, '%', suffix)),
+	sys.stdout.flush()
+
+	if iteration == total:
+		sys.stdout.write('\n')
+
+def do_convert(args, root_dir):
+	old_cwd = os.getcwd()
 	os.chdir(root_dir)
 
 	if not os.path.exists(args.input):
@@ -225,7 +267,9 @@ def do_convert(args, root_dir, build_dir):
 		print('No clips found to convert')
 		sys.exit(0)
 
-	print('Converting {} clips in ...'.format(len(conversion_clips)))
+	conversion_start_time = time.perf_counter()
+	num_processed = 0
+	print_progress(num_processed, len(conversion_clips), 'Converting clips:', '{} / {}'.format(num_processed, len(conversion_clips)))
 	conversion_failed = False
 	for (input_filename, output_filename) in conversion_clips:
 		cmd = '"{}" --convert "{}" "{}"'.format(tool_path, input_filename, output_filename)
@@ -238,13 +282,18 @@ def do_convert(args, root_dir, build_dir):
 
 		result = subprocess.call(cmd, shell=True)
 
+		num_processed += 1
+		print_progress(num_processed, len(conversion_clips), 'Converting clips:', '{} / {}'.format(num_processed, len(conversion_clips)))
+
 		if result != 0:
 			print('Failed to run conversion for clip: {}'.format(input_filename))
 			print(cmd)
 			conversion_failed = True
 
-	print('Done!')
-	os.chdir(build_dir)
+	conversion_end_time = time.perf_counter()
+	print('Done in {}'.format(format_elapsed_time(conversion_end_time - conversion_start_time)))
+
+	os.chdir(old_cwd)
 
 	if conversion_failed:
 		sys.exit(1)
@@ -286,6 +335,6 @@ if __name__ == "__main__":
 		do_build(args)
 
 	if args.convert:
-		do_convert(args, root_dir, build_dir)
+		do_convert(args, root_dir)
 
 	sys.exit(0)
