@@ -202,6 +202,10 @@ def do_convert(args, root_dir, build_dir):
 				if not filename.endswith('.acl.sjson') and not filename.endswith('.acl'):
 					continue
 
+				# Ignore the reference file format, it isn't a valid file
+				if filename == 'format_reference.acl.sjson':
+					continue
+
 				input_filename = os.path.join(dirpath, filename)
 				# Always convert to binary
 				output_filename = os.path.join(args.output, filename.replace('.acl.sjson', '.acl'))
