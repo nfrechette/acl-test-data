@@ -12,9 +12,10 @@ def parse_argv():
 	actions = parser.add_argument_group(title='Actions', description='If no action is specified, on Windows, OS X, and Linux the solution/make files are generated.  Multiple actions can be used simultaneously.')
 	actions.add_argument('-build', action='store_true')
 	actions.add_argument('-clean', action='store_true')
-	actions.add_argument('-convert', action='store_true', help="Converts the '-input' directory/file into '-output' directory/file")
+	actions.add_argument('-convert', action='store_true', help="Converts the '-input' directory/file into '-output' directory/file with optional -target version")
 	actions.add_argument('-input')
 	actions.add_argument('-output')
+	actions.add_argument('-target')
 
 	target = parser.add_argument_group(title='Target')
 	target.add_argument('-compiler', choices=['vs2019', 'clang14', 'gcc11', 'osx'], help='Defaults to the host system\'s default compiler')
@@ -228,6 +229,9 @@ def do_convert(args, root_dir, build_dir):
 	conversion_failed = False
 	for (input_filename, output_filename) in conversion_clips:
 		cmd = '"{}" --convert "{}" "{}"'.format(tool_path, input_filename, output_filename)
+
+		if args.target:
+			cmd = "{} --target {}".format(cmd, args.target)
 
 		if platform.system() == 'Windows':
 			cmd = cmd.replace('/', '\\')
