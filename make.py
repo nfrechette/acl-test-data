@@ -305,20 +305,15 @@ def do_package(args, root_dir):
 
 	args.convert = True
 	args.input = './regression_tests'
+	args.output = './output_regression_tests'
+
+	do_convert(args, root_dir)
 
 	readme_path = os.path.join(args.input, 'README.md')
+	shutil.copyfile(readme_path, os.path.join(args.output, 'README.md'))
 
-	versions = [ '2.0', '2.1' ]
-
-	for version in versions:
-		args.output = './output_clips_{}'.format(version.replace('.', ''))
-		args.target = version
-		do_convert(args, root_dir)
-
-		shutil.copyfile(readme_path, os.path.join(args.output, 'README.md'))
-
-		zip_filename = os.path.join(root_dir, 'regression_tests_' + version.replace('.', '_'))
-		shutil.make_archive(zip_filename, 'zip', args.output)
+	zip_filename = os.path.join(root_dir, 'output_regression_tests')
+	shutil.make_archive(zip_filename, 'zip', args.output)
 
 	os.chdir(old_cwd)
 
