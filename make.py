@@ -211,6 +211,9 @@ def do_convert(args, root_dir, build_dir):
 				output_filename = os.path.join(args.output, filename.replace('.acl.sjson', '.acl'))
 				conversion_clips.append((input_filename, output_filename))
 
+		if os.path.exists(args.output):
+			shutil.rmtree(args.output)
+
 		if not os.path.exists(args.output):
 			os.makedirs(args.output)
 	else:
