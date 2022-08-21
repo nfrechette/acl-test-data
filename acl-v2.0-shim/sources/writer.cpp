@@ -128,6 +128,7 @@ namespace
             const acl_sjson::track& track_ = input_tracks[track_index];
 
             acl::track out_track = make_track(allocator, track_);
+			out_track.set_name(acl::string(allocator, track_.get_name()));
 
             const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
             const uint32_t sample_size = get_sample_size(track_.get_type());
