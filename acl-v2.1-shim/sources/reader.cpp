@@ -252,7 +252,7 @@ namespace acl_sjson_v21
         acl::track_array input_tracks;
 
 		acl_sjson::metadata_t metadata;
-		std::memset(&metadata, 0, sizeof(metadata));
+		std::memset(&metadata.variant, 0, sizeof(metadata.variant));
 
         if (acl_sjson::is_acl_bin_file(filename))
         {
