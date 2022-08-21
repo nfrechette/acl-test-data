@@ -28,6 +28,7 @@
 #include "acl-sjson/track_description.h"
 
 #include <cstddef>
+#include <string>
 #include <vector>
 
 namespace acl_sjson
@@ -35,7 +36,7 @@ namespace acl_sjson
     class track
     {
     public:
-        track(sample_type type, float sample_rate);
+        track(sample_type type, float sample_rate, const char* name);
 
         track(const track&) = delete;
         track(track&&) = default;
@@ -45,6 +46,7 @@ namespace acl_sjson
         sample_type get_type() const;
         size_t get_num_samples() const;
         float get_sample_rate() const;
+		const char* get_name() const;
 
         void emplace_back(sample&& item);
 
@@ -56,6 +58,7 @@ namespace acl_sjson
 
     private:
         std::vector<sample> m_samples;
+		std::string			m_name;
         track_description   m_desc;
         sample_type         m_type;
         float               m_sample_rate;

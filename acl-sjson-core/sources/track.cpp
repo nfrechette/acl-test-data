@@ -27,8 +27,9 @@
 
 namespace acl_sjson
 {
-    track::track(sample_type type, float sample_rate)
-        : m_type(type)
+    track::track(sample_type type, float sample_rate, const char* name)
+        : m_name(name)
+		, m_type(type)
         , m_sample_rate(sample_rate)
     {
     }
@@ -47,6 +48,11 @@ namespace acl_sjson
     {
         return m_sample_rate;
     }
+
+	const char* track::get_name() const
+	{
+		return m_name.c_str();
+	}
 
     void track::emplace_back(sample&& item)
     {

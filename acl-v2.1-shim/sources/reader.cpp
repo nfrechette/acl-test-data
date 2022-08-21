@@ -177,8 +177,9 @@ namespace
         {
             const acl_sjson::sample_type type = get_sample_type(track_.get_type());
             const float sample_rate = track_.get_sample_rate();
+			const char* name = track_.get_name().c_str();
 
-            acl_sjson::track out_track(type, sample_rate);
+            acl_sjson::track out_track(type, sample_rate, name);
             out_track.get_description() = get_description(track_);
 
             const uint32_t num_samples = track_.get_num_samples();
