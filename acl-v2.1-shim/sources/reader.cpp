@@ -171,7 +171,7 @@ namespace
 
     static acl_sjson::track_array convert_tracks(const acl::track_array& input_tracks, const acl_sjson::metadata_t& metadata)
     {
-        acl_sjson::track_array out_tracks(metadata);
+        acl_sjson::track_array out_tracks(input_tracks.get_name().c_str(), metadata);
 
         for (const acl::track& track_ : input_tracks)
         {

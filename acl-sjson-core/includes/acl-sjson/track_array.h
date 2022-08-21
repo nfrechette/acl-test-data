@@ -29,6 +29,7 @@
 #include "acl-sjson/track.h"
 
 #include <cstddef>
+#include <string>
 #include <vector>
 
 namespace acl_sjson
@@ -37,7 +38,7 @@ namespace acl_sjson
     {
     public:
 		track_array();
-        explicit track_array(const metadata_t& metadata);
+        explicit track_array(const char* name, const metadata_t& metadata);
 
         track_array(const track_array&) = delete;
         track_array(track_array&&) = default;
@@ -51,6 +52,7 @@ namespace acl_sjson
 		float get_duration() const;
         acl_version get_version() const;
 		const metadata_t& get_metadata() const;
+		const char* get_name() const;
 
         void emplace_back(track&& item);
 
@@ -61,6 +63,7 @@ namespace acl_sjson
 
     private:
         std::vector<track>  m_tracks;
+		std::string			m_name;
         metadata_t          m_metadata;
     };
 }
