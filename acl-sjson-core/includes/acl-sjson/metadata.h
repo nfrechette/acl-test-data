@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////////////////////////
 // The MIT License (MIT)
 //
@@ -22,48 +24,64 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "command_line_options.h"
-#include "utils.h"
+#include "acl-sjson/acl_version.h"
 
-#include <acl-sjson/api_v20.h>
-#include <acl-sjson/api_v21.h>
-#include <acl-sjson/track_array.h>
+#include <string>
 
-#include <cstdio>
-
-bool convert(const command_line_options& options)
+namespace acl_sjson
 {
-    if (options.input_filename == options.output_filename)
+	enum class rotation_format_t
 	{
-		printf("Input and output cannot be the same file\n");
-		return false;
-	}
+		unknown,
+		quatf_full,
+		quatf_drop_w_full,
+		quatf_drop_w_variable,
+	};
 
-    acl_sjson::track_array tracks;
-    if (!read_tracks(options.input_filename.c_str(), tracks))
-        return false;
+	const char* to_string(rotation_format_t format);
 
-    if (tracks.get_version() == acl_sjson::acl_version::unknown)
-    {
-        printf("Unknown ACL version used in input file\n");
-        return false;
-    }
+	enum class vector_format_t
+	{
+		unknown,
+		vector3f_full,
+		vector3f_variable,
+	};
 
-    switch (options.output_version)
-    {
-    case acl_sjson::acl_version::v02_00_00:
-        if (!acl_sjson_v20::write_tracks(options.output_filename.c_str(), tracks))
-            return false;
-        break;
-    case acl_sjson::acl_version::v02_01_00:
-        if (!acl_sjson_v21::write_tracks(options.output_filename.c_str(), tracks))
-            return false;
-        break;
-    default:
-        printf("Unsupported target version\n");
-        return false;
-    }
+	const char* to_string(vector_format_t format);
 
-    // Done!
-    return true;
+	enum class track_variant_t
+	{
+		unknown,
+		transform,
+		scalar,
+	};
+
+	const char* to_string(track_variant_t variant);
+
+	struct transform_metadata_t
+	{
+		rotation_format_t rotation_format;
+		vector_format_t translation_format;
+		vector_format_t scale_format;
+	};
+
+	struct scalar_metadata_t
+	{
+	};
+
+	struct metadata_t
+	{
+		acl_version		version = acl_version::unknown;
+		size_t			size = 0;
+
+		std::string		name;
+
+		track_variant_t	track_variant = track_variant_t::unknown;
+
+		union
+		{
+			transform_metadata_t transform;
+			scalar_metadata_t scalar;
+		} variant;
+	};
 }

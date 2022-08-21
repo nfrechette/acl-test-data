@@ -24,7 +24,7 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "acl-sjson/acl_version.h"
+#include "acl-sjson/metadata.h"
 #include "acl-sjson/sample.h"
 #include "acl-sjson/track.h"
 
@@ -36,7 +36,8 @@ namespace acl_sjson
     class track_array
     {
     public:
-        track_array(acl_version version);
+		track_array();
+        explicit track_array(const metadata_t& metadata);
 
         track_array(const track_array&) = delete;
         track_array(track_array&&) = default;
@@ -47,7 +48,9 @@ namespace acl_sjson
         size_t get_num_tracks() const;
 		size_t get_num_samples_per_track() const;
 		float get_sample_rate() const;
+		float get_duration() const;
         acl_version get_version() const;
+		const metadata_t& get_metadata() const;
 
         void emplace_back(track&& item);
 
@@ -58,6 +61,6 @@ namespace acl_sjson
 
     private:
         std::vector<track>  m_tracks;
-        acl_version         m_version;
+        metadata_t          m_metadata;
     };
 }

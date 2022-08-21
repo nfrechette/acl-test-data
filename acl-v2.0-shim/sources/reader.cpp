@@ -166,9 +166,9 @@ namespace
         return desc;
     }
 
-    static acl_sjson::track_array convert_tracks(const acl::track_array& input_tracks, acl_sjson::acl_version version)
+    static acl_sjson::track_array convert_tracks(const acl::track_array& input_tracks, const acl_sjson::metadata_t& metadata)
     {
-        acl_sjson::track_array out_tracks(version);
+        acl_sjson::track_array out_tracks(metadata);
 
         for (const acl::track& track_ : input_tracks)
         {
@@ -207,6 +207,34 @@ namespace
             return acl_sjson::acl_version::unknown;
         }
     }
+
+	static acl_sjson::rotation_format_t get_rotation_format(acl::rotation_format8 format)
+	{
+		switch (format)
+		{
+		case acl::rotation_format8::quatf_full:
+			return acl_sjson::rotation_format_t::quatf_full;
+		case acl::rotation_format8::quatf_drop_w_full:
+			return acl_sjson::rotation_format_t::quatf_drop_w_full;
+		case acl::rotation_format8::quatf_drop_w_variable:
+			return acl_sjson::rotation_format_t::quatf_drop_w_variable;
+		default:
+			return acl_sjson::rotation_format_t::unknown;
+		}
+	}
+
+	static acl_sjson::vector_format_t get_vector_format(acl::vector_format8 format)
+	{
+		switch (format)
+		{
+		case acl::vector_format8::vector3f_full:
+			return acl_sjson::vector_format_t::vector3f_full;
+		case acl::vector_format8::vector3f_variable:
+			return acl_sjson::vector_format_t::vector3f_variable;
+		default:
+			return acl_sjson::vector_format_t::unknown;
+		}
+	}
 }
 
 namespace acl_sjson_v20
@@ -216,7 +244,8 @@ namespace acl_sjson_v20
         acl::ansi_allocator allocator;
 
         acl::track_array input_tracks;
-        acl_sjson::acl_version version = acl_sjson::acl_version::unknown;
+
+		acl_sjson::metadata_t metadata;
 
         if (acl_sjson::is_acl_bin_file(filename))
         {
@@ -235,7 +264,23 @@ namespace acl_sjson_v20
                 return false;
             }
 
-            version = get_version(tracks->get_version());
+			metadata.version = get_version(tracks->get_version());
+			metadata.size = tracks->get_size();
+			metadata.name = tracks->get_name();
+			metadata.track_variant = tracks->get_track_type() == acl::track_type8::qvvf ?
+				acl_sjson::track_variant_t::transform : acl_sjson::track_variant_t::scalar;
+
+			if (metadata.track_variant == acl_sjson::track_variant_t::transform)
+			{
+				const acl::acl_impl::tracks_header& header = acl::acl_impl::get_tracks_header(*tracks);
+				metadata.variant.transform.rotation_format = get_rotation_format(header.get_rotation_format());
+				metadata.variant.transform.translation_format = get_vector_format(header.get_translation_format());
+
+				if (header.get_has_scale())
+					metadata.variant.transform.scale_format = get_vector_format(header.get_scale_format());
+				else
+					metadata.variant.transform.scale_format = acl_sjson::vector_format_t::unknown;
+			}
 
             // Release the compressed data, no longer needed
             acl_sjson::free_file_memory(reinterpret_cast<char*>(tracks));
@@ -279,7 +324,7 @@ namespace acl_sjson_v20
                 return false;
             }
 
-            version = acl_sjson::acl_version::v02_00_00;
+            metadata.version = acl_sjson::acl_version::v02_00_00;
         }
 		else
 		{
@@ -287,7 +332,7 @@ namespace acl_sjson_v20
 			return false;
 		}
 
-        out_tracks = convert_tracks(input_tracks, version);
+        out_tracks = convert_tracks(input_tracks, metadata);
 
         return true;
     }
