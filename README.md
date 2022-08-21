@@ -18,5 +18,5 @@ By default, this converts every file into the latest version supported. An optio
 
 By default, clips will maintain their original compression format: raw files remain raw, compressed files remain compressed.
 
-For convenience, a single command can generate zip files for every version:
+For convenience, a single command can generate the zip file used for a package release:
 `python make.py -package`
