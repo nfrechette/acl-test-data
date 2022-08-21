@@ -27,8 +27,12 @@
 
 namespace acl_sjson
 {
-    track_array::track_array(acl_version version)
-        : m_version(version)
+	track_array::track_array()
+    {
+    }
+
+    track_array::track_array(const metadata_t& metadata)
+        : m_metadata(metadata)
     {
     }
 
@@ -61,10 +65,23 @@ namespace acl_sjson
 		return m_tracks[0].get_sample_rate();
 	}
 
+	float track_array::get_duration() const
+	{
+		if (m_tracks.empty())
+			return 0.0F;
+
+		return (m_tracks[0].get_num_samples() - 1) / m_tracks[0].get_sample_rate();
+	}
+
     acl_version track_array::get_version() const
     {
-        return m_version;
+        return m_metadata.version;
     }
+
+	const metadata_t& track_array::get_metadata() const
+	{
+		return m_metadata;
+	}
 
     void track_array::emplace_back(track&& item)
     {

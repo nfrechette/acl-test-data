@@ -22,48 +22,38 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "command_line_options.h"
-#include "utils.h"
+#include "acl-sjson/metadata.h"
 
-#include <acl-sjson/api_v20.h>
-#include <acl-sjson/api_v21.h>
-#include <acl-sjson/track_array.h>
-
-#include <cstdio>
-
-bool convert(const command_line_options& options)
+namespace acl_sjson
 {
-    if (options.input_filename == options.output_filename)
+	const char* to_string(rotation_format_t format)
 	{
-		printf("Input and output cannot be the same file\n");
-		return false;
+		switch (format)
+		{
+		case rotation_format_t::quatf_full:				return "quatf full";
+		case rotation_format_t::quatf_drop_w_full:		return "quatf full no W";
+		case rotation_format_t::quatf_drop_w_variable:	return "quatf variable no W";
+		default:										return "unknown";
+		}
 	}
 
-    acl_sjson::track_array tracks;
-    if (!read_tracks(options.input_filename.c_str(), tracks))
-        return false;
+	const char* to_string(vector_format_t format)
+	{
+		switch (format)
+		{
+		case vector_format_t::vector3f_full:		return "vector3f full";
+		case vector_format_t::vector3f_variable:	return "vector3f variable";
+		default:									return "unknown";
+		}
+	}
 
-    if (tracks.get_version() == acl_sjson::acl_version::unknown)
-    {
-        printf("Unknown ACL version used in input file\n");
-        return false;
-    }
-
-    switch (options.output_version)
-    {
-    case acl_sjson::acl_version::v02_00_00:
-        if (!acl_sjson_v20::write_tracks(options.output_filename.c_str(), tracks))
-            return false;
-        break;
-    case acl_sjson::acl_version::v02_01_00:
-        if (!acl_sjson_v21::write_tracks(options.output_filename.c_str(), tracks))
-            return false;
-        break;
-    default:
-        printf("Unsupported target version\n");
-        return false;
-    }
-
-    // Done!
-    return true;
+	const char* to_string(track_variant_t variant)
+	{
+		switch (variant)
+		{
+		case track_variant_t::transform:	return "transform";
+		case track_variant_t::scalar:		return "scalar";
+		default:							return "unknown";
+		}
+	}
 }
