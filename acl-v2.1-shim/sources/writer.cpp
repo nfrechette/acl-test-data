@@ -73,13 +73,11 @@ namespace
         return out_desc;
     }
 
-    static acl::track_desc_transformf get_description(const acl_sjson::transform_track_description& desc, acl_sjson::acl_version version)
+    static acl::track_desc_transformf get_description(const acl_sjson::transform_track_description& desc)
     {
         acl::track_desc_transformf out_desc;
 
-        if (version >= acl_sjson::acl_version::v02_01_00)
-            std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::qvvf));
-
+        std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::qvvf));
         out_desc.output_index = desc.output_index;
         out_desc.parent_index = desc.parent_index;
         out_desc.precision = desc.precision;
@@ -91,7 +89,7 @@ namespace
         return out_desc;
     }
 
-    static acl::track make_track(acl::iallocator& allocator, const acl_sjson::track& track, acl_sjson::acl_version version)
+    static acl::track make_track(acl::iallocator& allocator, const acl_sjson::track& track)
     {
         const acl_sjson::track_description& desc = track.get_description();
         const acl_sjson::sample_type type = track.get_type();
@@ -114,7 +112,7 @@ namespace
             ACL_ASSERT(false, "Unsupported type");
             return acl::track();
         case acl_sjson::sample_type::qvv:
-            return acl::track_qvvf::make_reserve(get_description(desc.transform, version), allocator, num_samples, sample_rate);
+            return acl::track_qvvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
         default:
             ACL_ASSERT(false, "Unsupported type");
             return acl::track();
@@ -124,7 +122,6 @@ namespace
     static acl::track_array convert_tracks(acl::iallocator& allocator, const acl_sjson::track_array& input_tracks)
     {
         const uint32_t num_tracks = static_cast<uint32_t>(input_tracks.get_num_tracks());
-        const acl_sjson::acl_version version = input_tracks.get_version();
 
         acl::track_array out_tracks(allocator, num_tracks);
 		out_tracks.set_name(acl::string(allocator, input_tracks.get_name()));
@@ -133,7 +130,7 @@ namespace
         {
             const acl_sjson::track& track_ = input_tracks[track_index];
 
-            acl::track out_track = make_track(allocator, track_, version);
+            acl::track out_track = make_track(allocator, track_);
 			out_track.set_name(acl::string(allocator, track_.get_name()));
 
             const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
