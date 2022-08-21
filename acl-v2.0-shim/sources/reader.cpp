@@ -276,14 +276,27 @@ namespace acl_sjson_v20
 
 			if (metadata.track_variant == acl_sjson::track_variant_t::transform)
 			{
-				const acl::acl_impl::tracks_header& header = acl::acl_impl::get_tracks_header(*tracks);
-				metadata.variant.transform.rotation_format = get_rotation_format(header.get_rotation_format());
-				metadata.variant.transform.translation_format = get_vector_format(header.get_translation_format());
+				{
+					const acl::acl_impl::tracks_header& header = acl::acl_impl::get_tracks_header(*tracks);
+					metadata.variant.transform.rotation_format = get_rotation_format(header.get_rotation_format());
+					metadata.variant.transform.translation_format = get_vector_format(header.get_translation_format());
 
-				if (header.get_has_scale())
-					metadata.variant.transform.scale_format = get_vector_format(header.get_scale_format());
-				else
-					metadata.variant.transform.scale_format = acl_sjson::vector_format_t::unknown;
+					if (header.get_has_scale())
+						metadata.variant.transform.scale_format = get_vector_format(header.get_scale_format());
+					else
+						metadata.variant.transform.scale_format = acl_sjson::vector_format_t::unknown;
+				}
+
+				{
+					const acl::acl_impl::transform_tracks_header& header = acl::acl_impl::get_transform_tracks_header(*tracks);
+					metadata.variant.transform.num_segments = header.num_segments;
+					metadata.variant.transform.num_animated_rotation_sub_tracks = header.num_animated_rotation_sub_tracks;
+					metadata.variant.transform.num_animated_translation_sub_tracks = header.num_animated_translation_sub_tracks;
+					metadata.variant.transform.num_animated_scale_sub_tracks = header.num_animated_scale_sub_tracks;
+					metadata.variant.transform.num_constant_rotation_samples = header.num_constant_rotation_samples;
+					metadata.variant.transform.num_constant_translation_samples = header.num_constant_translation_samples;
+					metadata.variant.transform.num_constant_scale_samples = header.num_constant_scale_samples;
+				}
 			}
 
             // Release the compressed data, no longer needed

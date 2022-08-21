@@ -63,6 +63,16 @@ namespace acl_sjson
 		rotation_format_t rotation_format;
 		vector_format_t translation_format;
 		vector_format_t scale_format;
+
+		uint32_t num_segments;
+
+		uint32_t num_animated_rotation_sub_tracks;
+		uint32_t num_animated_translation_sub_tracks;
+		uint32_t num_animated_scale_sub_tracks;
+
+		uint32_t num_constant_rotation_samples;
+		uint32_t num_constant_translation_samples;
+		uint32_t num_constant_scale_samples;
 	};
 
 	struct scalar_metadata_t

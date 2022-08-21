@@ -66,6 +66,18 @@ bool info(const command_line_options& options)
 		printf("Translation format: %s\n", to_string(metadata.variant.transform.translation_format));
 		if (metadata.variant.transform.scale_format != acl_sjson::vector_format_t::unknown)
 			printf("Scale format: %s\n", to_string(metadata.variant.transform.scale_format));
+
+		printf("Num segments: %u\n", metadata.variant.transform.num_segments);
+
+		printf("Num animated rotation sub-tracks: %u\n", metadata.variant.transform.num_animated_rotation_sub_tracks);
+		printf("Num animated translation sub-tracks: %u\n", metadata.variant.transform.num_animated_translation_sub_tracks);
+		if (metadata.variant.transform.scale_format != acl_sjson::vector_format_t::unknown)
+			printf("Num animated scale sub-tracks: %u\n", metadata.variant.transform.num_animated_scale_sub_tracks);
+
+		printf("Num constant rotation sub-tracks: %u\n", metadata.variant.transform.num_constant_rotation_samples);
+		printf("Num constant translation sub-tracks: %u\n", metadata.variant.transform.num_constant_translation_samples);
+		if (metadata.variant.transform.scale_format != acl_sjson::vector_format_t::unknown)
+			printf("Num constant scale sub-tracks: %u\n", metadata.variant.transform.num_constant_scale_samples);
 	}
 	else
 	{
