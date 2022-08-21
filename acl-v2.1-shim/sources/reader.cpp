@@ -63,7 +63,8 @@ namespace
     static bool read_acl_sjson_file(acl::iallocator& allocator, const char* input_filename,
         acl::sjson_file_type& out_file_type,
         acl::sjson_raw_clip& out_raw_clip,
-        acl::sjson_raw_track_list& out_raw_track_list)
+        acl::sjson_raw_track_list& out_raw_track_list,
+		size_t& out_bytes_read)
     {
         char* sjson_file_buffer = nullptr;
         size_t file_size = 0;
@@ -99,6 +100,7 @@ namespace
         }
 
         acl_sjson::free_file_memory(sjson_file_buffer);
+		out_bytes_read = file_size;
         return success;
     }
 
@@ -293,8 +295,9 @@ namespace acl_sjson_v21
             acl::sjson_file_type sjson_type = acl::sjson_file_type::unknown;
             acl::sjson_raw_clip sjson_clip;
             acl::sjson_raw_track_list sjson_track_list;
+			size_t file_size = 0;
 
-            if (!read_acl_sjson_file(allocator, filename, sjson_type, sjson_clip, sjson_track_list))
+            if (!read_acl_sjson_file(allocator, filename, sjson_type, sjson_clip, sjson_track_list, file_size))
                 return false;
 
             switch (sjson_type)
@@ -328,6 +331,17 @@ namespace acl_sjson_v21
             }
 
             metadata.version = acl_sjson::acl_version::v02_01_00;
+			metadata.size = file_size;
+			metadata.name = input_tracks.get_name().c_str();
+			metadata.track_variant = input_tracks.get_track_type() == acl::track_type8::qvvf ?
+				acl_sjson::track_variant_t::transform : acl_sjson::track_variant_t::scalar;
+
+			if (metadata.track_variant == acl_sjson::track_variant_t::transform)
+			{
+				metadata.variant.transform.rotation_format = acl_sjson::rotation_format_t::quatf_full;
+				metadata.variant.transform.translation_format = acl_sjson::vector_format_t::vector3f_full;
+				metadata.variant.transform.scale_format = acl_sjson::vector_format_t::vector3f_full;
+			}
         }
 		else
 		{
