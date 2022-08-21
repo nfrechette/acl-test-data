@@ -14,6 +14,7 @@ def parse_argv():
 	actions.add_argument('-build', action='store_true')
 	actions.add_argument('-clean', action='store_true')
 	actions.add_argument('-convert', action='store_true', help="Converts the '-input' directory/file into '-output' directory/file with optional -target version")
+	actions.add_argument('-package', action='store_true', help="Packages the regression tests into zip files for each target version")
 	actions.add_argument('-input')
 	actions.add_argument('-output')
 	actions.add_argument('-target')
@@ -298,6 +299,29 @@ def do_convert(args, root_dir):
 	if conversion_failed:
 		sys.exit(1)
 
+def do_package(args, root_dir):
+	old_cwd = os.getcwd()
+	os.chdir(root_dir)
+
+	args.convert = True
+	args.input = './regression_tests'
+
+	readme_path = os.path.join(args.input, 'README.md')
+
+	versions = [ '2.0', '2.1' ]
+
+	for version in versions:
+		args.output = './output_clips_{}'.format(version.replace('.', ''))
+		args.target = version
+		do_convert(args, root_dir)
+
+		shutil.copyfile(readme_path, os.path.join(args.output, 'README.md'))
+
+		zip_filename = os.path.join(root_dir, 'regression_tests_' + version.replace('.', '_'))
+		shutil.make_archive(zip_filename, 'zip', args.output)
+
+	os.chdir(old_cwd)
+
 if __name__ == "__main__":
 	args = parse_argv()
 
@@ -336,5 +360,8 @@ if __name__ == "__main__":
 
 	if args.convert:
 		do_convert(args, root_dir)
+
+	if args.package:
+		do_package(args, root_dir)
 
 	sys.exit(0)
