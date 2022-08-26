@@ -10,7 +10,9 @@ include_directories("${PROJECT_SOURCE_DIR}/../acl-v2.1-shim/includes")
 # Grab all of our source files
 file(GLOB_RECURSE ALL_MAIN_SOURCE_FILES LIST_DIRECTORIES false
 	${PROJECT_SOURCE_DIR}/sources/*.cpp
-	${PROJECT_SOURCE_DIR}/sources/*.h)
+	${PROJECT_SOURCE_DIR}/sources/*.h
+	${PROJECT_SOURCE_DIR}/../*.md
+	${PROJECT_SOURCE_DIR}/../*.py)
 
 create_source_groups("${ALL_MAIN_SOURCE_FILES}" ${PROJECT_SOURCE_DIR})
 
