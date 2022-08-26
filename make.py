@@ -253,6 +253,10 @@ def do_convert(args, root_dir):
 				input_filename = os.path.join(dirpath, filename)
 				# Always convert to binary
 				output_filename = os.path.join(args.output, filename.replace('.acl.sjson', '.acl'))
+
+				input_filename = os.path.abspath(input_filename)
+				output_filename = os.path.abspath(output_filename)
+
 				conversion_clips.append((input_filename, output_filename))
 
 		if os.path.exists(args.output):
