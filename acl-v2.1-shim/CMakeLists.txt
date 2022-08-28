@@ -28,6 +28,9 @@ setup_default_compiler_flags(${PROJECT_NAME})
 # Link dependencies
 target_link_libraries(${PROJECT_NAME} PRIVATE acl-sjson-core)
 
+# Enable usage of sjson-cpp
+add_definitions(-DACL_USE_SJSON)
+
 # Abort on failure, easier to debug issues this way
 add_definitions(-DACL_ON_ASSERT_ABORT)
 add_definitions(-DRTM_ON_ASSERT_ABORT)
