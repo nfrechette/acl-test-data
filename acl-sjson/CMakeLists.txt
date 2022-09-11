@@ -7,17 +7,20 @@ include_directories("${PROJECT_SOURCE_DIR}/../acl-sjson-core/includes")
 include_directories("${PROJECT_SOURCE_DIR}/../acl-v2.0-shim/includes")
 include_directories("${PROJECT_SOURCE_DIR}/../acl-v2.1-shim/includes")
 
-# Grab all of our source files
+# Grab all of our source and documentation files
 file(GLOB_RECURSE ALL_MAIN_SOURCE_FILES LIST_DIRECTORIES false
 	${PROJECT_SOURCE_DIR}/sources/*.cpp
 	${PROJECT_SOURCE_DIR}/sources/*.h
-	${PROJECT_SOURCE_DIR}/*.md
-	${PROJECT_SOURCE_DIR}/docs/*.md
-	${PROJECT_SOURCE_DIR}/*.py)
+	${PROJECT_SOURCE_DIR}/../docs/*.md)
+
+# Grab all root files
+file(GLOB ALL_ROOT_FILES LIST_DIRECTORIES false
+	${PROJECT_SOURCE_DIR}/../*.md
+	${PROJECT_SOURCE_DIR}/../*.py)
 
 create_source_groups("${ALL_MAIN_SOURCE_FILES}" ${PROJECT_SOURCE_DIR})
 
-add_executable(${PROJECT_NAME} ${ALL_TEST_SOURCE_FILES} ${ALL_MAIN_SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${ALL_TEST_SOURCE_FILES} ${ALL_MAIN_SOURCE_FILES} ${ALL_ROOT_FILES})
 
 setup_default_compiler_flags(${PROJECT_NAME})
 
