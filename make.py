@@ -7,6 +7,9 @@ import subprocess
 import sys
 import time
 
+# Current version of the regression test data
+REGRESSION_TEST_DATA_VERSION = '1'
+
 def parse_argv():
 	parser = argparse.ArgumentParser(add_help=False)
 
@@ -316,7 +319,7 @@ def do_package(args, root_dir):
 	readme_path = os.path.join(args.input, 'README.md')
 	shutil.copyfile(readme_path, os.path.join(args.output, 'README.md'))
 
-	zip_filename = os.path.join(root_dir, 'output_regression_tests')
+	zip_filename = os.path.join(root_dir, 'acl_regression_tests_v' + REGRESSION_TEST_DATA_VERSION)
 	shutil.make_archive(zip_filename, 'zip', args.output)
 
 	os.chdir(old_cwd)
