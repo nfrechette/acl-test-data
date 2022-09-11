@@ -16,7 +16,8 @@ file(GLOB_RECURSE ALL_MAIN_SOURCE_FILES LIST_DIRECTORIES false
 # Grab all root files
 file(GLOB ALL_ROOT_FILES LIST_DIRECTORIES false
 	${PROJECT_SOURCE_DIR}/../*.md
-	${PROJECT_SOURCE_DIR}/../*.py)
+	${PROJECT_SOURCE_DIR}/../*.py
+	${PROJECT_SOURCE_DIR}/../.gitignore)
 
 create_source_groups("${ALL_MAIN_SOURCE_FILES}" ${PROJECT_SOURCE_DIR})
 
