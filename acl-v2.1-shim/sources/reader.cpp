@@ -208,6 +208,8 @@ namespace
         case acl::compressed_tracks_version16::v02_00_00:
             return acl_sjson::acl_version::v02_00_00;
         case acl::compressed_tracks_version16::v02_01_99:
+		case acl::compressed_tracks_version16::v02_01_99_1:
+		case acl::compressed_tracks_version16::v02_01_99_2:
             return acl_sjson::acl_version::v02_01_00;
         default:
             return acl_sjson::acl_version::unknown;
