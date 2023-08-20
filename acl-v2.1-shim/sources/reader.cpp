@@ -141,9 +141,9 @@ namespace
         out_desc.parent_index = desc.parent_index;
         out_desc.precision = desc.precision;
         out_desc.shell_distance = desc.shell_distance;
-        out_desc.constant_rotation_threshold_angle = desc.constant_rotation_threshold_angle;
-        out_desc.constant_translation_threshold = desc.constant_translation_threshold;
-        out_desc.constant_scale_threshold = desc.constant_scale_threshold;
+        out_desc.constant_rotation_threshold_angle = 0.00284714461F;
+        out_desc.constant_translation_threshold = 0.001F;
+        out_desc.constant_scale_threshold = 0.00001F;
         return out_desc;
     }
 
