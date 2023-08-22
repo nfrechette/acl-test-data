@@ -185,7 +185,7 @@ namespace acl_sjson_v20
             output_file_stream.write(reinterpret_cast<const char*>(output_tracks), output_tracks->get_size());
 
             // Release the compressed data, no longer needed
-            acl::deallocate_type_array(allocator, output_tracks, output_tracks->get_size());
+			allocator.deallocate(output_tracks, output_tracks->get_size());
 
             if (!output_file_stream.good())
             {
