@@ -33,34 +33,34 @@
 
 namespace acl_sjson
 {
-    class track
-    {
-    public:
-        track(sample_type type, float sample_rate, const char* name);
+	class track
+	{
+	public:
+		track(sample_type type, float sample_rate, const char* name);
 
-        track(const track&) = delete;
-        track(track&&) = default;
-        track& operator=(const track&) = delete;
-        track& operator=(track&&) = default;
+		track(const track&) = delete;
+		track(track&&) = default;
+		track& operator=(const track&) = delete;
+		track& operator=(track&&) = default;
 
-        sample_type get_type() const;
-        size_t get_num_samples() const;
-        float get_sample_rate() const;
+		sample_type get_type() const;
+		size_t get_num_samples() const;
+		float get_sample_rate() const;
 		const char* get_name() const;
 
-        void emplace_back(sample&& item);
+		void emplace_back(sample&& item);
 
-        track_description& get_description();
-        const track_description& get_description() const;
+		track_description& get_description();
+		const track_description& get_description() const;
 
-        sample& operator[](size_t index);
-        const sample& operator[](size_t index) const;
+		sample& operator[](size_t index);
+		const sample& operator[](size_t index) const;
 
-    private:
-        std::vector<sample> m_samples;
+	private:
+		std::vector<sample> m_samples;
 		std::string			m_name;
-        track_description   m_desc;
-        sample_type         m_type;
-        float               m_sample_rate;
-    };
+		track_description   m_desc;
+		sample_type         m_type;
+		float               m_sample_rate;
+	};
 }

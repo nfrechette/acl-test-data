@@ -27,55 +27,55 @@
 
 namespace acl_sjson
 {
-    track::track(sample_type type, float sample_rate, const char* name)
-        : m_name(name)
+	track::track(sample_type type, float sample_rate, const char* name)
+		: m_name(name)
 		, m_type(type)
-        , m_sample_rate(sample_rate)
-    {
-    }
+		, m_sample_rate(sample_rate)
+	{
+	}
 
-    sample_type track::get_type() const
-    {
-        return m_type;
-    }
+	sample_type track::get_type() const
+	{
+		return m_type;
+	}
 
-    size_t track::get_num_samples() const
-    {
-        return m_samples.size();
-    }
+	size_t track::get_num_samples() const
+	{
+		return m_samples.size();
+	}
 
-    float track::get_sample_rate() const
-    {
-        return m_sample_rate;
-    }
+	float track::get_sample_rate() const
+	{
+		return m_sample_rate;
+	}
 
 	const char* track::get_name() const
 	{
 		return m_name.c_str();
 	}
 
-    void track::emplace_back(sample&& item)
-    {
-        m_samples.emplace_back(std::move(item));
-    }
+	void track::emplace_back(sample&& item)
+	{
+		m_samples.emplace_back(std::move(item));
+	}
 
-    track_description& track::get_description()
-    {
-        return m_desc;
-    }
+	track_description& track::get_description()
+	{
+		return m_desc;
+	}
 
-    const track_description& track::get_description() const
-    {
-        return m_desc;
-    }
+	const track_description& track::get_description() const
+	{
+		return m_desc;
+	}
 
-    sample& track::operator[](size_t index)
-    {
-        return m_samples[index];
-    }
+	sample& track::operator[](size_t index)
+	{
+		return m_samples[index];
+	}
 
-    const sample& track::operator[](size_t index) const
-    {
-        return m_samples[index];
-    }
+	const sample& track::operator[](size_t index) const
+	{
+		return m_samples[index];
+	}
 }

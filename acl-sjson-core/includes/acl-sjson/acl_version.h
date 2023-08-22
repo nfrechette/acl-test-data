@@ -26,14 +26,14 @@
 
 namespace acl_sjson
 {
-    enum class acl_version
-    {
-        v02_00_00 = 0,
-        v02_01_00 = 1,
+	enum class acl_version
+	{
+		v02_00_00 = 0,
+		v02_01_00 = 1,
 
-        latest = v02_01_00,
-        unknown = -1,
-    };
+		latest = v02_01_00,
+		unknown = -1,
+	};
 
 	const char* to_string(acl_version version);
 }
