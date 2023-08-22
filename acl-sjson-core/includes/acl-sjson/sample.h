@@ -26,77 +26,77 @@
 
 namespace acl_sjson
 {
-    struct quat
-    {
-        float x;
-        float y;
-        float z;
-        float w;
-    };
+	struct quat
+	{
+		float x;
+		float y;
+		float z;
+		float w;
+	};
 
-    struct float1
-    {
-        float x;
-    };
+	struct float1
+	{
+		float x;
+	};
 
-    struct float2
-    {
-        float x;
-        float y;
-    };
+	struct float2
+	{
+		float x;
+		float y;
+	};
 
-    struct float3
-    {
-        float x;
-        float y;
-        float z;
-    };
+	struct float3
+	{
+		float x;
+		float y;
+		float z;
+	};
 
-    struct float4
-    {
-        float x;
-        float y;
-        float z;
-        float w;
-    };
+	struct float4
+	{
+		float x;
+		float y;
+		float z;
+		float w;
+	};
 
-    struct vector4
-    {
-        float x;
-        float y;
-        float z;
-        float w;
-    };
+	struct vector4
+	{
+		float x;
+		float y;
+		float z;
+		float w;
+	};
 
-    struct qvv
-    {
-        quat rotation;
-        vector4 translation;
-        vector4 scale;
-    };
+	struct qvv
+	{
+		quat rotation;
+		vector4 translation;
+		vector4 scale;
+	};
 
-    enum class sample_type
-    {
+	enum class sample_type
+	{
 		unknown,
-        float1,
-        float2,
-        float3,
-        float4,
-        vector4,
-        quat,
-        qvv,
-    };
+		float1,
+		float2,
+		float3,
+		float4,
+		vector4,
+		quat,
+		qvv,
+	};
 
 	const char* to_string(sample_type type);
 
-    union sample
-    {
-        float1 f1;
-        float2 f2;
-        float3 f3;
-        float4 f4;
-        vector4 v4;
-        quat q;
-        qvv transform;
-    };
+	union sample
+	{
+		float1 f1;
+		float2 f2;
+		float3 f3;
+		float4 f4;
+		vector4 v4;
+		quat q;
+		qvv transform;
+	};
 }

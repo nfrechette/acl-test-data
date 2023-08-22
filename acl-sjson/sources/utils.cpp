@@ -29,8 +29,8 @@
 bool read_tracks(const char* filename, acl_sjson::track_array& out_tracks)
 {
 	// Always read with latest version, we are backwards compatible
-    if (acl_sjson_v21::read_tracks(filename, out_tracks))
-        return true;
+	if (acl_sjson_v21::read_tracks(filename, out_tracks))
+		return true;
 
-    return false;
+	return false;
 }

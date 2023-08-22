@@ -30,10 +30,10 @@
 
 namespace acl_sjson
 {
-    //////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
 	// This structure describes the various settings for floating point scalar tracks.
 	// Used by: float1f, float2f, float3f, float4f, vector4f
-    struct scalar_track_description
+	struct scalar_track_description
 	{
 		//////////////////////////////////////////////////////////////////////////
 		// The track output index. When writing out the compressed data stream, this index
@@ -51,7 +51,7 @@ namespace acl_sjson
 		float precision;
 	};
 
-    //////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
 	// This structure describes the various settings for transform tracks.
 	// Used by: quatf, qvvf
 	struct transform_track_description
@@ -118,9 +118,9 @@ namespace acl_sjson
 		uint32_t padding;
 	};
 
-    struct track_description
-    {
-        scalar_track_description    scalar;
-        transform_track_description transform;
-    };
+	struct track_description
+	{
+		scalar_track_description    scalar;
+		transform_track_description transform;
+	};
 }

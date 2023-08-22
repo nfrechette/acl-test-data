@@ -34,36 +34,36 @@
 
 namespace acl_sjson
 {
-    class track_array
-    {
-    public:
+	class track_array
+	{
+	public:
 		track_array();
-        explicit track_array(const char* name, const metadata_t& metadata);
+		explicit track_array(const char* name, const metadata_t& metadata);
 
-        track_array(const track_array&) = delete;
-        track_array(track_array&&) = default;
-        track_array& operator=(const track_array&) = delete;
-        track_array& operator=(track_array&&) = default;
+		track_array(const track_array&) = delete;
+		track_array(track_array&&) = default;
+		track_array& operator=(const track_array&) = delete;
+		track_array& operator=(track_array&&) = default;
 
 		sample_type get_type() const;
-        size_t get_num_tracks() const;
+		size_t get_num_tracks() const;
 		size_t get_num_samples_per_track() const;
 		float get_sample_rate() const;
 		float get_duration() const;
-        acl_version get_version() const;
+		acl_version get_version() const;
 		const metadata_t& get_metadata() const;
 		const char* get_name() const;
 
-        void emplace_back(track&& item);
+		void emplace_back(track&& item);
 
-        void clear();
+		void clear();
 
-        track& operator[](size_t index);
-        const track& operator[](size_t index) const;
+		track& operator[](size_t index);
+		const track& operator[](size_t index) const;
 
-    private:
-        std::vector<track>  m_tracks;
+	private:
+		std::vector<track>  m_tracks;
 		std::string			m_name;
-        metadata_t          m_metadata;
-    };
+		metadata_t          m_metadata;
+	};
 }

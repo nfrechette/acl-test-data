@@ -26,11 +26,11 @@
 
 namespace acl_sjson
 {
-    class track_array;
+	class track_array;
 }
 
 namespace acl_sjson_v21
 {
-    bool read_tracks(const char* filename, acl_sjson::track_array& out_tracks);
-    bool write_tracks(const char* filename, const acl_sjson::track_array& tracks);
+	bool read_tracks(const char* filename, acl_sjson::track_array& out_tracks);
+	bool write_tracks(const char* filename, const acl_sjson::track_array& tracks);
 }

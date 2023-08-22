@@ -42,174 +42,174 @@
 
 namespace
 {
-    static uint32_t get_sample_size(acl_sjson::sample_type type)
-    {
-        switch (type)
-        {
+	static uint32_t get_sample_size(acl_sjson::sample_type type)
+	{
+		switch (type)
+		{
 		default:
 			return 0;
-        case acl_sjson::sample_type::float1:
-            return sizeof(float);
-        case acl_sjson::sample_type::float2:
-            return sizeof(rtm::float2f);
-        case acl_sjson::sample_type::float3:
-            return sizeof(rtm::float3f);
-        case acl_sjson::sample_type::float4:
-            return sizeof(rtm::float4f);
-        case acl_sjson::sample_type::vector4:
-            return sizeof(rtm::vector4f);
-        case acl_sjson::sample_type::quat:
-            return sizeof(rtm::quatf);
-        case acl_sjson::sample_type::qvv:
-            return sizeof(rtm::qvvf);
-        }
-    }
+		case acl_sjson::sample_type::float1:
+			return sizeof(float);
+		case acl_sjson::sample_type::float2:
+			return sizeof(rtm::float2f);
+		case acl_sjson::sample_type::float3:
+			return sizeof(rtm::float3f);
+		case acl_sjson::sample_type::float4:
+			return sizeof(rtm::float4f);
+		case acl_sjson::sample_type::vector4:
+			return sizeof(rtm::vector4f);
+		case acl_sjson::sample_type::quat:
+			return sizeof(rtm::quatf);
+		case acl_sjson::sample_type::qvv:
+			return sizeof(rtm::qvvf);
+		}
+	}
 
-    static acl::track_desc_scalarf get_description(const acl_sjson::scalar_track_description& desc)
-    {
-        acl::track_desc_scalarf out_desc;
-        out_desc.output_index = desc.output_index;
-        out_desc.precision = desc.precision;
-        return out_desc;
-    }
+	static acl::track_desc_scalarf get_description(const acl_sjson::scalar_track_description& desc)
+	{
+		acl::track_desc_scalarf out_desc;
+		out_desc.output_index = desc.output_index;
+		out_desc.precision = desc.precision;
+		return out_desc;
+	}
 
-    static acl::track_desc_transformf get_description(const acl_sjson::transform_track_description& desc)
-    {
-        acl::track_desc_transformf out_desc;
+	static acl::track_desc_transformf get_description(const acl_sjson::transform_track_description& desc)
+	{
+		acl::track_desc_transformf out_desc;
 
-        std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::qvvf));
-        out_desc.output_index = desc.output_index;
-        out_desc.parent_index = desc.parent_index;
-        out_desc.precision = desc.precision;
-        out_desc.shell_distance = desc.shell_distance;
+		std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::qvvf));
+		out_desc.output_index = desc.output_index;
+		out_desc.parent_index = desc.parent_index;
+		out_desc.precision = desc.precision;
+		out_desc.shell_distance = desc.shell_distance;
 
-        return out_desc;
-    }
+		return out_desc;
+	}
 
-    static acl::track make_track(acl::iallocator& allocator, const acl_sjson::track& track)
-    {
-        const acl_sjson::track_description& desc = track.get_description();
-        const acl_sjson::sample_type type = track.get_type();
-        const uint32_t num_samples = static_cast<uint32_t>(track.get_num_samples());
-        const float sample_rate = track.get_sample_rate();
+	static acl::track make_track(acl::iallocator& allocator, const acl_sjson::track& track)
+	{
+		const acl_sjson::track_description& desc = track.get_description();
+		const acl_sjson::sample_type type = track.get_type();
+		const uint32_t num_samples = static_cast<uint32_t>(track.get_num_samples());
+		const float sample_rate = track.get_sample_rate();
 
-        switch (type)
-        {
-        case acl_sjson::sample_type::float1:
-            return acl::track_float1f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
-        case acl_sjson::sample_type::float2:
-            return acl::track_float2f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
-        case acl_sjson::sample_type::float3:
-            return acl::track_float3f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
-        case acl_sjson::sample_type::float4:
-            return acl::track_float4f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
-        case acl_sjson::sample_type::vector4:
-            return acl::track_vector4f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
-        case acl_sjson::sample_type::quat:
-            ACL_ASSERT(false, "Unsupported type");
-            return acl::track();
-        case acl_sjson::sample_type::qvv:
-            return acl::track_qvvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
-        default:
-            ACL_ASSERT(false, "Unsupported type");
-            return acl::track();
-        }
-    }
+		switch (type)
+		{
+		case acl_sjson::sample_type::float1:
+			return acl::track_float1f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::float2:
+			return acl::track_float2f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::float3:
+			return acl::track_float3f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::float4:
+			return acl::track_float4f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::vector4:
+			return acl::track_vector4f::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::quat:
+			ACL_ASSERT(false, "Unsupported type");
+			return acl::track();
+		case acl_sjson::sample_type::qvv:
+			return acl::track_qvvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
+		default:
+			ACL_ASSERT(false, "Unsupported type");
+			return acl::track();
+		}
+	}
 
-    static acl::track_array convert_tracks(acl::iallocator& allocator, const acl_sjson::track_array& input_tracks)
-    {
-        const uint32_t num_tracks = static_cast<uint32_t>(input_tracks.get_num_tracks());
+	static acl::track_array convert_tracks(acl::iallocator& allocator, const acl_sjson::track_array& input_tracks)
+	{
+		const uint32_t num_tracks = static_cast<uint32_t>(input_tracks.get_num_tracks());
 
-        acl::track_array out_tracks(allocator, num_tracks);
+		acl::track_array out_tracks(allocator, num_tracks);
 		out_tracks.set_name(acl::string(allocator, input_tracks.get_name()));
 
-        for (uint32_t track_index = 0; track_index < num_tracks; ++track_index)
-        {
-            const acl_sjson::track& track_ = input_tracks[track_index];
+		for (uint32_t track_index = 0; track_index < num_tracks; ++track_index)
+		{
+			const acl_sjson::track& track_ = input_tracks[track_index];
 
-            acl::track out_track = make_track(allocator, track_);
+			acl::track out_track = make_track(allocator, track_);
 			out_track.set_name(acl::string(allocator, track_.get_name()));
 
-            const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
-            const uint32_t sample_size = get_sample_size(track_.get_type());
+			const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
+			const uint32_t sample_size = get_sample_size(track_.get_type());
 
-            for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
-            {
-                const acl_sjson::sample& smpl = track_[sample_index];
-                void* sample_ptr = out_track[sample_index];
+			for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+			{
+				const acl_sjson::sample& smpl = track_[sample_index];
+				void* sample_ptr = out_track[sample_index];
 
-                std::memcpy(sample_ptr, &smpl, sample_size);
-            }
+				std::memcpy(sample_ptr, &smpl, sample_size);
+			}
 
-            out_tracks[track_index] = std::move(out_track);
-        }
+			out_tracks[track_index] = std::move(out_track);
+		}
 
-        return out_tracks;
-    }
+		return out_tracks;
+	}
 }
 
 namespace acl_sjson_v21
 {
-    bool write_tracks(const char* filename, const acl_sjson::track_array& tracks)
-    {
-        acl::ansi_allocator allocator;
+	bool write_tracks(const char* filename, const acl_sjson::track_array& tracks)
+	{
+		acl::ansi_allocator allocator;
 
-        const acl::track_array input_tracks = convert_tracks(allocator, tracks);
+		const acl::track_array input_tracks = convert_tracks(allocator, tracks);
 
-        if (acl_sjson::is_acl_bin_file(filename))
-        {
-            // Convert our input tracks into a compressed_tracks instance
-            acl::compressed_tracks* output_tracks = nullptr;
-            const acl::error_result result = acl::convert_track_list(allocator, input_tracks, output_tracks);
-            if (result.any())
-            {
-                printf("Failed to convert tracks: %s\n", result.c_str());
-                return false;
-            }
+		if (acl_sjson::is_acl_bin_file(filename))
+		{
+			// Convert our input tracks into a compressed_tracks instance
+			acl::compressed_tracks* output_tracks = nullptr;
+			const acl::error_result result = acl::convert_track_list(allocator, input_tracks, output_tracks);
+			if (result.any())
+			{
+				printf("Failed to convert tracks: %s\n", result.c_str());
+				return false;
+			}
 
 #ifdef _WIN32
-            char output_filename[64 * 1024] = { 0 };
-            snprintf(output_filename, acl::get_array_size(output_filename), "\\\\?\\%s", filename);
+			char output_filename[64 * 1024] = { 0 };
+			snprintf(output_filename, acl::get_array_size(output_filename), "\\\\?\\%s", filename);
 #else
-            const char* output_filename = filename;
+			const char* output_filename = filename;
 #endif
 
-            std::ofstream output_file_stream(output_filename, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
-            if (!output_file_stream.is_open() || !output_file_stream.good())
-            {
-                printf("Failed to open output file for writing: %s\n", filename);
-                acl::deallocate_type_array(allocator, output_tracks, output_tracks->get_size());
-                return false;
-            }
+			std::ofstream output_file_stream(output_filename, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+			if (!output_file_stream.is_open() || !output_file_stream.good())
+			{
+				printf("Failed to open output file for writing: %s\n", filename);
+				acl::deallocate_type_array(allocator, output_tracks, output_tracks->get_size());
+				return false;
+			}
 
-            output_file_stream.write(reinterpret_cast<const char*>(output_tracks), output_tracks->get_size());
+			output_file_stream.write(reinterpret_cast<const char*>(output_tracks), output_tracks->get_size());
 
-            // Release the compressed data, no longer needed
+			// Release the compressed data, no longer needed
 			allocator.deallocate(output_tracks, output_tracks->get_size());
 
-            if (!output_file_stream.good())
-            {
-                printf("Failed to write output file: %s\n", filename);
-                return false;
-            }
+			if (!output_file_stream.good())
+			{
+				printf("Failed to write output file: %s\n", filename);
+				return false;
+			}
 
-            output_file_stream.close();
-            if (!output_file_stream.good())
-            {
-                printf("Failed to close output file: %s\n", filename);
-                return false;
-            }
-        }
-        else
-        {
-            const acl::error_result result = acl::write_track_list(input_tracks, filename);
-            if (result.any())
-            {
-                printf("Failed to write output file: %s\n", result.c_str());
-                return false;
-            }
-        }
+			output_file_stream.close();
+			if (!output_file_stream.good())
+			{
+				printf("Failed to close output file: %s\n", filename);
+				return false;
+			}
+		}
+		else
+		{
+			const acl::error_result result = acl::write_track_list(input_tracks, filename);
+			if (result.any())
+			{
+				printf("Failed to write output file: %s\n", result.c_str());
+				return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

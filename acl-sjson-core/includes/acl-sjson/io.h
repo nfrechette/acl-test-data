@@ -28,17 +28,17 @@
 
 namespace acl_sjson
 {
-    // Reads a file and returns its content and size
-    // Memory is allocated with malloc and is aligned to 64 bytes
-    // Use free_file_memory(..) to free the allocated memory
-    bool read_file(const char* input_filename, char*& out_buffer, size_t& out_file_size);
+	// Reads a file and returns its content and size
+	// Memory is allocated with malloc and is aligned to 64 bytes
+	// Use free_file_memory(..) to free the allocated memory
+	bool read_file(const char* input_filename, char*& out_buffer, size_t& out_file_size);
 
-    // Frees memory allocated from read_file(..)
-    void free_file_memory(char* buffer);
+	// Frees memory allocated from read_file(..)
+	void free_file_memory(char* buffer);
 
-    // Returns whether or not the filename refers to a binary ACL file
-    bool is_acl_bin_file(const char* filename);
+	// Returns whether or not the filename refers to a binary ACL file
+	bool is_acl_bin_file(const char* filename);
 
 	// Returns whether or not the filename refers to a SJSON ACL file
-    bool is_acl_sjson_file(const char* filename);
+	bool is_acl_sjson_file(const char* filename);
 }

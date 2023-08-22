@@ -28,14 +28,14 @@
 namespace acl_sjson
 {
 	track_array::track_array()
-    {
-    }
+	{
+	}
 
-    track_array::track_array(const char* name, const metadata_t& metadata)
-        : m_name(name)
+	track_array::track_array(const char* name, const metadata_t& metadata)
+		: m_name(name)
 		, m_metadata(metadata)
-    {
-    }
+	{
+	}
 
 	sample_type track_array::get_type() const
 	{
@@ -45,10 +45,10 @@ namespace acl_sjson
 		return m_tracks[0].get_type();
 	}
 
-    size_t track_array::get_num_tracks() const
-    {
-        return m_tracks.size();
-    }
+	size_t track_array::get_num_tracks() const
+	{
+		return m_tracks.size();
+	}
 
 	size_t track_array::get_num_samples_per_track() const
 	{
@@ -74,10 +74,10 @@ namespace acl_sjson
 		return (m_tracks[0].get_num_samples() - 1) / m_tracks[0].get_sample_rate();
 	}
 
-    acl_version track_array::get_version() const
-    {
-        return m_metadata.version;
-    }
+	acl_version track_array::get_version() const
+	{
+		return m_metadata.version;
+	}
 
 	const metadata_t& track_array::get_metadata() const
 	{
@@ -89,23 +89,23 @@ namespace acl_sjson
 		return m_name.c_str();
 	}
 
-    void track_array::emplace_back(track&& item)
-    {
-        m_tracks.emplace_back(std::move(item));
-    }
+	void track_array::emplace_back(track&& item)
+	{
+		m_tracks.emplace_back(std::move(item));
+	}
 
-    void track_array::clear()
-    {
-        m_tracks.clear();
-    }
+	void track_array::clear()
+	{
+		m_tracks.clear();
+	}
 
-    track& track_array::operator[](size_t index)
-    {
-        return m_tracks[index];
-    }
+	track& track_array::operator[](size_t index)
+	{
+		return m_tracks[index];
+	}
 
-    const track& track_array::operator[](size_t index) const
-    {
-        return m_tracks[index];
-    }
+	const track& track_array::operator[](size_t index) const
+	{
+		return m_tracks[index];
+	}
 }
