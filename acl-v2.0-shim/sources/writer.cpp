@@ -178,7 +178,7 @@ namespace acl_sjson_v20
 			if (!output_file_stream.is_open() || !output_file_stream.good())
 			{
 				printf("Failed to open output file for writing: %s\n", filename);
-				acl::deallocate_type_array(allocator, output_tracks, output_tracks->get_size());
+				allocator.deallocate(output_tracks, output_tracks->get_size());
 				return false;
 			}
 
