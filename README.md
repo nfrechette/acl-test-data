@@ -20,4 +20,4 @@ By default, clips will maintain their original compression format: raw files rem
 
 For convenience, a single command can generate the zip file used for a package release:
 `python make.py -package`
-It will output its results under `./output_regression_tests`.
+It will output its results under `./output_regression_tests` and a zip file is created: `./acl_regression_tests_vXXX.zip` where `XXX` is the version specified at the top of `make.py`.
