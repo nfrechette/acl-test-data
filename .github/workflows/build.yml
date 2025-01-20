@@ -28,11 +28,11 @@ jobs:
         with:
           args: 'python3 make.py -ci -compiler ${{ matrix.compiler }} -config Release -cpu x64 -build'
 
-  osx-11:
-    runs-on: macos-11
+  osx-14:
+    runs-on: macos-14
     strategy:
       matrix:
-        compiler: [xcode13]
+        compiler: [xcode16]
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
@@ -40,8 +40,8 @@ jobs:
           submodules: 'recursive'
       - name: Setup ${{ matrix.compiler }} compiler
         run: ./tools/setup_osx_compiler.sh ${{ matrix.compiler }}
-      - name: Building (release-x64)
-        run: python3 make.py -ci -compiler osx -config Release -cpu x64 -build
+      - name: Building (release-arm64)
+        run: python3 make.py -ci -compiler osx -config Release -cpu arm64 -build
 
   windows:
     runs-on: windows-2019

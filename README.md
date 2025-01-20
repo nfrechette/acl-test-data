@@ -1,5 +1,5 @@
 # acl-test-data
-Regression test data for the Animation Compression Library
+Regression test data for the [Animation Compression Library](https://github.com/nfrechette/acl)
 
 ## How to generate regression test files
 

@@ -13,6 +13,12 @@ elif [[ $COMPILER == xcode12 ]]; then
     XCODE_PATH="/Applications/Xcode_12.5.1.app"
 elif [[ $COMPILER == xcode13 ]]; then
     XCODE_PATH="/Applications/Xcode_13.2.1.app"
+elif [[ $COMPILER == xcode14 ]]; then
+    XCODE_PATH="/Applications/Xcode_14.3.1.app"
+elif [[ $COMPILER == xcode15 ]]; then
+    XCODE_PATH="/Applications/Xcode_15.2.app"
+elif [[ $COMPILER == xcode16 ]]; then
+    XCODE_PATH="/Applications/Xcode_16.2.app"
 fi
 
 # Select our XCode version
