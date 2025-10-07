@@ -92,6 +92,8 @@ bool parse_command_line_arguments(int argc, char* argv[], command_line_options& 
 				options.output_version = acl_sjson::acl_version::v02_00_00;
 			else if (is_str_equal(target_version, "2.1"))
 				options.output_version = acl_sjson::acl_version::v02_01_00;
+			else if (is_str_equal(target_version, "2.2"))
+				options.output_version = acl_sjson::acl_version::v02_02_00;
 			else
 			{
 				printf("--target requires a valid version\n");

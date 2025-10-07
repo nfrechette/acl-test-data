@@ -32,6 +32,7 @@ namespace acl_sjson
 		{
 		case acl_version::v02_00_00:	return "2.0.0";
 		case acl_version::v02_01_00:	return "2.1.0";
+		case acl_version::v02_02_00:	return "2.2.0";
 		default:						return "<unknown>";
 		}
 	}

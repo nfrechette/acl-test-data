@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories("${PROJECT_SOURCE_DIR}/../acl-sjson-core/includes")
 include_directories("${PROJECT_SOURCE_DIR}/../acl-v2.0-shim/includes")
 include_directories("${PROJECT_SOURCE_DIR}/../acl-v2.1-shim/includes")
+include_directories("${PROJECT_SOURCE_DIR}/../acl-v2.2-shim/includes")
 
 # Grab all of our source and documentation files
 file(GLOB_RECURSE ALL_MAIN_SOURCE_FILES LIST_DIRECTORIES false
@@ -29,6 +30,7 @@ setup_default_compiler_flags(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} PRIVATE acl-sjson-core)
 target_link_libraries(${PROJECT_NAME} PRIVATE acl-v20-shim)
 target_link_libraries(${PROJECT_NAME} PRIVATE acl-v21-shim)
+target_link_libraries(${PROJECT_NAME} PRIVATE acl-v22-shim)
 
 # Abort on failure, easier to debug issues this way
 add_definitions(-DACL_ON_ASSERT_ABORT)
