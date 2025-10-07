@@ -238,18 +238,22 @@ tracks =
 
 		// The constant rotation detection threshold
 		// Transforms only
+		// DEPRECATED, NO LONGER USED OR NECESSARY
 		constant_rotation_threshold_angle = 0.1
 
 		// The constant translation detection threshold
 		// Transforms only
+		// DEPRECATED, NO LONGER USED OR NECESSARY
 		constant_translation_threshold = 0.1
 
 		// The constant scale detection threshold
 		// Transforms only
+		// DEPRECATED, NO LONGER USED OR NECESSARY
 		constant_scale_threshold = 0.1
 
 		// Bind pose transform information. All three are optional
 		// The bind pose should be in parent bone local space
+		// Transforms only
 		bind_rotation = [ 0.0, 0.0, 0.0, 1.0 ]
 		bind_translation = [ 0.0, 0.0, 0.0 ]
 		bind_scale = [ 1.0, 1.0, 1.0 ]
