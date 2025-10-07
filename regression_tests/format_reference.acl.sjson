@@ -189,7 +189,8 @@ track_list =
 	// List sample rate in samples per second. All tracks must have the same sample rate.
 	sample_rate = 30
 
-	// Whether floating point values are stored in hexadecimal and thus binary exact. Optional, defaults to 'false'.
+	// Whether floating point values are stored in hexadecimal and thus binary exact.
+	// Optional, defaults to 'false'.
 	is_binary_exact = true
 }
 
@@ -209,7 +210,7 @@ tracks =
 		name = "Right Hand IK"
 
 		// Track type (float1f, float2f, float3f, float4f)
-		type = float4f
+		type = "float4f"
 
 		// The precision target used when optimizing the bit rate
 		// Defaults to '0.0001' units
