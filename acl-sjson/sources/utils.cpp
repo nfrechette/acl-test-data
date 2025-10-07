@@ -24,12 +24,12 @@
 
 #include "utils.h"
 
-#include <acl-sjson/api_v21.h>
+#include <acl-sjson/api_v22.h>
 
 bool read_tracks(const char* filename, acl_sjson::track_array& out_tracks)
 {
 	// Always read with latest version, we are backwards compatible
-	if (acl_sjson_v21::read_tracks(filename, out_tracks))
+	if (acl_sjson_v22::read_tracks(filename, out_tracks))
 		return true;
 
 	return false;
