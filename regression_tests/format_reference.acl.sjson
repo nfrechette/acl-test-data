@@ -241,11 +241,6 @@ tracks =
 		// Transforms only
 		shell_distance = 3.0
 
-		// Track interpolator type: linear or extended
-		// Defaults to 'linear'
-		// Scalar only
-		interpolator = "linear"
-
 		// The constant rotation detection threshold
 		// Transforms only
 		// DEPRECATED, NO LONGER USED OR NECESSARY
