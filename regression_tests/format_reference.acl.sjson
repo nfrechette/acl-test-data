@@ -9,9 +9,10 @@
 // The ACL file format version
 // version = 1		// Initial version
 // version = 2		// Introduced clip compression settings
-//version = 3		// Introduced additive clip related data
-//version = 4		// Introduced track list related data
-version = 5			// Renamed enums for 2.0 and other related changes
+// version = 3		// Introduced additive clip related data
+// version = 4		// Introduced track list related data
+// version = 5		// Renamed enums for 2.0 and other related changes
+version = 6			// Introduced extended scalar samples for constant/linear interpolation per sample (ACL 2.2)
 
 // BEGIN CLIP RELATED DATA
 
@@ -212,6 +213,10 @@ tracks =
 		// Track type (float1f, float2f, float3f, float4f)
 		type = "float4f"
 
+		// Whether this track uses "linear" or "extended" interpolation
+		// Optional, defaults to 'linear'.
+		interpolator = "linear"
+
 		// The precision target used when optimizing the bit rate
 		// Defaults to '0.0001' units
 		precision = 0.0001
@@ -235,6 +240,11 @@ tracks =
 		// The shell distance of the transform's error metric
 		// Transforms only
 		shell_distance = 3.0
+
+		// Track interpolator type: linear or extended
+		// Defaults to 'linear'
+		// Scalar only
+		interpolator = "linear"
 
 		// The constant rotation detection threshold
 		// Transforms only
@@ -262,12 +272,30 @@ tracks =
 		// The number of samples here must match num_samples
 		data =
 		[
+			// With the linear interpolator
 			// Scalar tracks are of the form: [ x, y, z, .. ] with one entry per scalar component
 			[ 0.0, 0.0, 0.0, 1.0 ]
 			[ 1.0, 0.0, 0.0, 0.0 ]
 
+			// With the extended interpolator
+			// Scalar tracks are of the form: [ x, y, z, .. ] with one entry per scalar component
+			// However, each entry requires the extended information
+
+			// A constant interpolated sample
+			{
+				interpolator = "constant"
+				value = [ 0.0, 0.0, 0.0, 1.0 ]
+			}
+
+			// A linear interpolated sample
+			{
+				interpolator = "linear"
+				value = [ 1.0, 0.0, 0.0, 0.0 ]
+			}
+
 			// Transform tracks are of the form: [ [ rot.x, rot.y, rot.z, rot.z ], [ trans.x, trans.y, trans.z ], [ scale.x, scale.y, scale.z ] ]
 			// All three parts must be present and cannot be omitted
+			// Transform tracks do not support extended samples
 		]
 	}
 ]
