@@ -88,7 +88,9 @@ In order to test the compression and decompression code path for our algorithms,
 *  81_18_looping: 81_18 where the first sample repeats at the end to force a loop
 *  track_list_float1f: a mix of float1f tracks
 *  track_list_float2f: a mix of float2f tracks
+*  track_list_float2f_ex: a mix of float2f tracks with the extended interpolator, where each sample is constant or linear
 *  track_list_float3f: a mix of float3f tracks
+*  track_list_float3f_ex: 3 float3f tracks with the extended interpolator: each sample of the first track is linear, each sample of the second track is constant, and the third track mixes both
 *  track_list_float3f_looping: same as above where the first sample repeats at the end to force a loop
 *  track_list_float4f: a mix of float4f tracks
 *  track_list_vector4f: a mix of vector4f tracks
