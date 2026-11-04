@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required(VERSION 3.2...3.25)
 
 # Create groups for the test source files, this creates the proper directory structure under the
 # Visual Studio filters

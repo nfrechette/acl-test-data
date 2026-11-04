@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required(VERSION 3.2...3.25)
 
 # Detect which platform we have
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )

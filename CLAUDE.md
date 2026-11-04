@@ -33,7 +33,7 @@ python3 make.py -package             # convert regression_tests/ and write acl_r
 ./bin/acl-sjson --info <file>        # print information about one clip
 ```
 
-Useful variants: `-compiler {vs2019,clang14,gcc11,osx}`, `-cpu {x64,arm64}`, `-config {Debug,Release}`.
+Useful variants: `-compiler {vs2019,vs2022,vs2026,clang14,clang23,gcc11,gcc15,osx}`, `-cpu {x64,arm64}`, `-config {Debug,Release}`.
 `-convert` with a directory input converts each clip to the binary format, and it removes the output
 directory first. It skips `format_reference.acl.sjson`. `-package` uses `./output_regression_tests`
 as output and copies `regression_tests/README.md` into the zip. `REGRESSION_TEST_DATA_VERSION` at the

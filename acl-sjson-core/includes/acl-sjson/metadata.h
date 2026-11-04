@@ -26,6 +26,7 @@
 
 #include "acl-sjson/acl_version.h"
 
+#include <cstdint>
 #include <string>
 
 namespace acl_sjson
