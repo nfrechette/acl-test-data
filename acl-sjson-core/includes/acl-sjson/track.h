@@ -36,7 +36,7 @@ namespace acl_sjson
 	class track
 	{
 	public:
-		track(sample_type type, float sample_rate, const char* name);
+		track(sample_type type, float sample_rate, const char* name, track_interpolator interpolator = track_interpolator::linear);
 
 		track(const track&) = delete;
 		track(track&&) = default;
@@ -47,8 +47,18 @@ namespace acl_sjson
 		size_t get_num_samples() const;
 		float get_sample_rate() const;
 		const char* get_name() const;
+		track_interpolator get_interpolator() const;
 
+		// Returns true if a sample does not use linear interpolation
+		bool has_non_linear_samples() const;
+
+		// Adds a sample that uses linear interpolation
 		void emplace_back(sample&& item);
+
+		// Adds a sample with its interpolator, the track must use the extended interpolator
+		void emplace_back(sample&& item, sample_interpolator interpolator);
+
+		sample_interpolator get_sample_interpolator(size_t index) const;
 
 		track_description& get_description();
 		const track_description& get_description() const;
@@ -58,9 +68,11 @@ namespace acl_sjson
 
 	private:
 		std::vector<sample> m_samples;
+		std::vector<sample_interpolator> m_sample_interpolators;
 		std::string			m_name;
 		track_description   m_desc;
 		sample_type         m_type;
 		float               m_sample_rate;
+		track_interpolator  m_interpolator;
 	};
 }

@@ -89,6 +89,17 @@ namespace acl_sjson
 		return m_name.c_str();
 	}
 
+	bool track_array::has_non_linear_samples() const
+	{
+		for (const track& track_ : m_tracks)
+		{
+			if (track_.has_non_linear_samples())
+				return true;
+		}
+
+		return false;
+	}
+
 	void track_array::emplace_back(track&& item)
 	{
 		m_tracks.emplace_back(std::move(item));

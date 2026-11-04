@@ -54,6 +54,9 @@ namespace acl_sjson
 		const metadata_t& get_metadata() const;
 		const char* get_name() const;
 
+		// Returns true if a sample of a track does not use linear interpolation
+		bool has_non_linear_samples() const;
+
 		void emplace_back(track&& item);
 
 		void clear();

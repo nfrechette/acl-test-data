@@ -120,8 +120,63 @@ namespace
 			return acl_sjson::sample_type::float4;
 		case acl::track_type8::vector4f:
 			return acl_sjson::sample_type::vector4;
-		case acl::track_type8::qvvf:
+		case acl::track_type8::vqvf:
 			return acl_sjson::sample_type::qvv;
+		}
+	}
+
+	static acl_sjson::sample_interpolator get_sample_interpolator(acl::sample_interpolator_t interpolator)
+	{
+		switch (interpolator)
+		{
+		case acl::sample_interpolator_t::constant:
+			return acl_sjson::sample_interpolator::constant;
+		case acl::sample_interpolator_t::linear:
+		default:
+			return acl_sjson::sample_interpolator::linear;
+		}
+	}
+
+	// An extended sample stores its interpolator and its value, copy each of them
+	template<class track_type>
+	static void copy_extended_samples(const acl::track& track_, acl_sjson::track& out_track)
+	{
+		const track_type& typed_track = acl::track_cast<track_type>(track_);
+
+		const uint32_t num_samples = typed_track.get_num_samples();
+		for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+		{
+			const typename track_type::sample_type& extended_sample = typed_track[sample_index];
+
+			acl_sjson::sample smpl;
+			std::memcpy(&smpl, &extended_sample.value, sizeof(extended_sample.value));
+
+			out_track.emplace_back(std::move(smpl), get_sample_interpolator(extended_sample.interpolator));
+		}
+	}
+
+	static bool copy_extended_samples(const acl::track& track_, acl_sjson::track& out_track)
+	{
+		switch (track_.get_type())
+		{
+		case acl::track_type8::float1f:
+			copy_extended_samples<acl::track_float1f_ex>(track_, out_track);
+			return true;
+		case acl::track_type8::float2f:
+			copy_extended_samples<acl::track_float2f_ex>(track_, out_track);
+			return true;
+		case acl::track_type8::float3f:
+			copy_extended_samples<acl::track_float3f_ex>(track_, out_track);
+			return true;
+		case acl::track_type8::float4f:
+			copy_extended_samples<acl::track_float4f_ex>(track_, out_track);
+			return true;
+		case acl::track_type8::vector4f:
+			copy_extended_samples<acl::track_vector4f_ex>(track_, out_track);
+			return true;
+		default:
+			printf("Extended samples are not supported for this track type\n");
+			return false;
 		}
 	}
 
@@ -136,7 +191,7 @@ namespace
 	static acl_sjson::transform_track_description get_description(const acl::track_desc_transformf& desc)
 	{
 		acl_sjson::transform_track_description out_desc;
-		std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::qvvf));
+		std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::vqvf));
 		out_desc.output_index = desc.output_index;
 		out_desc.parent_index = desc.parent_index;
 		out_desc.precision = desc.precision;
@@ -161,7 +216,7 @@ namespace
 		default:
 			desc.scalar = get_description(track.get_description<acl::track_desc_scalarf>());
 			break;
-		case acl::track_type8::qvvf:
+		case acl::track_type8::vqvf:
 			desc.transform = get_description(track.get_description<acl::track_desc_transformf>());
 			break;
 		}
@@ -169,36 +224,46 @@ namespace
 		return desc;
 	}
 
-	static acl_sjson::track_array convert_tracks(const acl::track_array& input_tracks, const acl_sjson::metadata_t& metadata)
+	static bool convert_tracks(const acl::track_array& input_tracks, const acl_sjson::metadata_t& metadata, acl_sjson::track_array& out_tracks)
 	{
-		acl_sjson::track_array out_tracks(input_tracks.get_name().c_str(), metadata);
+		out_tracks = acl_sjson::track_array(input_tracks.get_name().c_str(), metadata);
 
 		for (const acl::track& track_ : input_tracks)
 		{
 			const acl_sjson::sample_type type = get_sample_type(track_.get_type());
 			const float sample_rate = track_.get_sample_rate();
 			const char* name = track_.get_name().c_str();
+			const bool is_extended = track_.get_interpolator() == acl::track_interpolator_t::extended;
+			const acl_sjson::track_interpolator interpolator = is_extended ? acl_sjson::track_interpolator::extended : acl_sjson::track_interpolator::linear;
 
-			acl_sjson::track out_track(type, sample_rate, name);
+			acl_sjson::track out_track(type, sample_rate, name, interpolator);
 			out_track.get_description() = get_description(track_);
 
-			const uint32_t num_samples = track_.get_num_samples();
-			const uint32_t sample_size = track_.get_sample_size();
-
-			for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+			if (is_extended)
 			{
-				const void* sample_ptr = track_[sample_index];
+				if (!copy_extended_samples(track_, out_track))
+					return false;
+			}
+			else
+			{
+				const uint32_t num_samples = track_.get_num_samples();
+				const uint32_t sample_size = track_.get_sample_size();
 
-				acl_sjson::sample smpl;
-				std::memcpy(&smpl, sample_ptr, sample_size);
+				for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+				{
+					const void* sample_ptr = track_[sample_index];
 
-				out_track.emplace_back(std::move(smpl));
+					acl_sjson::sample smpl;
+					std::memcpy(&smpl, sample_ptr, sample_size);
+
+					out_track.emplace_back(std::move(smpl));
+				}
 			}
 
 			out_tracks.emplace_back(std::move(out_track));
 		}
 
-		return out_tracks;
+		return true;
 	}
 
 	static acl_sjson::acl_version get_version(acl::compressed_tracks_version16 version)
@@ -211,6 +276,8 @@ namespace
 		case acl::compressed_tracks_version16::v02_01_99_1:
 		case acl::compressed_tracks_version16::v02_01_99_2:
 			return acl_sjson::acl_version::v02_01_00;
+		case acl::compressed_tracks_version16::v02_02_99_0:
+			return acl_sjson::acl_version::v02_02_00;
 		default:
 			return acl_sjson::acl_version::unknown;
 		}
@@ -276,7 +343,7 @@ namespace acl_sjson_v22
 			metadata.version = get_version(tracks->get_version());
 			metadata.size = tracks->get_size();
 			metadata.name = tracks->get_name();
-			metadata.track_variant = tracks->get_track_type() == acl::track_type8::qvvf ?
+			metadata.track_variant = tracks->get_track_type() == acl::track_type8::vqvf ?
 				acl_sjson::track_variant_t::transform : acl_sjson::track_variant_t::scalar;
 
 			if (metadata.track_variant == acl_sjson::track_variant_t::transform)
@@ -350,7 +417,7 @@ namespace acl_sjson_v22
 			metadata.version = acl_sjson::acl_version::v02_02_00;
 			metadata.size = file_size;
 			metadata.name = input_tracks.get_name().c_str();
-			metadata.track_variant = input_tracks.get_track_type() == acl::track_type8::qvvf ?
+			metadata.track_variant = input_tracks.get_track_type() == acl::track_type8::vqvf ?
 				acl_sjson::track_variant_t::transform : acl_sjson::track_variant_t::scalar;
 
 			if (metadata.track_variant == acl_sjson::track_variant_t::transform)
@@ -366,8 +433,6 @@ namespace acl_sjson_v22
 			return false;
 		}
 
-		out_tracks = convert_tracks(input_tracks, metadata);
-
-		return true;
+		return convert_tracks(input_tracks, metadata, out_tracks);
 	}
 }

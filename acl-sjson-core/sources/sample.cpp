@@ -41,4 +41,24 @@ namespace acl_sjson
 			case sample_type::qvv:		return "qvv";
 		}
 	}
+
+	const char* to_string(track_interpolator interpolator)
+	{
+		switch (interpolator)
+		{
+			default:
+			case track_interpolator::linear:	return "linear";
+			case track_interpolator::extended:	return "extended";
+		}
+	}
+
+	const char* to_string(sample_interpolator interpolator)
+	{
+		switch (interpolator)
+		{
+			default:
+			case sample_interpolator::constant:	return "constant";
+			case sample_interpolator::linear:	return "linear";
+		}
+	}
 }

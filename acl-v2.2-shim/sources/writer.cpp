@@ -61,7 +61,60 @@ namespace
 		case acl_sjson::sample_type::quat:
 			return sizeof(rtm::quatf);
 		case acl_sjson::sample_type::qvv:
-			return sizeof(rtm::qvvf);
+			return sizeof(rtm::vqvf);
+		}
+	}
+
+	static acl::sample_interpolator_t get_sample_interpolator(acl_sjson::sample_interpolator interpolator)
+	{
+		switch (interpolator)
+		{
+		case acl_sjson::sample_interpolator::constant:
+			return acl::sample_interpolator_t::constant;
+		case acl_sjson::sample_interpolator::linear:
+		default:
+			return acl::sample_interpolator_t::linear;
+		}
+	}
+
+	// An extended sample stores its interpolator and its value, copy each of them
+	template<class track_type>
+	static void copy_extended_samples(const acl_sjson::track& track_, acl::track& out_track)
+	{
+		track_type& typed_track = acl::track_cast<track_type>(out_track);
+
+		const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
+		for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+		{
+			typename track_type::sample_type& extended_sample = typed_track[sample_index];
+
+			std::memcpy(&extended_sample.value, &track_[sample_index], sizeof(extended_sample.value));
+			extended_sample.interpolator = get_sample_interpolator(track_.get_sample_interpolator(sample_index));
+		}
+	}
+
+	static void copy_extended_samples(const acl_sjson::track& track_, acl::track& out_track)
+	{
+		switch (track_.get_type())
+		{
+		case acl_sjson::sample_type::float1:
+			copy_extended_samples<acl::track_float1f_ex>(track_, out_track);
+			break;
+		case acl_sjson::sample_type::float2:
+			copy_extended_samples<acl::track_float2f_ex>(track_, out_track);
+			break;
+		case acl_sjson::sample_type::float3:
+			copy_extended_samples<acl::track_float3f_ex>(track_, out_track);
+			break;
+		case acl_sjson::sample_type::float4:
+			copy_extended_samples<acl::track_float4f_ex>(track_, out_track);
+			break;
+		case acl_sjson::sample_type::vector4:
+			copy_extended_samples<acl::track_vector4f_ex>(track_, out_track);
+			break;
+		default:
+			ACL_ASSERT(false, "Unsupported type");
+			break;
 		}
 	}
 
@@ -77,7 +130,7 @@ namespace
 	{
 		acl::track_desc_transformf out_desc;
 
-		std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::qvvf));
+		std::memcpy(&out_desc.default_value, &desc.default_value, sizeof(rtm::vqvf));
 		out_desc.output_index = desc.output_index;
 		out_desc.parent_index = desc.parent_index;
 		out_desc.precision = desc.precision;
@@ -92,6 +145,26 @@ namespace
 		const acl_sjson::sample_type type = track.get_type();
 		const uint32_t num_samples = static_cast<uint32_t>(track.get_num_samples());
 		const float sample_rate = track.get_sample_rate();
+
+		if (track.get_interpolator() == acl_sjson::track_interpolator::extended)
+		{
+			switch (type)
+			{
+			case acl_sjson::sample_type::float1:
+				return acl::track_float1f_ex::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+			case acl_sjson::sample_type::float2:
+				return acl::track_float2f_ex::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+			case acl_sjson::sample_type::float3:
+				return acl::track_float3f_ex::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+			case acl_sjson::sample_type::float4:
+				return acl::track_float4f_ex::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+			case acl_sjson::sample_type::vector4:
+				return acl::track_vector4f_ex::make_reserve(get_description(desc.scalar), allocator, num_samples, sample_rate);
+			default:
+				ACL_ASSERT(false, "Unsupported type");
+				return acl::track();
+			}
+		}
 
 		switch (type)
 		{
@@ -109,7 +182,7 @@ namespace
 			ACL_ASSERT(false, "Unsupported type");
 			return acl::track();
 		case acl_sjson::sample_type::qvv:
-			return acl::track_qvvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
+			return acl::track_vqvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
 		default:
 			ACL_ASSERT(false, "Unsupported type");
 			return acl::track();
@@ -130,15 +203,20 @@ namespace
 			acl::track out_track = make_track(allocator, track_);
 			out_track.set_name(acl::string(allocator, track_.get_name()));
 
-			const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
-			const uint32_t sample_size = get_sample_size(track_.get_type());
-
-			for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+			if (track_.get_interpolator() == acl_sjson::track_interpolator::extended)
+				copy_extended_samples(track_, out_track);
+			else
 			{
-				const acl_sjson::sample& smpl = track_[sample_index];
-				void* sample_ptr = out_track[sample_index];
+				const uint32_t num_samples = static_cast<uint32_t>(track_.get_num_samples());
+				const uint32_t sample_size = get_sample_size(track_.get_type());
 
-				std::memcpy(sample_ptr, &smpl, sample_size);
+				for (uint32_t sample_index = 0; sample_index < num_samples; ++sample_index)
+				{
+					const acl_sjson::sample& smpl = track_[sample_index];
+					void* sample_ptr = out_track[sample_index];
+
+					std::memcpy(sample_ptr, &smpl, sample_size);
+				}
 			}
 
 			out_tracks[track_index] = std::move(out_track);
