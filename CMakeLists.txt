@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.2...3.25)
 project(acl-test-data NONE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
@@ -21,3 +21,4 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/acl-sjson")
 add_subdirectory("${PROJECT_SOURCE_DIR}/acl-sjson-core")
 add_subdirectory("${PROJECT_SOURCE_DIR}/acl-v2.0-shim")
 add_subdirectory("${PROJECT_SOURCE_DIR}/acl-v2.1-shim")
+add_subdirectory("${PROJECT_SOURCE_DIR}/acl-v2.2-shim")

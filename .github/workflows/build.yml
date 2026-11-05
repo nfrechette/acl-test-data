@@ -17,25 +17,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        compiler: [gcc11, clang14]
+        compiler: [gcc15, clang23]
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           submodules: 'recursive'
       - name: Building (release-x64)
-        uses: docker://ghcr.io/nfrechette/toolchain-amd64-focal:v1
+        uses: docker://ghcr.io/nfrechette/toolchain-amd64-resolute:v1
         with:
           args: 'python3 make.py -ci -compiler ${{ matrix.compiler }} -config Release -cpu x64 -build'
 
-  osx-14:
-    runs-on: macos-14
+  osx-15:
+    runs-on: macos-15
     strategy:
       matrix:
-        compiler: [xcode16]
+        compiler: [xcode26]
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           submodules: 'recursive'
       - name: Setup ${{ matrix.compiler }} compiler
@@ -44,13 +44,13 @@ jobs:
         run: python3 make.py -ci -compiler osx -config Release -cpu arm64 -build
 
   windows:
-    runs-on: windows-2019
+    runs-on: windows-2025
     strategy:
       matrix:
-        compiler: [vs2019]
+        compiler: [vs2026]
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           submodules: 'recursive'
       - name: Building (release-x64)

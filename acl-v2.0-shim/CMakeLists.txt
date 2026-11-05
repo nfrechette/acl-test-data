@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required(VERSION 3.2...3.25)
 project(acl-v20-shim CXX)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -27,6 +27,11 @@ setup_default_compiler_flags(${PROJECT_NAME})
 
 # Link dependencies
 target_link_libraries(${PROJECT_NAME} PRIVATE acl-sjson-core)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	# Suppress new warnings introduced in recent clang
+	target_compile_options(${PROJECT_NAME} PRIVATE -Wno-missing-template-arg-list-after-template-kw)
+endif()
 
 # Abort on failure, easier to debug issues this way
 add_definitions(-DACL_ON_ASSERT_ABORT)

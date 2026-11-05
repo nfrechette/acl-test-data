@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required(VERSION 3.2...3.25)
 
 macro(setup_default_compiler_flags _project_name)
 	if(MSVC)

@@ -12,4 +12,4 @@ In order to contribute to or build `acl-test-data` you will first need to setup 
 
 ## Commit message format
 
-This library uses the [angular.js message format](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits) and it is enforced with commit linting through every pull request.
+This library uses the [angular.js message format](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).

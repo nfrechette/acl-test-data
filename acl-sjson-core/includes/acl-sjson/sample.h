@@ -89,6 +89,30 @@ namespace acl_sjson
 
 	const char* to_string(sample_type type);
 
+	// How the samples of a track interpolate
+	enum class track_interpolator
+	{
+		// Each sample uses linear interpolation
+		linear,
+
+		// Each sample has its own interpolator, see sample_interpolator
+		extended,
+	};
+
+	const char* to_string(track_interpolator interpolator);
+
+	// How a sample interpolates to the next sample
+	enum class sample_interpolator
+	{
+		// The sample keeps its value until the next sample
+		constant,
+
+		// The sample interpolates linearly to the next sample
+		linear,
+	};
+
+	const char* to_string(sample_interpolator interpolator);
+
 	union sample
 	{
 		float1 f1;

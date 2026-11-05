@@ -8,7 +8,7 @@ import sys
 import time
 
 # Current version of the regression test data
-REGRESSION_TEST_DATA_VERSION = '3'
+REGRESSION_TEST_DATA_VERSION = '4'
 
 def parse_argv():
 	parser = argparse.ArgumentParser(add_help=False)
@@ -23,7 +23,7 @@ def parse_argv():
 	actions.add_argument('-target')
 
 	target = parser.add_argument_group(title='Target')
-	target.add_argument('-compiler', choices=['vs2019', 'clang14', 'gcc11', 'osx'], help='Defaults to the host system\'s default compiler')
+	target.add_argument('-compiler', choices=['vs2019', 'vs2022', 'vs2026', 'clang14', 'clang23', 'gcc11', 'gcc15', 'osx'], help='Defaults to the host system\'s default compiler')
 	target.add_argument('-config', choices=['Debug', 'Release'], type=str.capitalize)
 	target.add_argument('-cpu', choices=['x64', 'arm64'], help='Defaults to the host system\'s architecture')
 
@@ -75,6 +75,11 @@ def get_generator(compiler, cpu):
 	if platform.system() == 'Windows':
 		if compiler == 'vs2019':
 			return 'Visual Studio 16 2019'
+		elif compiler == 'vs2022':
+			return 'Visual Studio 17 2022'
+		elif compiler == 'vs2026':
+			# VS2026 support needs cmake 4.2 and up
+			return 'Visual Studio 18 2026'
 	elif platform.system() == 'Darwin':
 		if compiler == 'osx':
 			return 'Xcode'
@@ -90,7 +95,7 @@ def get_architecture(compiler, cpu):
 		return None
 
 	if platform.system() == 'Windows':
-		if compiler == 'vs2019':
+		if compiler in ['vs2019', 'vs2022', 'vs2026']:
 			if cpu == 'x86':
 				return 'Win32'
 			else:
@@ -104,9 +109,15 @@ def set_compiler_env(compiler, args):
 		if compiler == 'clang14':
 			os.environ['CC'] = 'clang-14'
 			os.environ['CXX'] = 'clang++-14'
+		elif compiler == 'clang23':
+			os.environ['CC'] = 'clang-23'
+			os.environ['CXX'] = 'clang++-23'
 		elif compiler == 'gcc11':
 			os.environ['CC'] = 'gcc-11'
 			os.environ['CXX'] = 'g++-11'
+		elif compiler == 'gcc15':
+			os.environ['CC'] = 'gcc-15'
+			os.environ['CXX'] = 'g++-15'
 		else:
 			print('Unknown compiler: {}'.format(compiler))
 			print('See help with: python make.py -help')

@@ -2,3 +2,5 @@ build
 bin
 output_regression_tests
 acl_regression_tests_v*.zip
+.idea
+output_clips

@@ -1,0 +1,160 @@
+version = 6
+
+track_list =
+{
+	name = "test_list"
+	num_samples = 10
+	sample_rate = 24
+}
+
+tracks =
+[
+	{
+		name = "0-float2f_constant"
+		type = "float2f"
+		interpolator = "extended"
+		precision = 0.0001
+		data =
+		[
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.7071067811865475, -0.0 ]
+			}
+		]
+	}
+	{
+		name = "1-float2f_animated"
+		type = "float2f"
+		interpolator = "extended"
+		precision = 0.0001
+		data =
+		[
+			{
+				interpolator = "linear"
+				value = [ 0.29229792952537537,  145.65396118164062 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 1.1816197633743286,   136.18698120117188 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 1.1353191137313843,   121.33596801757812 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.40807250142097473,  106.25696563720703 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.08750254660844803,  91.39435577392578  ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.4532190263271332,   77.408447265625    ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.5581105351448059,   64.08024597167969  ]
+			}
+			{
+				interpolator = "linear"
+				value = [ -0.22040334343910217, 50.28704071044922  ]
+			}
+			{
+				interpolator = "linear"
+				value = [ -1.193902611732483,   37.312347412109375 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ -2.019469976425171,   25.044231414794922 ]
+			}
+		]
+	}
+	{
+		name = "2-float2f_extended"
+		type = "float2f"
+		interpolator = "extended"
+		precision = 0.0001
+		data =
+		[
+			{
+				interpolator = "constant"
+				value = [ 0.29229792952537537,  145.65396118164062 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ 1.1816197633743286,   136.18698120117188 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ 1.1353191137313843,   121.33596801757812 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.40807250142097473,  106.25696563720703 ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.08750254660844803,  91.39435577392578  ]
+			}
+			{
+				interpolator = "linear"
+				value = [ 0.4532190263271332,   77.408447265625    ]
+			}
+			{
+				interpolator = "constant"
+				value = [ 0.5581105351448059,   64.08024597167969  ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -0.22040334343910217, 50.28704071044922  ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -1.193902611732483,   37.312347412109375 ]
+			}
+			{
+				interpolator = "constant"
+				value = [ -2.019469976425171,   25.044231414794922 ]
+			}
+		]
+	}
+]
+

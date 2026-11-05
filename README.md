@@ -15,6 +15,7 @@ By default, this converts every file into the latest version supported. An optio
 
 *  2.0
 *  2.1
+*  2.2
 
 By default, clips will maintain their original compression format: raw files remain raw, compressed files remain compressed.
 

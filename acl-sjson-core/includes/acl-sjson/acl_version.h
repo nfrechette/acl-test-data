@@ -30,8 +30,9 @@ namespace acl_sjson
 	{
 		v02_00_00 = 0,
 		v02_01_00 = 1,
+		v02_02_00 = 2,
 
-		latest = v02_01_00,
+		latest = v02_02_00,
 		unknown = -1,
 	};
 

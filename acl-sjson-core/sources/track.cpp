@@ -27,10 +27,11 @@
 
 namespace acl_sjson
 {
-	track::track(sample_type type, float sample_rate, const char* name)
+	track::track(sample_type type, float sample_rate, const char* name, track_interpolator interpolator)
 		: m_name(name)
 		, m_type(type)
 		, m_sample_rate(sample_rate)
+		, m_interpolator(interpolator)
 	{
 	}
 
@@ -54,9 +55,37 @@ namespace acl_sjson
 		return m_name.c_str();
 	}
 
+	track_interpolator track::get_interpolator() const
+	{
+		return m_interpolator;
+	}
+
+	bool track::has_non_linear_samples() const
+	{
+		for (sample_interpolator interpolator : m_sample_interpolators)
+		{
+			if (interpolator != sample_interpolator::linear)
+				return true;
+		}
+
+		return false;
+	}
+
 	void track::emplace_back(sample&& item)
 	{
 		m_samples.emplace_back(std::move(item));
+		m_sample_interpolators.push_back(sample_interpolator::linear);
+	}
+
+	void track::emplace_back(sample&& item, sample_interpolator interpolator)
+	{
+		m_samples.emplace_back(std::move(item));
+		m_sample_interpolators.push_back(interpolator);
+	}
+
+	sample_interpolator track::get_sample_interpolator(size_t index) const
+	{
+		return m_sample_interpolators[index];
 	}
 
 	track_description& track::get_description()

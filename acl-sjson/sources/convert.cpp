@@ -27,6 +27,7 @@
 
 #include <acl-sjson/api_v20.h>
 #include <acl-sjson/api_v21.h>
+#include <acl-sjson/api_v22.h>
 #include <acl-sjson/track_array.h>
 
 #include <cstdio>
@@ -59,6 +60,10 @@ bool convert(const command_line_options& options)
 		if (!acl_sjson_v21::write_tracks(options.output_filename.c_str(), tracks))
 			return false;
 		break;
+	case acl_sjson::acl_version::v02_02_00:
+		if (!acl_sjson_v22::write_tracks(options.output_filename.c_str(), tracks))
+			return false;
+		break;
 	default:
 		// By default, if no target version is specified, we maintain the source version
 		switch (tracks.get_version())
@@ -69,6 +74,10 @@ bool convert(const command_line_options& options)
 			break;
 		case acl_sjson::acl_version::v02_01_00:
 			if (!acl_sjson_v21::write_tracks(options.output_filename.c_str(), tracks))
+				return false;
+			break;
+		case acl_sjson::acl_version::v02_02_00:
+			if (!acl_sjson_v22::write_tracks(options.output_filename.c_str(), tracks))
 				return false;
 			break;
 		default:

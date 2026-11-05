@@ -1,0 +1,523 @@
+version = 6
+
+track_list = {
+	name = "extended_samples"
+	num_samples = 32
+	sample_rate = 30
+	is_binary_exact = true
+}
+
+tracks = [ 
+
+	{
+		name = "0-float3f_linear"
+		type = "float3f"
+		interpolator = "extended"
+		precision = "3A83126F"
+		output_index = 0
+		data = [ 
+
+			{
+				interpolator = "linear"
+				value = [ "0", "40000000", "C0A00000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3E4B6FFA", "3FFDBA52", "C0955555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3EC761D8", "3FF6F39B", "C08AAAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F108C69", "3FEBCAA7", "C0800000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F37A4A7", "3FDC722D", "C06AAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F576AA4", "3FC92FE8", "C0555555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F6E9A1D", "3FB25B5F", "C0400000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F7C466F", "3F985C50", "C02AAAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F7FE40E", "3F7751BE", "C0155555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F794E14", "3F3986F3", "BFFFFFFF" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F68C7B7", "3EF0E21C", "BFD55554" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F4EF99E", "3E54DF4F", "BFAAAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F2CEB27", "BD6F33E3", "BF7FFFFF" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F03F7E7", "BEA5B4BF", "BF2AAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3EAB8393", "BF1548FD", "BEAAAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3E1081C3", "BF551133", "0" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BD6F1A06", "BF888895", "3EAAAAB4" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BE82D64C", "BFA41C18", "3F2AAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BEE2920E", "BFBCC5D7", "3F800002" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF1CA2B7", "BFD215B9", "3FAAAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF41BDCF", "BFE3AAE9", "3FD55557" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF5F1F95", "BFF1357B", "3FFFFFFF" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF739C32", "BFFA77EB", "40155556" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF7E6288", "BFFF4821", "402AAAAA" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF7F04A5", "BFFF903F", "40400000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF757C10", "BFFB4EFD", "40555554" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF622A17", "BFF297B0", "406AAAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF45D3E9", "BFE591F6", "407FFFFF" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BF219AB2", "BFD478FA", "408AAAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BEEDE05F", "BFBF9A72", "40955555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BE8F0F8C", "BFA75530", "40A00000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "BDAA2AE0", "BF8C1785", "40AAAAAA" ]
+			}
+
+		]
+	}
+	{
+		name = "1-float3f_constant"
+		type = "float3f"
+		interpolator = "extended"
+		precision = "3A83126F"
+		output_index = 1
+		data = [ 
+
+			{
+				interpolator = "constant"
+				value = [ "0", "80000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "0", "80000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "0", "80000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "0", "80000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3F800000", "C0000000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3F800000", "C0000000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3F800000", "C0000000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3F800000", "C0000000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40000000", "C0800000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40000000", "C0800000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40000000", "C0800000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40000000", "C0800000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40400000", "C0C00000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40400000", "C0C00000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40400000", "C0C00000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40400000", "C0C00000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40800000", "C1000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40800000", "C1000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40800000", "C1000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40800000", "C1000000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40A00000", "C1200000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40A00000", "C1200000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40A00000", "C1200000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40A00000", "C1200000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40C00000", "C1400000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40C00000", "C1400000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40C00000", "C1400000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40C00000", "C1400000", "3F800000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40E00000", "C1600000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40E00000", "C1600000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40E00000", "C1600000", "0" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40E00000", "C1600000", "0" ]
+			}
+
+		]
+	}
+	{
+		name = "2-float3f_mixed"
+		type = "float3f"
+		interpolator = "extended"
+		precision = "3A83126F"
+		output_index = 2
+		data = [ 
+
+			{
+				interpolator = "constant"
+				value = [ "0", "0", "42C80000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3ECC7578", "3F800000", "42C6AAAB" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3F4B6FFA", "40000000", "42C55555" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3F974E6D", "40400000", "42C40000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3FC761D8", "40800000", "42C2AAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3FF57744", "0", "42C15555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "40108C69", "3F800000", "42C00000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "4024EB73", "40000000", "42BEAAAB" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "4037A4A7", "40400000", "42BD5555" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "4048881D", "40800000", "42BC0000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40576AA4", "0", "42BAAAAB" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "4064262B", "3F800000", "42B95555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "406E9A1D", "40000000", "42B80000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "4076ABC0", "40400000", "42B6AAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "407C466F", "40800000", "42B55555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "407F5BD5", "0", "42B40000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "407FE40E", "3F800000", "42B2AAAB" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "407DDDBF", "40000000", "42B15555" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40794E14", "40400000", "42B00000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "407240B9", "40800000", "42AEAAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "4068C7B7", "0", "42AD5555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "405CFB4B", "3F800000", "42AC0000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "404EF99E", "40000000", "42AAAAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "403EE68A", "40400000", "42A95555" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "402CEB27", "40800000", "42A80000" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "40193578", "0", "42A6AAAB" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "4003F7E7", "3F800000", "42A55555" ]
+			}
+
+			{
+				interpolator = "constant"
+				value = [ "3FDAD18F", "40000000", "42A40000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3FAB8393", "40400000", "42A2AAAB" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F74FDD0", "40800000", "42A15555" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3F1081C3", "0", "42A00000" ]
+			}
+
+			{
+				interpolator = "linear"
+				value = [ "3E2A5096", "3F800000", "429EAAAB" ]
+			}
+
+		]
+	}
+]
+

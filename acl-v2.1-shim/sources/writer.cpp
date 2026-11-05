@@ -152,6 +152,13 @@ namespace acl_sjson_v21
 {
 	bool write_tracks(const char* filename, const acl_sjson::track_array& tracks)
 	{
+		// ACL 2.1 has no sample interpolator, refuse a clip that would lose one
+		if (tracks.has_non_linear_samples())
+		{
+			printf("ACL 2.1 does not support extended samples, a sample does not use linear interpolation\n");
+			return false;
+		}
+
 		acl::ansi_allocator allocator;
 
 		const acl::track_array input_tracks = convert_tracks(allocator, tracks);
