@@ -59,7 +59,7 @@ bool info(const command_line_options& options)
 	printf("Duration: %.2f seconds\n", tracks.get_duration());
 	printf("Sample type: %s\n", acl_sjson::to_string(tracks.get_type()));
 
-	if (tracks.get_type() == acl_sjson::sample_type::qvv)
+	if (tracks.get_type() == acl_sjson::sample_type::qvv || tracks.get_type() == acl_sjson::sample_type::vq)
 	{
 		// QVV
 		printf("Rotation format: %s\n", to_string(metadata.variant.transform.rotation_format));

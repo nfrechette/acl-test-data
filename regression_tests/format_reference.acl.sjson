@@ -210,7 +210,8 @@ tracks =
 		// Track name, optional
 		name = "Right Hand IK"
 
-		// Track type (float1f, float2f, float3f, float4f)
+		// Track type (float1f, float2f, float3f, float4f, vector4f, vqvf, vqf)
+		// vqf is a transform without scale (ACL 2.2)
 		type = "float4f"
 
 		// Whether this track uses "linear" or "extended" interpolation
@@ -262,6 +263,7 @@ tracks =
 		bind_rotation = [ 0.0, 0.0, 0.0, 1.0 ]
 		bind_translation = [ 0.0, 0.0, 0.0 ]
 		bind_scale = [ 1.0, 1.0, 1.0 ]
+		// A vqf track has no scale, it does not write bind_scale and ignores it when present
 
 		// Track data
 		// The number of samples here must match num_samples
@@ -290,6 +292,7 @@ tracks =
 
 			// Transform tracks are of the form: [ [ rot.x, rot.y, rot.z, rot.z ], [ trans.x, trans.y, trans.z ], [ scale.x, scale.y, scale.z ] ]
 			// All three parts must be present and cannot be omitted
+			// VQ transform tracks (vqf) have no scale, they are of the form: [ [ rot.x, rot.y, rot.z, rot.z ], [ trans.x, trans.y, trans.z ] ]
 			// Transform tracks do not support extended samples
 		]
 	}

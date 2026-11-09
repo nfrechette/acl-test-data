@@ -122,6 +122,8 @@ namespace
 			return acl_sjson::sample_type::vector4;
 		case acl::track_type8::vqvf:
 			return acl_sjson::sample_type::qvv;
+		case acl::track_type8::vqf:
+			return acl_sjson::sample_type::vq;
 		}
 	}
 
@@ -217,6 +219,7 @@ namespace
 			desc.scalar = get_description(track.get_description<acl::track_desc_scalarf>());
 			break;
 		case acl::track_type8::vqvf:
+		case acl::track_type8::vqf:
 			desc.transform = get_description(track.get_description<acl::track_desc_transformf>());
 			break;
 		}
@@ -277,6 +280,7 @@ namespace
 		case acl::compressed_tracks_version16::v02_01_99_2:
 			return acl_sjson::acl_version::v02_01_00;
 		case acl::compressed_tracks_version16::v02_02_99_0:
+		case acl::compressed_tracks_version16::v02_02_99_1:
 			return acl_sjson::acl_version::v02_02_00;
 		default:
 			return acl_sjson::acl_version::unknown;
@@ -343,7 +347,7 @@ namespace acl_sjson_v22
 			metadata.version = get_version(tracks->get_version());
 			metadata.size = tracks->get_size();
 			metadata.name = tracks->get_name();
-			metadata.track_variant = tracks->get_track_type() == acl::track_type8::vqvf ?
+			metadata.track_variant = acl::acl_impl::is_transform_track_type(tracks->get_track_type()) ?
 				acl_sjson::track_variant_t::transform : acl_sjson::track_variant_t::scalar;
 
 			if (metadata.track_variant == acl_sjson::track_variant_t::transform)
@@ -417,7 +421,7 @@ namespace acl_sjson_v22
 			metadata.version = acl_sjson::acl_version::v02_02_00;
 			metadata.size = file_size;
 			metadata.name = input_tracks.get_name().c_str();
-			metadata.track_variant = input_tracks.get_track_type() == acl::track_type8::vqvf ?
+			metadata.track_variant = acl::acl_impl::is_transform_track_type(input_tracks.get_track_type()) ?
 				acl_sjson::track_variant_t::transform : acl_sjson::track_variant_t::scalar;
 
 			if (metadata.track_variant == acl_sjson::track_variant_t::transform)

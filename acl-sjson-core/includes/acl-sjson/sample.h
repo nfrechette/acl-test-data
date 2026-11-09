@@ -75,6 +75,13 @@ namespace acl_sjson
 		vector4 scale;
 	};
 
+	// A transform without scale
+	struct vq
+	{
+		quat rotation;
+		vector4 translation;
+	};
+
 	enum class sample_type
 	{
 		unknown,
@@ -85,6 +92,7 @@ namespace acl_sjson
 		vector4,
 		quat,
 		qvv,
+		vq,
 	};
 
 	const char* to_string(sample_type type);
@@ -122,5 +130,6 @@ namespace acl_sjson
 		vector4 v4;
 		quat q;
 		qvv transform;
+		vq transform_vq;
 	};
 }
