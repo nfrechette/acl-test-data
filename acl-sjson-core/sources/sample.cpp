@@ -38,7 +38,7 @@ namespace acl_sjson
 			case sample_type::float4:	return "float4";
 			case sample_type::vector4:	return "vector4";
 			case sample_type::quat:		return "quat";
-			case sample_type::qvv:		return "qvv";
+			case sample_type::vqv:		return "vqv";
 			case sample_type::vq:		return "vq";
 		}
 	}

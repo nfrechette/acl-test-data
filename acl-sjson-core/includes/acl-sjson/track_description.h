@@ -53,7 +53,7 @@ namespace acl_sjson
 
 	//////////////////////////////////////////////////////////////////////////
 	// This structure describes the various settings for transform tracks.
-	// Used by: quatf, qvvf
+	// Used by: quatf, vqvf, vqf
 	struct transform_track_description
 	{
 		//////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ namespace acl_sjson
 		// Note that if you do not use the identity here, compressed tracks will not contain the required data
 		// to be able to reconstruct the original tracks on their own: the implementation will have to provide
 		// the default sub-track values (whether constant or variable per sub-track).
-		qvv default_value;
+		vqv default_value;
 
 		//////////////////////////////////////////////////////////////////////////
 		// The track output index. When writing out the compressed data stream, this index

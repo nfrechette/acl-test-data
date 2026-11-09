@@ -68,7 +68,7 @@ namespace acl_sjson
 		float w;
 	};
 
-	struct qvv
+	struct vqv
 	{
 		quat rotation;
 		vector4 translation;
@@ -91,7 +91,7 @@ namespace acl_sjson
 		float4,
 		vector4,
 		quat,
-		qvv,
+		vqv,
 		vq,
 	};
 
@@ -129,7 +129,7 @@ namespace acl_sjson
 		float4 f4;
 		vector4 v4;
 		quat q;
-		qvv transform;
+		vqv transform;
 		vq transform_vq;
 	};
 }
