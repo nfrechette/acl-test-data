@@ -1,0 +1,805 @@
+version = 6
+
+track_list = {
+	name = "93_01_zero_range_extent_vq"
+	num_samples = 5
+	sample_rate = 24
+	is_binary_exact = true
+}
+
+tracks = [ 
+
+	{
+		name = "93_01"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 0
+		parent_index = 4294967295
+		shell_distance = "40400000"
+		bind_rotation = [ "BF3504F4", "80000000", "0", "3F3504F4" ]
+		bind_translation = [ "0", "0", "0" ]
+		data = [ 
+			[ [ "BF3504F4", "80000000", "0", "3F3504F4" ], [ "0", "0", "0" ] ]
+			[ [ "BF3504F4", "80000000", "0", "3F3504F4" ], [ "0", "0", "0" ] ]
+			[ [ "BF3504F4", "80000000", "0", "3F3504F4" ], [ "0", "0", "0" ] ]
+			[ [ "BF3504F4", "80000000", "0", "3F3504F4" ], [ "0", "0", "0" ] ]
+			[ [ "BF3504F4", "80000000", "0", "3F3504F4" ], [ "0", "0", "0" ] ]
+		]
+	}
+	{
+		name = "hip"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 1
+		parent_index = 0
+		shell_distance = "40400000"
+		bind_rotation = [ "3F03A88F", "3EF877BF", "3F03A88F", "3EF877C0" ]
+		bind_translation = [ "0", "0", "0" ]
+		data = [ 
+			[ [ "3F03A88F", "BF03A88F", "3EF877BF", "3EF877C0" ], [ "C2551530", "0", "429511EB" ] ]
+			[ [ "BCB66B43", "BF330064", "BD50408D", "3F367663" ], [ "C26C1C5A", "0", "42914618" ] ]
+			[ [ "BCD198FC", "BF336AA6", "BD4B3EF1", "3F360C40" ], [ "C26B44B3", "0", "429133C2" ] ]
+			[ [ "BCD06C5A", "BF3369BD", "BD52DBAC", "3F3604D4" ], [ "C26A8A6F", "0", "42910B9D" ] ]
+			[ [ "BCE76EBF", "BF3347B2", "BD4DFEBC", "3F3624FA" ], [ "C26A2193", "0", "4290D603" ] ]
+		]
+	}
+	{
+		name = "abdomen"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 2
+		parent_index = 1
+		shell_distance = "40400000"
+		bind_rotation = [ "BD4C0240", "A5C06BC2", "268483B2", "3F7FAEA9" ]
+		bind_translation = [ "0", "41A5813B", "BF3B44A4" ]
+		data = [ 
+			[ [ "393F4DCE", "3D4C1D54", "3BA2AA22", "3F7FADC5" ], [ "41A4E31D", "B4B65A5F", "BFF7030C" ] ]
+			[ [ "B999C60F", "BDAD379B", "3D24E845", "3F7EDFD8" ], [ "41A4E31B", "356B9E1C", "BFF7030A" ] ]
+			[ [ "B9559484", "BD9C60C6", "3D055EEA", "3F7F1DD2" ], [ "41A4E31A", "360C9A5A", "BFF70308" ] ]
+			[ [ "BA94CF8E", "BD9DACC1", "3D08B619", "3F7F18D1" ], [ "41A4E318", "365E4D2D", "BFF70307" ] ]
+			[ [ "BA3EBDDF", "BDA0425D", "3CFB2EBE", "3F7F181E" ], [ "41A4E316", "36980000", "BFF70305" ] ]
+		]
+	}
+	{
+		name = "chest"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 3
+		parent_index = 2
+		shell_distance = "40400000"
+		bind_rotation = [ "BD9C2C84", "254FD472", "A6E77F0E", "3F7F412D" ]
+		bind_translation = [ "0", "4140E601", "40299705" ]
+		data = [ 
+			[ [ "389C1B6F", "3D9C4174", "3AB60961", "3F7F40E9" ], [ "413B6E7D", "B5F9C000", "B5DC6000" ] ]
+			[ [ "3B5243EA", "3E081516", "BCE606A9", "3F7DA04F" ], [ "413B6E74", "B536A000", "B5A54800" ] ]
+			[ [ "3B3DA015", "3E04BA33", "BCCEB3F7", "3F7DC1D5" ], [ "413B6E6C", "35064000", "B55C6000" ] ]
+			[ [ "3B2AE079", "3E05B974", "BCCD6E89", "3F7DB9C4" ], [ "413B6E64", "35E19000", "B4DC6000" ] ]
+			[ [ "3B349C0A", "3E06941F", "BCCFAEE8", "3F7DB20E" ], [ "413B6E5B", "36400000", "0" ] ]
+		]
+	}
+	{
+		name = "neck"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 4
+		parent_index = 3
+		shell_distance = "40400000"
+		bind_rotation = [ "3E39D00D", "3AD8B695", "3C8AFA5B", "3F7BB657" ]
+		bind_translation = [ "3F894E64", "41BF3FF0", "C15D5E20" ]
+		data = [ 
+			[ [ "BAD8B69B", "BE39D010", "3C8AFA5D", "3F7BB656" ], [ "41B1908B", "3610A000", "400864D0" ] ]
+			[ [ "3CD6A325", "BEB35057", "3D036F1E", "3F6F8D51" ], [ "41B1908D", "35F0F000", "400864D2" ] ]
+			[ [ "3C8D02DA", "BEABACAC", "3CEE727F", "3F710663" ], [ "41B1908E", "35C0A000", "400864D3" ] ]
+			[ [ "3C72CD5B", "BEAB7EE9", "3CDDAA04", "3F711534" ], [ "41B19090", "35905000", "400864D4" ] ]
+			[ [ "3C554D92", "BEAB83C6", "3CD9B0CD", "3F7116FD" ], [ "41B19092", "35400000", "400864D6" ] ]
+		]
+	}
+	{
+		name = "head"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 5
+		parent_index = 4
+		shell_distance = "40400000"
+		bind_rotation = [ "3E9AD7FC", "3BF6164B", "BCDF9F59", "3F73E783" ]
+		bind_translation = [ "C055A869", "4172B20B", "C1F6B37D" ]
+		data = [ 
+			[ [ "BBF615F3", "BE9AD7FF", "BCDF9F62", "3F73E783" ], [ "40E5C0E2", "362E4000", "34000000" ] ]
+			[ [ "3D0F3BC5", "3D130809", "BD95B767", "3F7EFE15" ], [ "40E5C0EB", "3612B000", "360C0000" ] ]
+			[ [ "3CB6C23C", "3BC11566", "BD71F3DE", "3F7F7C15" ], [ "40E5C0F4", "35EE4000", "36880000" ] ]
+			[ [ "3CAAB95E", "3BE06018", "BD57DC3D", "3F7F9523" ], [ "40E5C0FD", "35B72000", "36CA0000" ] ]
+			[ [ "3C9DF32F", "3C0B4FDE", "BD457057", "3F7FA540" ], [ "40E5C106", "35800000", "37060000" ] ]
+		]
+	}
+	{
+		name = "leftEye"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 6
+		parent_index = 5
+		shell_distance = "40400000"
+		bind_rotation = [ "BE8A854F", "3E8A8551", "BF252225", "3F2954BB" ]
+		bind_translation = [ "C218825F", "42884F43", "424BF2FE" ]
+		data = [ 
+			[ [ "BE8A854F", "3E8A854E", "BF252225", "3F2954BA" ], [ "4137749B", "C079A00D", "BD0DC672" ] ]
+			[ [ "BE8A854F", "3E8A854E", "BF252225", "3F2954BA" ], [ "413774A2", "C079A00B", "BD0DC92E" ] ]
+			[ [ "BE8A8550", "3E8A854F", "BF252225", "3F2954BB" ], [ "413774A9", "C079A008", "BD0DCBE9" ] ]
+			[ [ "BE8A8550", "3E8A854F", "BF252225", "3F2954BB" ], [ "413774B0", "C079A006", "BD0DCEA4" ] ]
+			[ [ "BE8A8550", "3E8A854F", "BF252225", "3F2954BB" ], [ "413774B7", "C079A004", "BD0DD160" ] ]
+		]
+	}
+	{
+		name = "rightEye"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 7
+		parent_index = 5
+		shell_distance = "40400000"
+		bind_rotation = [ "BE8A854F", "3E8A8551", "BF252225", "3F2954BB" ]
+		bind_translation = [ "C237B885", "42884F43", "424BF2FD" ]
+		data = [ 
+			[ [ "BE8A854F", "3E8A854E", "BF252225", "3F2954BA" ], [ "4134C7FE", "4079A004", "3D0DC319" ] ]
+			[ [ "BE8A854F", "3E8A854E", "BF252225", "3F2954BA" ], [ "4134C800", "4079A004", "3D0DC323" ] ]
+			[ [ "BE8A8550", "3E8A854F", "BF252225", "3F2954BB" ], [ "4134C803", "4079A004", "3D0DC32C" ] ]
+			[ [ "BE8A854F", "3E8A854E", "BF252225", "3F2954BA" ], [ "4134C806", "4079A004", "3D0DC336" ] ]
+			[ [ "BE8A8550", "3E8A854F", "BF252225", "3F2954BB" ], [ "4134C808", "4079A004", "3D0DC340" ] ]
+		]
+	}
+	{
+		name = "rCollar"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 8
+		parent_index = 3
+		shell_distance = "40400000"
+		bind_rotation = [ "3E40CF13", "3D98AC75", "3F43D16A", "3F1C8951" ]
+		bind_translation = [ "41D96057", "426D4B79", "C1810A0D" ]
+		data = [ 
+			[ [ "BD98AC84", "BE40CF12", "3F43D16A", "3F1C8951" ], [ "419EBD87", "402BA9E2", "BF8864CB" ] ]
+			[ [ "BD98AC84", "BE40CF11", "3F43D16A", "3F1C8951" ], [ "419EBD86", "402BA9DF", "BF8864D1" ] ]
+			[ [ "BD98AC84", "BE40CF14", "3F43D16A", "3F1C8951" ], [ "419EBD86", "402BA9DC", "BF8864D6" ] ]
+			[ [ "BD98AC82", "BE40CF12", "3F43D16A", "3F1C8951" ], [ "419EBD85", "402BA9D8", "BF8864DC" ] ]
+			[ [ "BD98AC82", "BE40CF12", "3F43D16A", "3F1C8951" ], [ "419EBD84", "402BA9D5", "BF8864E2" ] ]
+		]
+	}
+	{
+		name = "rShldr"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 9
+		parent_index = 8
+		shell_distance = "40400000"
+		bind_rotation = [ "BDA39A54", "BDAB2B05", "BD8FF2B2", "3F7DA558" ]
+		bind_translation = [ "C18D57B9", "BDA8633D", "41158376" ]
+		data = [ 
+			[ [ "3DAB2AF9", "3DA39A55", "BD8FF2B0", "3F7DA558" ], [ "4111C516", "B7080000", "27800000" ] ]
+			[ [ "BE30A221", "BE940683", "3EA0A843", "3F634745" ], [ "4111C516", "B6A20000", "34700000" ] ]
+			[ [ "BE269E5D", "BE8402AC", "3E99C722", "3F675ED8" ], [ "4111C516", "B5D00000", "34F00000" ] ]
+			[ [ "BE24EBAD", "BE840B52", "3E992F02", "3F678A49" ], [ "4111C517", "35E80000", "35340000" ] ]
+			[ [ "BE24C0E2", "BE84C9DE", "3E984D38", "3F67962F" ], [ "4111C517", "36A80000", "35700000" ] ]
+		]
+	}
+	{
+		name = "rForeArm"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 10
+		parent_index = 9
+		shell_distance = "40400000"
+		bind_rotation = [ "3E088AF0", "3E125A47", "BD8BF241", "3F7A73A2" ]
+		bind_translation = [ "C2105071", "BFEFF06A", "C17470D6" ]
+		data = [ 
+			[ [ "BE125A47", "BE088AE8", "BD8BF246", "3F7A73A2" ], [ "41E1D7C4", "35E80000", "B6900000" ] ]
+			[ [ "BDC89EA6", "BF1BF2C5", "BEE7F048", "3F24BCBD" ], [ "41E1D7C4", "35C60000", "B5F00000" ] ]
+			[ [ "BDA4DE5A", "BF1510A5", "BEE8E553", "3F2B4329" ], [ "41E1D7C4", "35A40000", "35400000" ] ]
+			[ [ "BDA4A1E3", "BF152E95", "BEE91ACE", "3F2B17CB" ], [ "41E1D7C4", "35820000", "36580000" ] ]
+			[ [ "BDA515E0", "BF14F534", "BEE8B432", "3F2B6AE3" ], [ "41E1D7C4", "35400000", "36C00000" ] ]
+		]
+	}
+	{
+		name = "rHand"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 11
+		parent_index = 10
+		shell_distance = "40400000"
+		bind_rotation = [ "3CF0729C", "3D0B08D7", "BCC19430", "3F7FABAA" ]
+		bind_translation = [ "C1C6790C", "BF90E37A", "3FC9AFE0" ]
+		data = [ 
+			[ [ "BD0B08A0", "BCF072E8", "BCC19452", "3F7FABAA" ], [ "41BD73CE", "B6000000", "0" ] ]
+			[ [ "BEB125E5", "BDFA9CC0", "3D7C3DB5", "3F6D9D5E" ], [ "41BD73CD", "B4A00000", "B5200000" ] ]
+			[ [ "BEA7AF41", "BDF0121A", "3D6B4BEC", "3F6F8FBA" ], [ "41BD73CC", "35B00000", "B5A00000" ] ]
+			[ [ "BEA8C472", "BDF159E8", "3D6DBDEC", "3F6F5779" ], [ "41BD73CB", "36440000", "B5F00000" ] ]
+			[ [ "BEA7F976", "BDF069D4", "3D6BF362", "3F6F80B5" ], [ "41BD73CA", "36980000", "B6200000" ] ]
+		]
+	}
+	{
+		name = "rThumb1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 12
+		parent_index = 11
+		shell_distance = "40400000"
+		bind_rotation = [ "3E5EE016", "3E5411B6", "BD3CA6ED", "3F73E36F" ]
+		bind_translation = [ "C184BDA6", "40B83E42", "C2249BFD" ]
+		data = [ 
+			[ [ "BE5411C3", "BE5EE006", "BD3CA6DD", "3F73E36F" ], [ "40167F54", "BED5F360", "40314AC0" ] ]
+			[ [ "BE5411C3", "BE5EE005", "BD3CA6D9", "3F73E36F" ], [ "40167F54", "BED5F318", "40314ACE" ] ]
+			[ [ "BE5411C2", "BE5EE007", "BD3CA6D8", "3F73E36F" ], [ "40167F54", "BED5F2D0", "40314ADD" ] ]
+			[ [ "BE5411C2", "BE5EE005", "BD3CA6D3", "3F73E36F" ], [ "40167F55", "BED5F288", "40314AEC" ] ]
+			[ [ "BE5411C2", "BE5EE005", "BD3CA6D0", "3F73E36F" ], [ "40167F55", "BED5F240", "40314AFA" ] ]
+		]
+	}
+	{
+		name = "rThumb2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 13
+		parent_index = 12
+		shell_distance = "40400000"
+		bind_rotation = [ "3DA6C5E9", "BD9635AD", "3E30F50C", "3F7A9534" ]
+		bind_translation = [ "411CCAEF", "41C7014B", "40FF9F54" ]
+		data = [ 
+			[ [ "3D9635A9", "BDA6C5F4", "3E30F50C", "3F7A9534" ], [ "409A6CCC", "B6C00000", "B7600000" ] ]
+			[ [ "3D9635A9", "BDA6C5F2", "3E30F50B", "3F7A9534" ], [ "409A6CCA", "B6300000", "B6DA0000" ] ]
+			[ [ "3D9635AA", "BDA6C5F5", "3E30F50D", "3F7A9534" ], [ "409A6CC8", "35000000", "34C00000" ] ]
+			[ [ "3D9635A9", "BDA6C5F3", "3E30F50F", "3F7A9534" ], [ "409A6CC7", "36700000", "36F20000" ] ]
+			[ [ "3D9635AA", "BDA6C5F3", "3E30F50F", "3F7A9534" ], [ "409A6CC5", "36E00000", "376C0000" ] ]
+		]
+	}
+	{
+		name = "rIndex1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 14
+		parent_index = 11
+		shell_distance = "40400000"
+		bind_rotation = [ "3E1F25FF", "3DC70E48", "3DE93FCA", "3F79F7B4" ]
+		bind_translation = [ "BFEAE64E", "41A8D05F", "C19D7832" ]
+		data = [ 
+			[ [ "BDC70E6C", "BE1F25ED", "3DE93FD1", "3F79F7B4" ], [ "4114FE33", "BF9F5780", "40046308" ] ]
+			[ [ "BDC70E6E", "BE1F25EC", "3DE93FD0", "3F79F7B4" ], [ "4114FE31", "BF9F576C", "40046312" ] ]
+			[ [ "BDC70E6E", "BE1F25ED", "3DE93FD2", "3F79F7B4" ], [ "4114FE30", "BF9F5759", "4004631B" ] ]
+			[ [ "BDC70E6B", "BE1F25EA", "3DE93FD5", "3F79F7B4" ], [ "4114FE2E", "BF9F5746", "40046324" ] ]
+			[ [ "BDC70E6C", "BE1F25EB", "3DE93FD5", "3F79F7B4" ], [ "4114FE2C", "BF9F5732", "4004632E" ] ]
+		]
+	}
+	{
+		name = "rIndex2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 15
+		parent_index = 14
+		shell_distance = "40400000"
+		bind_rotation = [ "BC9ABE42", "3D2ADFD0", "BDB865ED", "3F7EB0C7" ]
+		bind_translation = [ "C157B9D4", "C14F2888", "BFDD36B3" ]
+		data = [ 
+			[ [ "BD3933D1", "BD02CE1E", "BCCB12AF", "3F7F8758" ], [ "404730A0", "36600000", "B7400000" ] ]
+			[ [ "BD3933CF", "BD02CE1D", "BCCB12AE", "3F7F8758" ], [ "404730A6", "35C00000", "B71A0000" ] ]
+			[ [ "BD3933CB", "BD02CE1E", "BCCB12B0", "3F7F8758" ], [ "404730AD", "B5000000", "B6E80000" ] ]
+			[ [ "BD3933C6", "BD02CE1C", "BCCB12B2", "3F7F8758" ], [ "404730B4", "B6200000", "B69C0000" ] ]
+			[ [ "BD3933C4", "BD02CE1C", "BCCB12B2", "3F7F8758" ], [ "404730BA", "B6900000", "B6200000" ] ]
+		]
+	}
+	{
+		name = "rMid1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 16
+		parent_index = 11
+		shell_distance = "40400000"
+		bind_rotation = [ "3CA43E31", "BCBD4AC2", "3DF17C2D", "3F7E17EE" ]
+		bind_translation = [ "3FC4ADEA", "4189BB67", "409C8E85" ]
+		data = [ 
+			[ [ "3CBD4ACC", "BCA43E26", "3DF17C27", "3F7E17EE" ], [ "410FA47C", "BF2D78E0", "BDC20500" ] ]
+			[ [ "3CBD4AC6", "BCA43E26", "3DF17C27", "3F7E17EE" ], [ "410FA47A", "BF2D78B7", "BDC203A0" ] ]
+			[ [ "3CBD4AC3", "BCA43E28", "3DF17C29", "3F7E17EE" ], [ "410FA478", "BF2D788E", "BDC20240" ] ]
+			[ [ "3CBD4ABA", "BCA43E28", "3DF17C2A", "3F7E17EE" ], [ "410FA476", "BF2D7865", "BDC200E0" ] ]
+			[ [ "3CBD4AB5", "BCA43E2A", "3DF17C2B", "3F7E17EE" ], [ "410FA474", "BF2D783C", "BDC1FF80" ] ]
+		]
+	}
+	{
+		name = "rMid2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 17
+		parent_index = 16
+		shell_distance = "40400000"
+		bind_rotation = [ "BC3822CE", "BB56585A", "BCC73715", "3F7FE821" ]
+		bind_translation = [ "C0B29495", "C082A6A2", "402B872F" ]
+		data = [ 
+			[ [ "3B595A90", "3ACD4ACE", "3A1F4410", "3F7FFF8C" ], [ "40553EEC", "B6400000", "37400000" ] ]
+			[ [ "3B595A98", "3ACD4AB8", "3A1F43FE", "3F7FFF8C" ], [ "40553EF2", "B5E00000", "37340000" ] ]
+			[ [ "3B595A9E", "3ACD4AA6", "3A1F43F0", "3F7FFF8C" ], [ "40553EF8", "B5000000", "37280000" ] ]
+			[ [ "3B595AA2", "3ACD4A8F", "3A1F43E1", "3F7FFF8C" ], [ "40553EFF", "35400000", "371C0000" ] ]
+			[ [ "3B595AA9", "3ACD4A7B", "3A1F43D0", "3F7FFF8C" ], [ "40553F05", "36000000", "37100000" ] ]
+		]
+	}
+	{
+		name = "rRing1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 18
+		parent_index = 11
+		shell_distance = "40400000"
+		bind_rotation = [ "BE1CBBD2", "BE534F7C", "3E5536A8", "3F719897" ]
+		bind_translation = [ "C007263B", "420B66DA", "4221CE86" ]
+		data = [ 
+			[ [ "3E534F79", "3E1CBBD4", "3E5536A9", "3F719897" ], [ "410C9BAF", "3F20D4F0", "BFDA77E0" ] ]
+			[ [ "3E534F79", "3E1CBBD3", "3E5536A7", "3F719897" ], [ "410C9BAC", "3F20D50F", "BFDA77CA" ] ]
+			[ [ "3E534F78", "3E1CBBD4", "3E5536AB", "3F719897" ], [ "410C9BAA", "3F20D52E", "BFDA77B4" ] ]
+			[ [ "3E534F77", "3E1CBBD3", "3E5536AD", "3F719898" ], [ "410C9BA7", "3F20D54D", "BFDA779E" ] ]
+			[ [ "3E534F77", "3E1CBBD3", "3E5536AD", "3F719898" ], [ "410C9BA4", "3F20D56C", "BFDA7788" ] ]
+		]
+	}
+	{
+		name = "rRing2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 19
+		parent_index = 18
+		shell_distance = "40400000"
+		bind_rotation = [ "3D12F216", "3D445478", "BDB9FF3E", "3F7E7B1E" ]
+		bind_translation = [ "C159370C", "C141BBDC", "C124F4BB" ]
+		data = [ 
+			[ [ "BD53625D", "BD1E4300", "BA9346BD", "3F7F77A0" ], [ "402F0CA3", "36B70000", "B6080000" ] ]
+			[ [ "BD53625D", "BD1E42FF", "BA934702", "3F7F77A0" ], [ "402F0CA0", "355A0000", "B6060000" ] ]
+			[ [ "BD53625E", "BD1E4300", "BA93474B", "3F7F77A0" ], [ "402F0C9D", "B6808000", "B6040000" ] ]
+			[ [ "BD53625C", "BD1E42FE", "BA93478A", "3F7F77A0" ], [ "402F0C9A", "B70E2000", "B6020000" ] ]
+			[ [ "BD53625C", "BD1E42FE", "BA9347D0", "3F7F77A0" ], [ "402F0C97", "B75C0000", "B6000000" ] ]
+		]
+	}
+	{
+		name = "rPinky1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 20
+		parent_index = 11
+		shell_distance = "40400000"
+		bind_rotation = [ "BEB76549", "BEC04317", "3E3476E3", "3F5620D0" ]
+		bind_translation = [ "C1D1C078", "4244D972", "42880D19" ]
+		data = [ 
+			[ [ "3EC04317", "3EB76549", "3E3476E5", "3F5620CF" ], [ "40F07EE7", "3FDB25B8", "C0426200" ] ]
+			[ [ "3EC04318", "3EB76549", "3E3476E5", "3F5620D0" ], [ "40F07EE6", "3FDB25C8", "C04261F8" ] ]
+			[ [ "3EC04315", "3EB76549", "3E3476E7", "3F5620D0" ], [ "40F07EE6", "3FDB25D8", "C04261F0" ] ]
+			[ [ "3EC04315", "3EB76548", "3E3476EA", "3F5620D0" ], [ "40F07EE6", "3FDB25E8", "C04261E8" ] ]
+			[ [ "3EC04314", "3EB76548", "3E3476EA", "3F5620D0" ], [ "40F07EE5", "3FDB25F8", "C04261E0" ] ]
+		]
+	}
+	{
+		name = "rPinky2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 21
+		parent_index = 20
+		shell_distance = "40400000"
+		bind_rotation = [ "3C87B88E", "3C6762DE", "BC70D553", "3F7FE963" ]
+		bind_translation = [ "C05A2C95", "C0238E64", "C08A2486" ]
+		data = [ 
+			[ [ "BC6A3EB1", "BBF5FAF4", "3B72508A", "3F7FF702" ], [ "4003EF28", "B5800000", "37000000" ] ]
+			[ [ "BC6A3EB1", "BBF5FAE4", "3B7250A8", "3F7FF702" ], [ "4003EF28", "35240000", "36E00000" ] ]
+			[ [ "BC6A3EB1", "BBF5FAD7", "3B7250CA", "3F7FF702" ], [ "4003EF29", "36120000", "36C00000" ] ]
+			[ [ "BC6A3EAE", "BBF5FAC6", "3B7250EB", "3F7FF702" ], [ "4003EF2A", "367B0000", "36A00000" ] ]
+			[ [ "BC6A3EAE", "BBF5FAB8", "3B72510A", "3F7FF702" ], [ "4003EF2A", "36B20000", "36800000" ] ]
+		]
+	}
+	{
+		name = "lCollar"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 22
+		parent_index = 3
+		shell_distance = "40400000"
+		bind_rotation = [ "3E40CF13", "BD98AC74", "BF43D16A", "3F1C8951" ]
+		bind_translation = [ "C1D96057", "426D4B79", "C1810A0D" ]
+		data = [ 
+			[ [ "3D98AC8A", "BE40CF11", "BF43D16A", "3F1C8951" ], [ "419EBD83", "C02BA9C8", "BF8864D1" ] ]
+			[ [ "3D98AC89", "BE40CF11", "BF43D16A", "3F1C8951" ], [ "419EBD84", "C02BA9C9", "BF8864D2" ] ]
+			[ [ "3D98AC8A", "BE40CF12", "BF43D169", "3F1C8951" ], [ "419EBD86", "C02BA9CA", "BF8864D2" ] ]
+			[ [ "3D98AC8A", "BE40CF12", "BF43D16A", "3F1C8952" ], [ "419EBD88", "C02BA9CB", "BF8864D3" ] ]
+			[ [ "3D98AC8A", "BE40CF12", "BF43D16A", "3F1C8952" ], [ "419EBD89", "C02BA9CC", "BF8864D4" ] ]
+		]
+	}
+	{
+		name = "lShldr"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 23
+		parent_index = 22
+		shell_distance = "40400000"
+		bind_rotation = [ "BDA39A55", "3DAB2B05", "3D8FF2B2", "3F7DA558" ]
+		bind_translation = [ "418D57B9", "BDA8629E", "41158376" ]
+		data = [ 
+			[ [ "BDAB2AFE", "3DA39A56", "3D8FF2AF", "3F7DA558" ], [ "4111C510", "B6A00000", "0" ] ]
+			[ [ "3E26843A", "BE566999", "BEA19E7D", "3F693CB3" ], [ "4111C512", "B6B00000", "A8200000" ] ]
+			[ [ "3E19A8D0", "BE3DA5E8", "BE990CE0", "3F6C8D04" ], [ "4111C514", "B6C00000", "A7000000" ] ]
+			[ [ "3E17ED36", "BE3B2F7D", "BE9A1947", "3F6C92BF" ], [ "4111C515", "B6D00000", "28000000" ] ]
+			[ [ "3E1B813C", "BE3AED16", "BE9A8D5F", "3F6C5DDF" ], [ "4111C517", "B6E00000", "A7000000" ] ]
+		]
+	}
+	{
+		name = "lForeArm"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 24
+		parent_index = 23
+		shell_distance = "40400000"
+		bind_rotation = [ "3E088AF0", "BE125A47", "3D8BF242", "3F7A73A2" ]
+		bind_translation = [ "42105071", "BFEFF064", "C17470D7" ]
+		data = [ 
+			[ [ "3E125A47", "BE088AE4", "3D8BF247", "3F7A73A2" ], [ "41E1D7C1", "376C8000", "B4B00000" ] ]
+			[ [ "3DC6B74A", "BF1DF51A", "3EEAF0F9", "3F21C4C6" ], [ "41E1D7C0", "37496000", "B5A10000" ] ]
+			[ [ "3DA078F1", "BF173378", "3EECB83F", "3F281D92" ], [ "41E1D7C0", "37264000", "B60B0000" ] ]
+			[ [ "3D9E3658", "BF184522", "3EEEA3AD", "3F267F73" ], [ "41E1D7BF", "37032000", "B6458000" ] ]
+			[ [ "3D9BB949", "BF196F95", "3EF0BB0A", "3F24B3B3" ], [ "41E1D7BE", "36C00000", "B6800000" ] ]
+		]
+	}
+	{
+		name = "lHand"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 25
+		parent_index = 24
+		shell_distance = "40400000"
+		bind_rotation = [ "3CF07299", "BD0B08D9", "3CC1942F", "3F7FABAA" ]
+		bind_translation = [ "41C6790C", "BF90E378", "3FC9AFE1" ]
+		data = [ 
+			[ [ "3D0B08A7", "BCF072DB", "3CC19456", "3F7FABAA" ], [ "41BD73CA", "36100000", "36300000" ] ]
+			[ [ "3E761D97", "BDBAC5E8", "BD05478F", "3F7741A6" ], [ "41BD73CA", "36640000", "36040000" ] ]
+			[ [ "3E6AFBC6", "BDB4723F", "BCF58EEE", "3F7806DA" ], [ "41BD73CB", "369C0000", "35B00000" ] ]
+			[ [ "3E6B373F", "BDB495AE", "BCF6125A", "3F7802CC" ], [ "41BD73CC", "36C60000", "35300000" ] ]
+			[ [ "3E643FDD", "BDB06DCC", "BCE695D1", "3F787A84" ], [ "41BD73CC", "36F00000", "0" ] ]
+		]
+	}
+	{
+		name = "lThumb1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 26
+		parent_index = 25
+		shell_distance = "40400000"
+		bind_rotation = [ "3E5EE016", "BE5411B5", "3D3CA6EA", "3F73E36F" ]
+		bind_translation = [ "4184BDA4", "40B83E40", "C2249BFD" ]
+		data = [ 
+			[ [ "3E5411C6", "BE5EDFFF", "3D3CA6D0", "3F73E370" ], [ "40167F48", "3ED5F2F0", "40314AD7" ] ]
+			[ [ "3E5411C6", "BE5EDFFF", "3D3CA6D0", "3F73E370" ], [ "40167F4B", "3ED5F294", "40314ADB" ] ]
+			[ [ "3E5411C7", "BE5EE002", "3D3CA6D7", "3F73E36F" ], [ "40167F4E", "3ED5F238", "40314AE0" ] ]
+			[ [ "3E5411C7", "BE5EE002", "3D3CA6D8", "3F73E36F" ], [ "40167F51", "3ED5F1DC", "40314AE4" ] ]
+			[ [ "3E5411C7", "BE5EE003", "3D3CA6DA", "3F73E36F" ], [ "40167F54", "3ED5F180", "40314AE8" ] ]
+		]
+	}
+	{
+		name = "lThumb2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 27
+		parent_index = 26
+		shell_distance = "40400000"
+		bind_rotation = [ "3DA6C5EA", "3D9635AD", "BE30F50C", "3F7A9534" ]
+		bind_translation = [ "C11CCAEC", "41C7014B", "40FF9F51" ]
+		data = [ 
+			[ [ "BD9635A1", "BDA6C5F3", "BE30F509", "3F7A9535" ], [ "409A6CD0", "37800000", "B5C00000" ] ]
+			[ [ "BD9635A2", "BDA6C5F3", "BE30F509", "3F7A9535" ], [ "409A6CCE", "370C0000", "B5F00000" ] ]
+			[ [ "BD9635A7", "BDA6C5F8", "BE30F509", "3F7A9535" ], [ "409A6CCB", "35C00000", "B6100000" ] ]
+			[ [ "BD9635A8", "BDA6C5F7", "BE30F50C", "3F7A9534" ], [ "409A6CC8", "B6B80000", "B6280000" ] ]
+			[ [ "BD9635A9", "BDA6C5F9", "BE30F50D", "3F7A9534" ], [ "409A6CC6", "B7500000", "B6400000" ] ]
+		]
+	}
+	{
+		name = "lIndex1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 28
+		parent_index = 25
+		shell_distance = "40400000"
+		bind_rotation = [ "3E1F2600", "BDC70E47", "BDE93FCB", "3F79F7B4" ]
+		bind_translation = [ "3FEAE64A", "41A8D05F", "C19D7832" ]
+		data = [ 
+			[ [ "3DC70E6F", "BE1F25E8", "BDE93FD6", "3F79F7B4" ], [ "4114FE2E", "3F9F5756", "4004631E" ] ]
+			[ [ "3DC70E70", "BE1F25E6", "BDE93FD5", "3F79F7B4" ], [ "4114FE2E", "3F9F573C", "4004631E" ] ]
+			[ [ "3DC70E77", "BE1F25E9", "BDE93FD3", "3F79F7B4" ], [ "4114FE2E", "3F9F5721", "4004631F" ] ]
+			[ [ "3DC70E76", "BE1F25E8", "BDE93FD4", "3F79F7B4" ], [ "4114FE2D", "3F9F5706", "40046320" ] ]
+			[ [ "3DC70E77", "BE1F25E8", "BDE93FD4", "3F79F7B4" ], [ "4114FE2D", "3F9F56EC", "40046320" ] ]
+		]
+	}
+	{
+		name = "lIndex2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 29
+		parent_index = 28
+		shell_distance = "40400000"
+		bind_rotation = [ "BC9ABE44", "BD2ADFD0", "3DB865ED", "3F7EB0C7" ]
+		bind_translation = [ "4157B9D5", "C14F2887", "BFDD36AE" ]
+		data = [ 
+			[ [ "3D3933C2", "BD02CE16", "3CCB1299", "3F7F8758" ], [ "404730A5", "36F00000", "B5800000" ] ]
+			[ [ "3D3933C0", "BD02CE12", "3CCB129C", "3F7F8758" ], [ "404730A6", "36940000", "B6000000" ] ]
+			[ [ "3D3933C6", "BD02CE13", "3CCB129F", "3F7F8758" ], [ "404730A6", "35E00000", "B6400000" ] ]
+			[ [ "3D3933C5", "BD02CE11", "3CCB12A0", "3F7F8758" ], [ "404730A7", "B5900000", "B6800000" ] ]
+			[ [ "3D3933C5", "BD02CE0E", "3CCB12A4", "3F7F8758" ], [ "404730A8", "B6800000", "B6A00000" ] ]
+		]
+	}
+	{
+		name = "lMid1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 30
+		parent_index = 25
+		shell_distance = "40400000"
+		bind_rotation = [ "3CA43E33", "3CBD4AC1", "BDF17C2E", "3F7E17EE" ]
+		bind_translation = [ "BFC4ADFB", "4189BB67", "409C8E84" ]
+		data = [ 
+			[ [ "BCBD4ABA", "BCA43E31", "BDF17C2C", "3F7E17EE" ], [ "410FA47D", "3F2D7944", "BDC205C0" ] ]
+			[ [ "BCBD4ABB", "BCA43E33", "BDF17C2B", "3F7E17EE" ], [ "410FA47E", "3F2D78E9", "BDC204D0" ] ]
+			[ [ "BCBD4AC2", "BCA43E3A", "BDF17C2A", "3F7E17EE" ], [ "410FA47F", "3F2D788E", "BDC203E0" ] ]
+			[ [ "BCBD4AC2", "BCA43E3B", "BDF17C2A", "3F7E17EE" ], [ "410FA480", "3F2D7833", "BDC202F0" ] ]
+			[ [ "BCBD4AC4", "BCA43E3E", "BDF17C29", "3F7E17EE" ], [ "410FA481", "3F2D77D8", "BDC20200" ] ]
+		]
+	}
+	{
+		name = "lMid2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 31
+		parent_index = 30
+		shell_distance = "40400000"
+		bind_rotation = [ "BC3822CD", "3B565861", "3CC73716", "3F7FE821" ]
+		bind_translation = [ "40B29496", "C082A6A1", "402B8730" ]
+		data = [ 
+			[ [ "BB595A8A", "3ACD4A48", "BA1F440F", "3F7FFF8C" ], [ "40553F04", "B7210000", "35800000" ] ]
+			[ [ "BB595A91", "3ACD4A2D", "BA1F43F0", "3F7FFF8C" ], [ "40553EFC", "B6F58000", "34800000" ] ]
+			[ [ "BB595A9E", "3ACD4A15", "BA1F43D0", "3F7FFF8C" ], [ "40553EF4", "B6A90000", "B5000000" ] ]
+			[ [ "BB595AA3", "3ACD49F7", "BA1F43B0", "3F7FFF8C" ], [ "40553EEC", "B6390000", "B5A00000" ] ]
+			[ [ "BB595AAB", "3ACD49DD", "BA1F4392", "3F7FFF8C" ], [ "40553EE4", "B5000000", "B6000000" ] ]
+		]
+	}
+	{
+		name = "lRing1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 32
+		parent_index = 25
+		shell_distance = "40400000"
+		bind_rotation = [ "BE1CBBD2", "3E534F7B", "BE5536A7", "3F719897" ]
+		bind_translation = [ "4007262D", "420B66D9", "4221CE86" ]
+		data = [ 
+			[ [ "BE534F76", "3E1CBBCF", "BE5536AD", "3F719898" ], [ "410C9BAA", "BF20D5C0", "BFDA77C4" ] ]
+			[ [ "BE534F75", "3E1CBBD0", "BE5536AD", "3F719898" ], [ "410C9BAC", "BF20D5FC", "BFDA77C7" ] ]
+			[ [ "BE534F77", "3E1CBBD3", "BE5536A9", "3F719897" ], [ "410C9BAD", "BF20D638", "BFDA77CA" ] ]
+			[ [ "BE534F77", "3E1CBBD3", "BE5536A8", "3F719897" ], [ "410C9BAE", "BF20D674", "BFDA77CD" ] ]
+			[ [ "BE534F76", "3E1CBBD5", "BE5536A9", "3F719897" ], [ "410C9BB0", "BF20D6B0", "BFDA77D0" ] ]
+		]
+	}
+	{
+		name = "lRing2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 33
+		parent_index = 32
+		shell_distance = "40400000"
+		bind_rotation = [ "3D12F217", "BD445478", "3DB9FF3B", "3F7E7B1E" ]
+		bind_translation = [ "4159370B", "C141BBD9", "C124F4BB" ]
+		data = [ 
+			[ [ "3D53625F", "BD1E42FB", "3A9347CC", "3F7F77A0" ], [ "402F0CCD", "36860000", "B5800000" ] ]
+			[ [ "3D53625F", "BD1E42F9", "3A9347D9", "3F7F77A0" ], [ "402F0CC9", "36460000", "35000000" ] ]
+			[ [ "3D536263", "BD1E42FD", "3A9347F4", "3F7F77A0" ], [ "402F0CC4", "36000000", "36000000" ] ]
+			[ [ "3D536263", "BD1E42FC", "3A934803", "3F7F77A0" ], [ "402F0CC0", "35680000", "36600000" ] ]
+			[ [ "3D536263", "BD1E42FC", "3A934812", "3F7F77A0" ], [ "402F0CBC", "B4400000", "36A00000" ] ]
+		]
+	}
+	{
+		name = "lPinky1"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 34
+		parent_index = 25
+		shell_distance = "40400000"
+		bind_rotation = [ "BEB76549", "3EC04316", "BE3476E3", "3F5620D0" ]
+		bind_translation = [ "41D1C077", "4244D971", "42880D1A" ]
+		data = [ 
+			[ [ "BEC04318", "3EB76545", "BE3476EA", "3F5620D0" ], [ "40F07EF0", "BFDB2592", "C042621C" ] ]
+			[ [ "BEC04318", "3EB76546", "BE3476EA", "3F5620D0" ], [ "40F07EEE", "BFDB25B4", "C0426215" ] ]
+			[ [ "BEC04318", "3EB76547", "BE3476E4", "3F5620D0" ], [ "40F07EED", "BFDB25D5", "C042620E" ] ]
+			[ [ "BEC0431A", "3EB76548", "BE3476E5", "3F5620D0" ], [ "40F07EEC", "BFDB25F6", "C0426207" ] ]
+			[ [ "BEC04319", "3EB76549", "BE3476E5", "3F5620D0" ], [ "40F07EEA", "BFDB2618", "C0426200" ] ]
+		]
+	}
+	{
+		name = "lPinky2"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 35
+		parent_index = 34
+		shell_distance = "40400000"
+		bind_rotation = [ "3C87B88D", "BC6762DF", "3C70D554", "3F7FE963" ]
+		bind_translation = [ "405A2C8F", "C0238E63", "C08A2486" ]
+		data = [ 
+			[ [ "3C6A3E8D", "BBF5FAB5", "BB72510A", "3F7FF702" ], [ "4003EF1C", "B7480000", "36000000" ] ]
+			[ [ "3C6A3E8E", "BBF5FAB3", "BB72510B", "3F7FF702" ], [ "4003EF22", "B6CC0000", "36200000" ] ]
+			[ [ "3C6A3E96", "BBF5FAB9", "BB72510B", "3F7FF702" ], [ "4003EF28", "B4800000", "36400000" ] ]
+			[ [ "3C6A3E94", "BBF5FAB7", "BB72510F", "3F7FF702" ], [ "4003EF2D", "36BC0000", "36600000" ] ]
+			[ [ "3C6A3E96", "BBF5FAB6", "BB725111", "3F7FF702" ], [ "4003EF33", "37400000", "36800000" ] ]
+		]
+	}
+	{
+		name = "rButtock"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 36
+		parent_index = 1
+		shell_distance = "40400000"
+		bind_rotation = [ "3F692241", "A66C8FCA", "24A4A1B1", "BED383CF" ]
+		bind_translation = [ "C10C73AC", "408B3A14", "3F9C0ECC" ]
+		data = [ 
+			[ [ "B393A61B", "3F692240", "281A07C5", "3ED383CF" ], [ "408D413A", "410C73AE", "3F7702E0" ] ]
+			[ [ "B391A8FA", "3F692240", "AF72DBA1", "3ED383D0" ], [ "408D4134", "410C73AE", "3F7702E4" ] ]
+			[ [ "B38FABDA", "3F692240", "AFF2DD05", "3ED383D0" ], [ "408D412F", "410C73AF", "3F7702E9" ] ]
+			[ [ "B38DAEB9", "3F692240", "B036262E", "3ED383D0" ], [ "408D412A", "410C73B0", "3F7702EE" ] ]
+			[ [ "B38BB199", "3F692240", "B072DDAF", "3ED383D0" ], [ "408D4124", "410C73B0", "3F7702F2" ] ]
+		]
+	}
+	{
+		name = "rThigh"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 37
+		parent_index = 36
+		shell_distance = "40400000"
+		bind_rotation = [ "BEE58175", "24FE0F77", "2653F9CA", "3F64D710" ]
+		bind_translation = [ "B50C73AE", "BF6F7C66", "3FE41C9D" ]
+		data = [ 
+			[ [ "BB2A2AAE", "3EF76688", "BBFE5FC5", "3F601EC4" ], [ "4031EEB4", "36D4F9CC", "36000000" ] ]
+			[ [ "BB1D321C", "3F26CCCC", "BB160482", "3F4232CF" ], [ "4031EEC0", "3691BB59", "35300000" ] ]
+			[ [ "BA4613F5", "3F249B6B", "3B29B011", "3F440FB1" ], [ "4031EECB", "361CF9CC", "B5200000" ] ]
+			[ [ "BB12ED0E", "3F251DAB", "3AAC698B", "3F43A211" ], [ "4031EED6", "34B3E730", "B5F80000" ] ]
+			[ [ "BAD39701", "3F259239", "3B689983", "3F433F1B" ], [ "4031EEE2", "B5E00000", "B6500000" ] ]
+		]
+	}
+	{
+		name = "rShin"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 38
+		parent_index = 37
+		shell_distance = "40400000"
+		bind_rotation = [ "3D88F141", "BE10928A", "3AB7CCB0", "3F7CDB53" ]
+		bind_translation = [ "BF1088C6", "C2144480", "4032476E" ]
+		data = [ 
+			[ [ "3E10943B", "BDB7B68D", "3B9981D0", "3F7C63DE" ], [ "42134F05", "36A74000", "361E0000" ] ]
+			[ [ "3DDFC9A8", "BF16CA96", "3DA0AE7C", "3F4BFD85" ], [ "42134F05", "368E7000", "36488000" ] ]
+			[ [ "3DE62D59", "BF0FCE35", "3D97AE33", "3F50F871" ], [ "42134F04", "366B4000", "36730000" ] ]
+			[ [ "3DE5D8B6", "BF10286D", "3D981615", "3F50BA86" ], [ "42134F04", "3639A000", "368EC000" ] ]
+			[ [ "3DE55437", "BF10CCF6", "3D98E328", "3F504872" ], [ "42134F04", "36080000", "36A40000" ] ]
+		]
+	}
+	{
+		name = "rFoot"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 39
+		parent_index = 38
+		shell_distance = "40400000"
+		bind_rotation = [ "BF224F5F", "3D2268E5", "BDB4CF4D", "3F44696D" ]
+		bind_translation = [ "40615418", "C2950784", "C2196E12" ]
+		data = [ 
+			[ [ "BD3407F2", "3F1F593F", "BDA81C97", "3F46EFCE" ], [ "42359FBD", "36AC6000", "B6340000" ] ]
+			[ [ "3BA472C9", "3F4D170E", "BDC11539", "3F174B4A" ], [ "42359FBD", "368E4800", "B6370000" ] ]
+			[ [ "3AB86B1D", "3F4A80DA", "BDC36996", "3F1AB2D1" ], [ "42359FBE", "36606000", "B63A0000" ] ]
+			[ [ "3B00E2FA", "3F4A8023", "BDC1F3AE", "3F1ABAFE" ], [ "42359FBE", "36243000", "B63D0000" ] ]
+			[ [ "3AD3F1B6", "3F4A8248", "BDC2CE55", "3F1AB3F8" ], [ "42359FBE", "35D00000", "B6400000" ] ]
+		]
+	}
+	{
+		name = "lButtock"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 40
+		parent_index = 1
+		shell_distance = "40400000"
+		bind_rotation = [ "3F692241", "A66C8FCA", "24A4A1B1", "BED383CF" ]
+		bind_translation = [ "410C73AC", "408B3A14", "3F9C0ECC" ]
+		data = [ 
+			[ [ "B393A61B", "3F692240", "281A07C5", "3ED383CF" ], [ "408D413D", "C10C73AE", "3F7702E0" ] ]
+			[ [ "B391A8FA", "3F692240", "AF72DBA1", "3ED383D0" ], [ "408D4138", "C10C73AE", "3F7702DE" ] ]
+			[ [ "B38FABDA", "3F692240", "AFF2DD05", "3ED383D0" ], [ "408D4133", "C10C73AE", "3F7702DD" ] ]
+			[ [ "B38DAEB9", "3F692240", "B036262E", "3ED383D0" ], [ "408D412E", "C10C73AE", "3F7702DC" ] ]
+			[ [ "B38BB199", "3F692240", "B072DDAF", "3ED383D0" ], [ "408D4129", "C10C73AE", "3F7702DA" ] ]
+		]
+	}
+	{
+		name = "lThigh"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 41
+		parent_index = 40
+		shell_distance = "40400000"
+		bind_rotation = [ "BEE58175", "24FE0F77", "2653F9CA", "3F64D710" ]
+		bind_translation = [ "350C73AE", "BF6F7C66", "3FE41C9D" ]
+		data = [ 
+			[ [ "3855E139", "3EEECCBD", "3A187DD0", "3F62733A" ], [ "4031EEBA", "36D4F9CC", "36000000" ] ]
+			[ [ "BD96FAD9", "3F266D39", "BD1EC331", "3F415926" ], [ "4031EEB8", "367376B2", "36340000" ] ]
+			[ [ "BD8A5FF1", "3F2380CE", "BCF50B03", "3F4412DF" ], [ "4031EEB6", "3573E730", "36680000" ] ]
+			[ [ "BD8CEC51", "3F23F5F9", "BD016A27", "3F43A539" ], [ "4031EEB4", "B5F30634", "368E0000" ] ]
+			[ [ "BD9414FC", "3F240D57", "BCF19C94", "3F4381FB" ], [ "4031EEB2", "B6980000", "36A80000" ] ]
+		]
+	}
+	{
+		name = "lShin"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 42
+		parent_index = 41
+		shell_distance = "40400000"
+		bind_rotation = [ "3D88F141", "3E10928B", "BAB7CCBA", "3F7CDB53" ]
+		bind_translation = [ "3F1088C7", "C2144480", "4032476E" ]
+		data = [ 
+			[ [ "BE1131CD", "BD6368EA", "393FF6A1", "3F7D03BE" ], [ "42134F03", "36AE8000", "3586C000" ] ]
+			[ [ "BDE560BA", "BF182AE0", "BDA6FBAE", "3F4AC9EE" ], [ "42134F04", "36A2E000", "36384800" ] ]
+			[ [ "BDEC300D", "BF0FF6D7", "BD9C4C1E", "3F50B3FD" ], [ "42134F04", "36974000", "36969800" ] ]
+			[ [ "BDEBF871", "BF105B16", "BD9CDDD8", "3F506DF8" ], [ "42134F04", "368BA000", "36D10C00" ] ]
+			[ [ "BDEBC56A", "BF109F62", "BD9D4E53", "3F503E2E" ], [ "42134F05", "36800000", "3705C000" ] ]
+		]
+	}
+	{
+		name = "lFoot"
+		type = "vqf"
+		interpolator = "linear"
+		precision = "3C23D70A"
+		output_index = 43
+		parent_index = 42
+		shell_distance = "40400000"
+		bind_rotation = [ "BF224F5F", "BD2268E7", "3DB4CF4E", "3F44696C" ]
+		bind_translation = [ "C0615419", "C2950785", "C2196E12" ]
+		data = [ 
+			[ [ "3D39A6D7", "3F1C5122", "3DA28E22", "3F496107" ], [ "42359FC0", "35FF4000", "B5E40000" ] ]
+			[ [ "3DC1EF4B", "3F3DA8EE", "3E4E4609", "3F223A8F" ], [ "42359FC0", "3613B800", "B5360000" ] ]
+			[ [ "3DBDE831", "3F3BCB42", "3E4554FB", "3F252493" ], [ "42359FBF", "3627D000", "34B80000" ] ]
+			[ [ "3DC1522C", "3F3BACEB", "3E47766B", "3F250E44" ], [ "42359FBE", "363BE800", "35B70000" ] ]
+			[ [ "3DC86E80", "3F3B3741", "3E4B1E4E", "3F252AA0" ], [ "42359FBE", "36500000", "36200000" ] ]
+		]
+	}
+]
+
