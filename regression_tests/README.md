@@ -84,7 +84,9 @@ In order to test the compression and decompression code path for our algorithms,
 
 *  09_02_multi_root: 09_02 where the two hand bones have been converted to root bones
 *  09_02_vq: 09_02 as a track list of VQ transform tracks (vqf), without scale
+*  09_02_with_rising_scale_vqs: 09_02_with_rising_scale as a track list of VQS transform tracks (vqsf), with a uniform scale
 *  09_02_with_scale: 09_02 where one track has positive, and negative scale
+*  09_02_with_uniform_scale_vqs: 09_02 as a track list of VQS transform tracks (vqsf): one track in three has an animated uniform scale, one has a constant uniform scale, and one has no scale
 *  09_02_with_zero_scale: 09_02 where one track has positive, zero, and negative scale
 *  81_18_looping: 81_18 where the first sample repeats at the end to force a loop
 *  93_01_zero_range_extent_vq: 93_01_zero_range_extent as a track list of VQ transform tracks (vqf), without scale
