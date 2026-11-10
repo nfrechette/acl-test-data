@@ -124,6 +124,8 @@ namespace
 			return acl_sjson::sample_type::vqv;
 		case acl::track_type8::vqf:
 			return acl_sjson::sample_type::vq;
+		case acl::track_type8::vqsf:
+			return acl_sjson::sample_type::vqs;
 		}
 	}
 
@@ -220,6 +222,7 @@ namespace
 			break;
 		case acl::track_type8::vqvf:
 		case acl::track_type8::vqf:
+		case acl::track_type8::vqsf:
 			desc.transform = get_description(track.get_description<acl::track_desc_transformf>());
 			break;
 		}

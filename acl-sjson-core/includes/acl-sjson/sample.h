@@ -82,6 +82,13 @@ namespace acl_sjson
 		vector4 translation;
 	};
 
+	// A transform with a uniform scale, the scale is in translation_scale.w
+	struct vqs
+	{
+		quat rotation;
+		vector4 translation_scale;
+	};
+
 	enum class sample_type
 	{
 		unknown,
@@ -93,6 +100,7 @@ namespace acl_sjson
 		quat,
 		vqv,
 		vq,
+		vqs,
 	};
 
 	const char* to_string(sample_type type);
@@ -131,5 +139,6 @@ namespace acl_sjson
 		quat q;
 		vqv transform;
 		vq transform_vq;
+		vqs transform_vqs;
 	};
 }

@@ -166,6 +166,13 @@ namespace acl_sjson_v20
 			return false;
 		}
 
+		// ACL 2.0 has no VQS transform track type
+		if (tracks.get_type() == acl_sjson::sample_type::vqs)
+		{
+			printf("ACL 2.0 does not support VQS transform tracks (vqsf)\n");
+			return false;
+		}
+
 		acl::ansi_allocator allocator;
 
 		const acl::track_array input_tracks = convert_tracks(allocator, tracks);
