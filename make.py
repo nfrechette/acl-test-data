@@ -8,7 +8,7 @@ import sys
 import time
 
 # Current version of the regression test data
-REGRESSION_TEST_DATA_VERSION = '4'
+REGRESSION_TEST_DATA_VERSION = '5'
 
 def parse_argv():
 	parser = argparse.ArgumentParser(add_help=False)
