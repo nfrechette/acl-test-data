@@ -60,8 +60,12 @@ namespace
 			return sizeof(rtm::vector4f);
 		case acl_sjson::sample_type::quat:
 			return sizeof(rtm::quatf);
-		case acl_sjson::sample_type::qvv:
+		case acl_sjson::sample_type::vqv:
 			return sizeof(rtm::vqvf);
+		case acl_sjson::sample_type::vq:
+			return sizeof(rtm::vqf);
+		case acl_sjson::sample_type::vqs:
+			return sizeof(rtm::vqsf);
 		}
 	}
 
@@ -181,8 +185,12 @@ namespace
 		case acl_sjson::sample_type::quat:
 			ACL_ASSERT(false, "Unsupported type");
 			return acl::track();
-		case acl_sjson::sample_type::qvv:
+		case acl_sjson::sample_type::vqv:
 			return acl::track_vqvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::vq:
+			return acl::track_vqf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
+		case acl_sjson::sample_type::vqs:
+			return acl::track_vqsf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
 		default:
 			ACL_ASSERT(false, "Unsupported type");
 			return acl::track();

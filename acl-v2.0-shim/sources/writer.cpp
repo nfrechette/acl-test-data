@@ -60,7 +60,7 @@ namespace
 			return sizeof(rtm::vector4f);
 		case acl_sjson::sample_type::quat:
 			return sizeof(rtm::quatf);
-		case acl_sjson::sample_type::qvv:
+		case acl_sjson::sample_type::vqv:
 			return sizeof(rtm::qvvf);
 		}
 	}
@@ -108,7 +108,7 @@ namespace
 		case acl_sjson::sample_type::quat:
 			ACL_ASSERT(false, "Unsupported type");
 			return acl::track();
-		case acl_sjson::sample_type::qvv:
+		case acl_sjson::sample_type::vqv:
 			return acl::track_qvvf::make_reserve(get_description(desc.transform), allocator, num_samples, sample_rate);
 		default:
 			ACL_ASSERT(false, "Unsupported type");
@@ -156,6 +156,20 @@ namespace acl_sjson_v20
 		if (tracks.has_non_linear_samples())
 		{
 			printf("ACL 2.0 does not support extended samples, a sample does not use linear interpolation\n");
+			return false;
+		}
+
+		// ACL 2.0 has no VQ transform track type
+		if (tracks.get_type() == acl_sjson::sample_type::vq)
+		{
+			printf("ACL 2.0 does not support VQ transform tracks (vqf)\n");
+			return false;
+		}
+
+		// ACL 2.0 has no VQS transform track type
+		if (tracks.get_type() == acl_sjson::sample_type::vqs)
+		{
+			printf("ACL 2.0 does not support VQS transform tracks (vqsf)\n");
 			return false;
 		}
 

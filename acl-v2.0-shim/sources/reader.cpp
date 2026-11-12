@@ -121,7 +121,7 @@ namespace
 		case acl::track_type8::vector4f:
 			return acl_sjson::sample_type::vector4;
 		case acl::track_type8::qvvf:
-			return acl_sjson::sample_type::qvv;
+			return acl_sjson::sample_type::vqv;
 		}
 	}
 
